@@ -15,6 +15,33 @@ body {
     -webkit-user-select: none;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+
+    /* 하드웨어 가속 유도 (깜빡임 방지) */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* 다크모드 대응: 브라우저 강제 반전 방지 */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+    .container {
+        background-color: #1e1e1e;
+        border-color: #333;
+    }
+    .intro-text, .time, .location { color: #bbb; }
+    .msg-card { background-color: #2a2a2a; border-color: #333; }
+    .msg-text { color: #ddd; }
+    .guestbook-form input, .guestbook-form textarea {
+        background-color: #2a2a2a;
+        color: #fff;
+        border-color: #444;
+    }
+    .divider::before, .divider::after {
+        background-color: #1e1e1e;
+    }
 }
 
 /* 주소 복사는 가능해야 하니까 예외 처리 */
@@ -193,6 +220,16 @@ img {
     /* 그림자 및 폰트 */
     font-weight: bold;
     box-shadow: 0 4px 15px rgba(144, 202, 249, 0.4); /* 그림자도 살짝 진하게 */
+    
+    /* 하드웨어 가속 */
+    transform: translateZ(0);
+}
+
+@media (prefers-color-scheme: dark) {
+    .d-day-box {
+        background-color: #1e88e5; /* 다크모드에선 조금 더 진한 파랑 */
+        box-shadow: 0 4px 15px rgba(30, 136, 229, 0.3);
+    }
 }
 footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px; }
 
