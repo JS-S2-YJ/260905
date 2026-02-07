@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function checkGuestbookInput() {
         if (guestNameInput.value.trim() !== "" && guestMsgInput.value.trim() !== "") {
             guestSubmitBtn.classList.add('btn-active');
-            guestSubmitBtn.innerText = "비행기 탑승하기 ✈️";
+            guestSubmitBtn.innerText = "전송하기 ✈️";
         } else {
             guestSubmitBtn.classList.remove('btn-active');
             guestSubmitBtn.innerText = "등록하기";
