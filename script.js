@@ -28,18 +28,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const timerInterval = setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // 2. 이미지 저장 및 롱클릭 방지 (전역 설정)
+    // 2. 이미지 저장 및 롱클릭 방지 (강력한 전역 설정)
+    // 우클릭 및 꾹 누르기(컨텍스트 메뉴) 무조건 차단
     document.addEventListener('contextmenu', function(event) {
-        if (event.target.tagName === 'IMG') {
-            event.preventDefault();
-        }
-    }, false);
+        event.preventDefault();
+        return false;
+    }, { passive: false });
 
+    // 드래그 앤 드롭 차단
     document.addEventListener('dragstart', function(event) {
-        if (event.target.tagName === 'IMG') {
+        event.preventDefault();
+        return false;
+    }, { passive: false });
+
+    // 선택 차단 (더블클릭 등으로 선택되는 것 방지)
+    document.addEventListener('selectstart', function(event) {
+        // 입력창(input, textarea)이 아니면 선택 금지
+        if (event.target.tagName !== 'INPUT' && event.target.tagName !== 'TEXTAREA') {
             event.preventDefault();
         }
-    }, false);
+    });
 
     // 3. 이미지 팝업 (모달) 기능
     const modal = document.getElementById('image-modal');

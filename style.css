@@ -1,11 +1,29 @@
-/* --- 기존 설정 유지 --- */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* --- [수정] 이미지 저장 방지 (강력한 전역 적용) --- */
 body {
     font-family: 'Noto Serif KR', serif;
     background-color: #f9f9f9;
     color: #333;
     line-height: 1.8;
-    -webkit-user-select: none; user-select: none; /* 드래그 방지 */
+    
+    /* 1. 페이지 전체에서 꾹 눌렀을 때 메뉴(저장/공유) 금지 */
+    -webkit-touch-callout: none !important;
+    
+    /* 2. 페이지 전체 드래그 금지 (텍스트 복사 필요하면 아래에서 풀기) */
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 주소 복사는 가능해야 하니까 예외 처리 */
+.map-info, .address-text, .account-info {
+    -webkit-user-select: text !important;
+    user-select: text !important;
+}
+
+img, .gallery-item, .modal-content, .main-photo, .map-image {
+    /* 이미지 전용 추가 방어 */
+    -webkit-user-drag: none !important;
+    pointer-events: auto; /* 클릭은 되어야 함 */
 }
 .container {
     max-width: 480px; margin: 0 auto; background-color: white;
@@ -126,18 +144,4 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
     cursor: pointer;        /* 클릭 가능 표시 */
 }
 
-/* --- [수정] 이미지 저장 방지 (스크롤은 허용) --- */
-img, .gallery-item, .modal-content, .main-photo, .map-image {
-    /* 1. iOS(아이폰)에서 꾹 눌렀을 때 메뉴 안 뜨게 */
-    -webkit-touch-callout: none !important;
-    
-    /* 2. 드래그 앤 드롭 금지 */
-    -webkit-user-drag: none !important;
-    
-    /* 3. 텍스트처럼 선택되는 것 금지 */
-    -webkit-user-select: none !important;
-    user-select: none !important;
-    
-    /* 마우스 오른쪽 버튼 금지 효과 보조 */
-    -webkit-tap-highlight-color: transparent;
-}
+/* 중복 규칙 삭제됨 */
