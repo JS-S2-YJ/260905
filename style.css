@@ -202,7 +202,15 @@ img { -webkit-user-drag: none; display: block; }
 }
 .btn-active {
     background: linear-gradient(45deg, #90caf9, #64b5f6, #42a5f5, #90caf9);
-    background-size: 300% 300%; animation: gradientFlow 3s ease infinite;
+    background-size: 300% 300%; 
+    animation: gradientFlow 3s ease infinite, pulse 1.5s ease-in-out infinite;
+    cursor: pointer;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
 }
 
 /* 방명록 컨테이너 및 헤더 */
