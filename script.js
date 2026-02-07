@@ -105,4 +105,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // 클릭 가능하다는 걸 알리기 위해 커서 변경 (PC용)
         mainPhoto.style.cursor = "pointer"; 
     }
+
+    // 1. 마우스 오른쪽 클릭 금지 (PC)
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+        // alert("사진은 눈으로만 봐주세요! 😊"); // 필요하면 주석 풀고 쓰세요
+    });
+
+    // 2. 이미지 드래그 금지
+    document.addEventListener('dragstart', function(event) {
+        event.preventDefault();
+    });
    }); 
