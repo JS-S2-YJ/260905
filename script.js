@@ -297,7 +297,7 @@ const App = (() => {
         setTimeout(() => {
             if (typeof confetti === 'function') {
                 confetti({
-                    particleCount: 150, spread: 60, origin: { y: 0.8 },
+                    particleCount: 600, spread: 60, origin: { y: 0.8 },
                     colors: CONFIG.colors, disableForReducedMotion: true
                 });
             }
@@ -309,10 +309,22 @@ const App = (() => {
             dDayBox.addEventListener('click', () => {
                 if (typeof confetti === 'function') {
                     confetti({
-                        particleCount: 100,
-                        spread: 70,
-                        origin: { y: 0.6 },
+                        particleCount: 100, spread: 70, origin: { y: 0.6 },
                         colors: ['#90caf9', '#ff8a80', '#ffffff', '#f6d365']
+                    });
+                }
+            });
+        }
+
+        // Main Photo Click Confetti
+        const mainPhoto = document.querySelector('.main-photo-wrapper');
+        if (mainPhoto) {
+            mainPhoto.style.cursor = 'pointer'; // 클릭 가능 표시
+            mainPhoto.addEventListener('click', () => {
+                if (typeof confetti === 'function') {
+                    confetti({
+                        particleCount: 150, spread: 80, origin: { y: 0.7 },
+                        colors: CONFIG.colors
                     });
                 }
             });
