@@ -131,7 +131,7 @@ const App = (() => {
         let isEnd = false;
         const PAGE_SIZE = 10;
 
-        const animalEmojis = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🐥", "🐧", "🐦", "🐣", "🦆", "🦄", "🐴", "🐝"];
+        const animalEmojis = ["🐶", "🐱", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐥", "🐧", "🐦", "🐣", "🦄", "🐬", "🦢", "🦋", "✨"];
 
         const createMsgHtml = (data) => {
             const randomEmoji = animalEmojis[Math.floor(Math.random() * animalEmojis.length)];
