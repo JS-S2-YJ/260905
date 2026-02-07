@@ -60,14 +60,18 @@ body {
 
 img { 
     -webkit-user-drag: none; display: block; 
-    -webkit-touch-callout: none; /* 모바일 롱클릭 방지 */
+    -webkit-touch-callout: none;
     user-select: none; -webkit-user-select: none;
+    pointer-events: none; /* [핵심] 이미지에 직접적인 터치가 안 가도록 차단 */
 }
 
-.gallery-item-wrapper, .map-image-wrapper {
+/* 이미지는 클릭을 못 받으므로, 부모인 wrapper들이 클릭을 받게 함 */
+.gallery-item-wrapper, .map-image-wrapper, .main-photo-wrapper, .modal-img-wrapper {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
+    cursor: pointer;
+    pointer-events: auto; /* 부모는 클릭을 받아야 함 */
 }
 
 /* --- [5] 레이아웃 (Container) --- */
