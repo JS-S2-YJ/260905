@@ -167,28 +167,34 @@ img {
 .time, .location { font-size: 1rem; color: #666; }
 .d-day-box {
     margin-top: 30px;
-    /* [수정] 버튼과 동일한 그라데이션 애니메이션 적용 */
+    
+    /* 배경 및 애니메이션 (기존 유지) */
     background: linear-gradient(45deg, #90caf9, #64b5f6, #42a5f5, #90caf9);
     background-size: 300% 300%;
-    animation: gradientFlow 5s ease infinite; /* 버튼보다 조금 천천히 흐르게 */
+    animation: gradientFlow 5s ease infinite;
     
     color: white;
-    padding: 12px 30px; 
-    min-width: 260px;
     border-radius: 50px;
     
-    /* [수정] 완벽한 중앙 정렬을 위한 Flex + Margin Auto */
+    /* [수정] 크기 및 여백 설정 (여기가 핵심!) */
+    width: 85%;           /* 부모 크기의 85%까지 쫙 늘림 */
+    max-width: 350px;     /* 대신 너무 커지진 않게 제한 */
+    min-width: 300px;     /* 최소 이만큼은 확보 */
+    padding: 20px 40px;   /* 위아래 20, 좌우 40 (더 빵빵하게) */
+    
+    /* [수정] 플렉스 정렬 설정 */
     display: flex;
-    margin: 30px auto; /* 좌우 마진 자동으로 중앙 정렬 */
-    width: fit-content; /* 내용물에 딱 맞게 */
-    max-width: 100%; /* [추가] 부모 너비 넘지 않게 */
-    box-sizing: border-box; /* [추가] 패딩 포함해서 너비 계산 */
+    flex-direction: column; /* ★중요: 글자가 위아래로 예쁘게 쌓이게 함 */
     justify-content: center;
     align-items: center;
     
+    /* 위치 정렬 */
+    margin: 30px auto;    /* 중앙 정렬 */
+    box-sizing: border-box;
+    
+    /* 그림자 및 폰트 */
     font-weight: bold;
-    font-size: 1rem;
-    box-shadow: 0 4px 15px rgba(144, 202, 249, 0.3);
+    box-shadow: 0 4px 15px rgba(144, 202, 249, 0.4); /* 그림자도 살짝 진하게 */
 }
 footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px; }
 

@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
 // --- [1] D-Day 카운트다운 (멘트는 10초마다 변경) ---
     const dDayElement = document.getElementById('d-day-count');
-    const weddingDate = new Date('2026-02-08T12:00:00+09:00'); // 예식일
+    const weddingDate = new Date('2026-02-08T15:30:00+09:00'); // 예식일
 
     // 1. 사용할 멘트 목록
     const wittyPhrases = [
