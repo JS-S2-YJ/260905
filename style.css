@@ -24,10 +24,41 @@ body {
 img {
     -webkit-user-drag: none !important;
 }
+/* --- [컨셉 수정] 비행기 티켓(Boarding Pass) 스타일 --- */
 .container {
     max-width: 480px; margin: 0 auto; background-color: white;
-    padding: 40px 20px; box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    padding: 0; /* 패딩 제거 (티켓 헤더 위해) */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     min-height: 100vh; text-align: center;
+    border-radius: 20px; /* 둥근 모서리 */
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #e0e0e0;
+}
+
+/* 티켓 상단 헤더 (퍼스트 클래스 느낌) */
+.ticket-header {
+    background-color: #90caf9;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border-bottom: 2px dashed white; /* 절취선 느낌 */
+    position: relative;
+}
+.ticket-header::after {
+    content: '✈️ WEDDING AIRLINES';
+    display: block;
+    font-size: 0.8rem;
+    opacity: 0.8;
+    margin-top: 5px;
+}
+
+/* 본문 패딩 다시 주기 */
+.ticket-body {
+    padding: 40px 20px;
 }
 
 /* 애니메이션 */
@@ -35,17 +66,25 @@ img {
 .is-visible { opacity: 1; transform: none; }
 
 /* 메인 디자인 */
-.eng-date { font-size: 0.9rem; letter-spacing: 2px; color: #888; margin-bottom: 20px; }
+.eng-date { 
+    font-family: 'Courier New', Courier, monospace; /* 타자기 폰트 */
+    font-weight: bold;
+    color: #90caf9; 
+    margin-bottom: 10px; 
+}
 .photo-area { margin-bottom: 30px; }
 
-/* [수정] 메인 사진 래퍼 (이미지 보호용) */
+/* [수정] 메인 사진 래퍼 */
 .main-photo-wrapper {
     width: 100%;
-    border-radius: 150px 150px 0 0;
-    overflow: hidden; /* 이미지가 튀어나가지 않게 */
-    position: relative; /* 자식 요소 기준점 */
-    cursor: pointer; /* 클릭 가능 표시 */
+    /* 티켓 안의 사진 느낌 */
+    border-radius: 10px; 
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+    border: 5px solid white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 .main-photo {
     width: 100%;
@@ -59,7 +98,25 @@ img {
 .names h1 { font-size: 1.5rem; margin-bottom: 20px; }
 .amp { color: #90caf9; margin: 0 5px; }
 .intro-text { font-size: 0.95rem; color: #555; margin-bottom: 30px; }
-.divider { border: none; border-top: 1px solid #eee; margin: 30px 0; }
+/* 구분선 = 티켓 절취선 */
+.divider { 
+    border: none; 
+    border-top: 2px dashed #ddd; 
+    margin: 40px 10px; 
+    position: relative; 
+}
+/* 절취선 양옆에 홈 파기 (티켓 느낌) */
+.divider::before, .divider::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    width: 20px; height: 20px;
+    background-color: #f9f9f9; /* 배경색과 동일하게 */
+    border-radius: 50%;
+    box-shadow: inset 2px 0 5px rgba(0,0,0,0.05);
+}
+.divider::before { left: -30px; }
+.divider::after { right: -30px; }
 
 /* ▼▼▼ 갤러리 섹션 (새로 추가됨) ▼▼▼ */
 .gallery-section h2 {
@@ -207,8 +264,42 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
     font-family: 'Noto Serif KR', serif;
 }
 .guestbook-form button {
-    padding: 10px; background-color: #90caf9; color: white; border: none;
-    border-radius: 5px; cursor: pointer; font-weight: bold;
+    padding: 15px; 
+    background-color: #ddd; /* 기본은 회색(비활성 느낌) */
+    color: white; 
+    border: none;
+    border-radius: 50px; /* 둥글게 */
+    cursor: pointer; 
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* 활성화(Active) 되었을 때 클래스 */
+.btn-active {
+    /* 1. 그라데이션 배경 (하늘색 계열) */
+    background: linear-gradient(45deg, #90caf9, #64b5f6, #42a5f5, #90caf9);
+    background-size: 300% 300%;
+    
+    /* 2. 그림자 빛나는 효과 (Glow) */
+    box-shadow: 0 0 15px rgba(144, 202, 249, 0.6);
+    
+    /* 3. 애니메이션 실행 */
+    animation: gradientFlow 3s ease infinite, pulseBtn 2s infinite;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseBtn {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
 }
 
 /* 메시지 카드 */
