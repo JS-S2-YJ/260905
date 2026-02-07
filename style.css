@@ -418,3 +418,64 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
     0% { background-position: 0% 50%; }
     100% { background-position: 100% 50%; }
 }
+
+/* --- 유튜브 배경 (화면 꽉 채우기) --- */
+.video-background {
+    position: relative; width: 100%; overflow: hidden;
+    margin-bottom: 0; background: #000;
+}
+.video-foreground {
+    position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+}
+.video-foreground iframe, .video-foreground object, .video-foreground embed {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; /* 영상 클릭 방지 (버튼으로만 조작) */
+}
+
+/* --- 🎵 뮤직 플레이어 버튼 (Floating Button) --- */
+.music-fab {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 10000; /* 제일 위에 */
+    
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    background: rgba(255, 255, 255, 0.9); /* 반투명 흰색 */
+    backdrop-filter: blur(5px); /* 배경 흐리게 (아이폰 느낌) */
+    padding: 12px 20px;
+    border-radius: 50px;
+    
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    
+    /* 둥둥 떠있는 애니메이션 */
+    animation: floatBtn 3s ease-in-out infinite;
+}
+
+.music-fab .icon { font-size: 1.2rem; }
+.music-fab .text { 
+    font-size: 0.9rem; 
+    font-weight: 700; 
+    color: #555; 
+    letter-spacing: -0.5px;
+}
+
+/* 눌렀을 때 (활성화) 스타일 */
+.music-fab.playing {
+    background: rgba(255, 233, 236, 0.95); /* 연한 핑크색 */
+    border-color: #ffb7c5;
+    padding-right: 25px; /* 공간 살짝 더 확보 */
+}
+.music-fab.playing .text { color: #d65a73; }
+
+/* 둥둥 떠다니는 애니메이션 키프레임 */
+@keyframes floatBtn {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
