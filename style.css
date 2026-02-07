@@ -168,10 +168,8 @@ img {
 .d-day-box {
     margin-top: 30px;
     
-    /* 배경 및 애니메이션 (기존 유지) */
-    background: linear-gradient(45deg, #90caf9, #64b5f6, #42a5f5, #90caf9);
-    background-size: 300% 300%;
-    animation: gradientFlow 5s ease infinite;
+    /* 배경 고정 (깜빡임 방지) */
+    background-color: #90caf9;
     
     color: white;
     border-radius: 50px;

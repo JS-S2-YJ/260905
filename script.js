@@ -4,7 +4,8 @@ import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "ht
 document.addEventListener('DOMContentLoaded', function() {
     
 // --- [1] D-Day 카운트다운 (멘트는 10초마다 변경) ---
-    const dDayElement = document.getElementById('d-day-count');
+    const dDayPhraseElement = document.getElementById('d-day-phrase');
+    const dDayTimeElement = document.getElementById('d-day-time');
     const weddingDate = new Date('2026-02-08T15:30:00+09:00'); // 예식일
 
     // 1. 사용할 멘트 목록
@@ -64,12 +65,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const formatTime = (time) => String(time).padStart(2, '0');
 
         // 여기서 'currentPhrase' 변수를 갖다 씁니다 (10초 동안은 똑같은 멘트 유지됨)
-        // ▼ [수정] innerText -> innerHTML로 바꾸고 <br> 추가!
-        // ▼ [수정] 각각 <span> 태그로 감싸서 클래스 이름을 붙여줌!
-        dDayElement.innerHTML = `
-            <span class="dd-phrase">${currentPhrase}</span>
-            <span class="dd-time">D-${days}일 ${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}</span>
-        `;
+        if (dDayPhraseElement) dDayPhraseElement.textContent = currentPhrase;
+        if (dDayTimeElement) {
+            dDayTimeElement.textContent = `D-${days}일 ${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
+        }
     }
 
     // 5. 시계 타이머 시작
@@ -183,13 +182,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // [수정] 메인 사진 클릭 시 발사 (래퍼 기준)
     // [추가] 방명록 버튼 활성화 애니메이션 로직
-    const guestNameInput = document.getElementById('guest-name');
     const guestMsgInput = document.getElementById('guest-message');
     const guestSubmitBtn = document.querySelector('.guestbook-form button');
 
     function checkGuestbookInput() {
         // 둘 다 입력되었는지 확인
-        const isFilled = guestNameInput.value.trim() !== "" && guestMsgInput.value.trim() !== "";
+        const isFilled = guestMsgInput.value.trim() !== "";
 
         if (isFilled) {
             // ★ 중요: 버튼이 '비활성' -> '활성'으로 바뀔 때만 멘트를 변경함
@@ -206,8 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    if (guestNameInput && guestMsgInput) {
-        guestNameInput.addEventListener('input', checkGuestbookInput);
+    if (guestMsgInput) {
         guestMsgInput.addEventListener('input', checkGuestbookInput);
     }
 });
@@ -227,28 +224,24 @@ const db = getFirestore(app);
 
 // 1. 방명록 쓰기 기능
 window.writeGuestbook = async function() {
-    const name = document.getElementById('guest-name').value;
     const msg = document.getElementById('guest-message').value;
 
-    if (!name || !msg) {
-        alert("이름과 내용을 모두 입력해주세요!");
+    if (!msg) {
+        alert("내용을 입력해주세요!");
         return;
     }
 
     try {
         await addDoc(collection(db, "guestbook"), {
-            name: name,
             message: msg,
             date: new Date().toISOString() // 날짜 저장
         });
-        alert("메시지가 등록되었습니다! 🎉");
-        document.getElementById('guest-name').value = ""; // 입력창 비우기
         document.getElementById('guest-message').value = "";
-        
         // [추가] 버튼 상태 초기화
         const btn = document.querySelector('.guestbook-form button');
         btn.classList.remove('btn-active');
         btn.innerText = "등록하기";
+        alert("메시지가 등록되었습니다! 🎉");
     } catch (e) {
         console.error("Error adding document: ", e);
         alert("등록에 실패했습니다 ㅠㅠ");
@@ -264,10 +257,11 @@ onSnapshot(q, (snapshot) => {
     snapshot.forEach((doc) => {
         const data = doc.data();
         const date = new Date(data.date).toLocaleDateString();
+        const name = data.name || "익명"; // 이름 없으면 익명 처리
         
         const html = `
             <div class="msg-card">
-                <div class="msg-name">${data.name}</div>
+                <div class="msg-name">${name}</div>
                 <div class="msg-text">${data.message}</div>
                 <div class="msg-date">${date}</div>
             </div>
