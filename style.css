@@ -37,27 +37,27 @@ body {
 /* 다크모드 대응: 브라우저 강제 반전 방지 */
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #121212;
-        color: #e0e0e0;
+        background-color: #121212 !important;
+        color: #e0e0e0 !important;
     }
     .container {
-        background-color: #1e1e1e;
-        border-color: #333;
+        background-color: #1e1e1e !important;
+        border-color: #333 !important;
     }
-    .names h1 { color: #ffffff; } /* 이름은 완전 흰색으로 강조 */
-    .intro-text, .time, .location { color: #bbb; }
-    .msg-card { background-color: #2a2a2a; border-color: #333; }
-    .msg-name { color: #90caf9; } /* 작성자 이름은 하늘색으로 */
-    .msg-text { color: #eee; }
-    .msg-date { color: #888; }
+    .names h1 { color: #ffffff !important; } /* PC에서도 이름이 보이도록 흰색 고정 */
+    .intro-text, .time, .location { color: #cccccc !important; }
+    .msg-card { background-color: #2a2a2a !important; border-color: #444 !important; }
+    .msg-name { color: #bbdefb !important; font-weight: 700 !important; } /* 이름을 더 밝은 하늘색으로 */
+    .msg-text { color: #ffffff !important; } /* 본문을 완전 흰색으로 */
+    .msg-date { color: #aaaaaa !important; }
     .guestbook-form input, .guestbook-form textarea {
-        background-color: #2a2a2a;
-        color: #fff;
-        border-color: #444;
+        background-color: #2a2a2a !important;
+        color: #ffffff !important;
+        border-color: #555 !important;
     }
-    .guestbook-form textarea::placeholder { color: #777; }
+    .guestbook-form textarea::placeholder { color: #888888 !important; }
     .divider::before, .divider::after {
-        background-color: #1e1e1e;
+        background-color: #1e1e1e !important;
     }
 }
 
@@ -238,8 +238,15 @@ img {
     font-weight: 700;
     box-shadow: 0 4px 15px rgba(144, 202, 249, 0.4); /* 그림자도 살짝 진하게 */
     
-    /* 하드웨어 가속 */
+    /* 렌더링 최적화: 이 박스만 독립된 레이어로 분리하여 주변 깜빡임 방지 */
+    will-change: contents, text-content;
     transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* 주변 섹션도 렌더링 격리 */
+.calendar-section, .map-section {
+    contain: content;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -395,9 +402,12 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
     margin-bottom: 10px; text-align: left; border: 1px solid #eee;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
-.msg-name { font-weight: bold; font-size: 0.9rem; color: #555; margin-bottom: 5px; }
-.msg-text { font-size: 0.95rem; color: #333; white-space: pre-wrap; }
-.msg-date { font-size: 0.7rem; color: #aaa; text-align: right; margin-top: 5px; }
+.msg-text { 
+    font-size: 1rem; 
+    color: #333; 
+    white-space: pre-wrap; 
+    font-weight: 700; /* [수정] 메시지 볼드체 */
+}
 
 /* [추가] 방명록 리스트 스크롤 영역 */
 #guestbook-list {
