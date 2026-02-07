@@ -1,42 +1,38 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 1. D-Day 계산 로직
-    const weddingDate = new Date('2024-12-25'); // 결혼식 날짜 수정
-    const today = new Date();
-    const diff = weddingDate - today;
-    const diffDay = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    // 1. 실시간 D-Day 카운트다운 (초 단위 포함)
     const dDayElement = document.getElementById('d-day-count');
+    
+    // 목표 날짜 (본인 예식일로 변경)
+    const weddingDate = new Date('2026-09-05T12:00:00'); 
 
-    if (diffDay > 0) {
-        dDayElement.innerText = diffDay;
-    } else if (diffDay === 0) {
-        dDayElement.innerText = "Day";
-    } else {
-        dDayElement.innerText = "+" + Math.abs(diffDay);
+    function updateCountdown() {
+        const now = new Date();
+        const diff = weddingDate - now;
+
+        // 시간이 지났다면?
+        if (diff <= 0) {
+            dDayElement.innerText = "❤️ 저희 결혼했습니다 ❤️";
+            clearInterval(timerInterval);
+            return;
+        }
+
+        // 시간 계산
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        // ▼ 숫자 앞에 0 붙이기 (예: 5분 -> 05분)
+        const formatTime = (time) => String(time).padStart(2, '0');
+
+        // 화면에 표시 (멘트까지 여기서 한 번에 처리)
+        dDayElement.innerText = 
+            `결혼식까지 ${days}일 ${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)} 남음`;
     }
 
-    // 2. 스크롤 애니메이션 (등장 효과)
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // 애니메이션 적용 대상 설정
-    const sections = document.querySelectorAll('.main-header, .calendar-section, footer');
-    sections.forEach(section => {
-        section.classList.add('fade-in-section'); // 숨김 클래스 추가
-        observer.observe(section); // 관찰 시작
-    });
+    const timerInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
 });
 
 // 3. 우클릭 및 꾹 누르기(컨텍스트 메뉴) 방지

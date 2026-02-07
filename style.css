@@ -58,8 +58,18 @@ body {
 .calendar-section h2 { font-size: 1.4rem; margin-bottom: 5px; }
 .time, .location { font-size: 1rem; color: #666; }
 .d-day-box {
-    margin-top: 30px; background-color: #ccaea5; color: white;
-    padding: 10px 20px; border-radius: 30px; display: inline-block; font-weight: bold;
+    margin-top: 30px;
+    background-color: #ccaea5;
+    color: white;
+    
+    /* ▼ 여기를 수정하세요 (여백을 좀 더 넉넉하게) */
+    padding: 10px 30px; 
+    min-width: 250px; /* 최소 너비 확보 */
+    
+    border-radius: 30px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1rem; /* 글자 크기 조정 */
 }
 footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px; }
 
