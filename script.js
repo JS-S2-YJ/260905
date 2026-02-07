@@ -52,7 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const diff = weddingDate - now;
 
         if (diff <= 0) {
-            dDayElement.innerText = "❤️ 저희 결혼했습니다 ❤️";
+            if (dDayPhraseElement) dDayPhraseElement.innerText = "❤️ 저희 결혼했습니다 ❤️";
+            if (dDayTimeElement) dDayTimeElement.innerText = "";
             clearInterval(timerInterval);
             return;
         }
