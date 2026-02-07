@@ -48,3 +48,32 @@ document.addEventListener('contextmenu', function(event) {
 document.addEventListener('dragstart', function(event) {
     event.preventDefault();
 });
+
+/* --- 이미지 팝업 기능 --- */
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('image-modal');
+    const modalImg = document.getElementById('modal-img');
+    const closeBtn = document.querySelector('.close-btn');
+    
+    // 1. 모든 갤러리 이미지에 클릭 이벤트 추가
+    const galleryImages = document.querySelectorAll('.gallery-item');
+    
+    galleryImages.forEach(function(img) {
+        img.addEventListener('click', function() {
+            modal.style.display = 'flex'; // 팝업 보이기
+            modalImg.src = this.src;      // 클릭한 이미지 주소를 가져옴
+        });
+    });
+
+    // 2. X 버튼 누르면 닫기
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+
+    // 3. 사진 바깥(검은 배경)을 눌러도 닫기 (편의성)
+    modal.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+});
