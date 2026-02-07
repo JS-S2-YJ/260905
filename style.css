@@ -312,15 +312,14 @@ footer { margin-top: 50px; font-size: 0.8rem; color: var(--text-light); padding-
 .music-fab {
     position: fixed; bottom: 25px; right: 25px; z-index: 10000;
     display: flex; align-items: center; gap: 8px;
-    background: linear-gradient(to bottom, #ff9a9e 0%, #f6d365 100%); /* 화사한 샴페인/로즈골드 톤 */
+    background: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 100%); /* 평상시: 깔끔한 실버/화이트 */
     padding: 10px 18px; border-radius: 50px;
     
-    /* 입체감 (3D 뎁스) */
     border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.8);
     box-shadow: 
-        0 4px 0px #d65a73, /* 하단 두께감 */
-        0 8px 15px rgba(214, 90, 115, 0.3);
+        0 4px 0px #cccccc, /* 하단 두께감 */
+        0 8px 15px rgba(0, 0, 0, 0.1);
     
     cursor: pointer; transition: all 0.2s;
     animation: floatBtn 3s ease-in-out infinite;
@@ -328,21 +327,25 @@ footer { margin-top: 50px; font-size: 0.8rem; color: var(--text-light); padding-
 
 .music-fab .icon { font-size: 1.1rem; }
 .music-fab .text { 
-    font-size: 0.82rem; font-weight: 800; color: white; 
-    letter-spacing: -0.5px; text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    font-size: 0.82rem; font-weight: 800; color: #555; /* 평상시 글자색 */
+    letter-spacing: -0.5px;
 }
 
 .music-fab:active {
     transform: translateY(2px);
-    box-shadow: 0 2px 0px #d65a73, 0 5px 10px rgba(214, 90, 115, 0.3);
+    box-shadow: 0 2px 0px #cccccc, 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* 재생 중 (활성화 상태) */
 .music-fab.playing {
-    background: linear-gradient(to bottom, #84fab0 0%, #8fd3f4 100%); /* 재생 중엔 청량한 민트/하늘색 */
-    box-shadow: 0 4px 0px #56a5d4, 0 8px 15px rgba(86, 165, 212, 0.3);
+    background: linear-gradient(to bottom, #ff9a9e 0%, #f6d365 100%); /* 재생 중: 화사한 로즈골드 */
+    box-shadow: 
+        0 4px 0px #d65a73,
+        0 8px 20px rgba(214, 90, 115, 0.4);
 }
+.music-fab.playing .text { color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
 .music-fab.playing:active {
-    box-shadow: 0 2px 0px #56a5d4, 0 5px 10px rgba(86, 165, 212, 0.3);
+    box-shadow: 0 2px 0px #d65a73, 0 5px 10px rgba(214, 90, 115, 0.4);
 }
 
 @keyframes floatBtn { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
