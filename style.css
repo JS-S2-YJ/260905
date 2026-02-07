@@ -39,10 +39,18 @@ body {
 }
 .gallery-container::-webkit-scrollbar { display: none; }
 .gallery-item {
-    flex: 0 0 80%; /* 화면의 80% 차지 (옆 사진 살짝 보임) */
-    scroll-snap-align: center; /* 중앙 정렬 */
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    /* 1. 크기 고정 (액자 틀 만들기) */
+    width: 280px;       /* 너비: 화면의 약 80% 느낌 */
+    height: 400px;      /* 높이: 고정 (이 숫자를 바꾸면 더 길거나 짧게 됨) */
+    
+    /* 2. 비율 유지 (핵심 기술 ⭐) */
+    object-fit: cover;  /* 사진이 찌그러지지 않고 틀에 꽉 차게 (넘치면 잘림) */
+    
+    /* 3. 배치 및 디자인 */
+    border-radius: 15px;             /* 모서리 둥글게 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 그림자 */
+    scroll-snap-align: center;       /* 스크롤 시 가운데 정렬 */
+    flex-shrink: 0;                  /* 사진이 찌그러지지 않게 강제함 */
 }
 .gallery-hint {
     font-size: 0.8rem; color: #aaa; margin-top: 5px;
