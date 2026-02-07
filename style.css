@@ -361,16 +361,16 @@ footer { margin-top: 50px; font-size: 0.8rem; color: var(--text-light); padding-
     box-shadow: 0 2px 0px #56a5d4, 0 5px 10px rgba(86, 165, 212, 0.3);
 }
 
-/* 재생 중 (음악을 끄고 싶을 때) - 차분한 실버/화이트 */
+/* 재생 중 (끄기 버튼 상태) - 화사한 레드/로즈골드 */
 .music-fab.playing {
-    background: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 100%);
+    background: linear-gradient(to bottom, #ff9a9e 0%, #f6d365 100%);
     box-shadow: 
-        0 4px 0px #cccccc, 
-        0 8px 15px rgba(0, 0, 0, 0.1);
+        0 4px 0px #d65a73, /* 하단 두께감 (레드) */
+        0 8px 15px rgba(214, 90, 115, 0.4);
 }
-.music-fab.playing .text { color: #555; text-shadow: none; }
+.music-fab.playing .text { color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
 .music-fab.playing:active {
-    box-shadow: 0 2px 0px #cccccc, 0 5px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 0px #d65a73, 0 5px 10px rgba(214, 90, 115, 0.4);
 }
 
 @keyframes floatBtn { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
