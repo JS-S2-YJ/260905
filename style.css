@@ -174,7 +174,7 @@ img { -webkit-user-drag: none; display: block; }
     background: linear-gradient(to bottom, #a2d5ff 0%, #90caf9 50%, #82bcff 100%);
     
     color: white; border-radius: 50px;
-    width: 88%; max-width: 360px; padding: 20px 30px;
+    width: 92%; max-width: 400px; padding: 20px 30px;
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
     font-weight: 700; 
     
@@ -188,6 +188,7 @@ img { -webkit-user-drag: none; display: block; }
     position: relative; overflow: hidden;
     will-change: transform; transform: translateZ(0);
     transition: transform 0.2s;
+    cursor: pointer; /* 클릭 가능하다는 표시 */
 }
 
 .d-day-box:active {
