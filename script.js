@@ -258,7 +258,7 @@ const App = (() => {
                     isMusicPlaying = false;
                 } else {
                     player.playVideo();
-                    icon.innerText = "🔊"; text.innerText = "입장곡 끄기";
+                    icon.innerText = "🔇"; text.innerText = "입장곡 끄기";
                     btn.classList.add('playing');
                     isMusicPlaying = true;
                 }
