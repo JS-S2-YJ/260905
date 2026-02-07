@@ -116,4 +116,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('dragstart', function(event) {
         event.preventDefault();
     });
+    const allImages = document.querySelectorAll('img');
+
+    allImages.forEach(function(img) {
+        // 2. 꾹 눌렀을 때 메뉴가 뜨려는 순간(contextmenu)을 감지해서
+        img.addEventListener('contextmenu', function(event) {
+            // 3. "멈춰!" 하고 취소시킵니다.
+            event.preventDefault();
+            return false;
+        })
+    });
    }); 
