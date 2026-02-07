@@ -122,8 +122,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function shootConfetti() {
         confetti({
-            particleCount: 300,
-            spread: 120,
+            particleCount: 600,
+            spread: 60,
             origin: { y: 0.6 },
             colors: weddingColors,
             disableForReducedMotion: true
