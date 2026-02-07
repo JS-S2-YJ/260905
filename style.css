@@ -447,7 +447,7 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
     
     background: rgba(255, 255, 255, 0.9); /* 반투명 흰색 */
     backdrop-filter: blur(5px); /* 배경 흐리게 (아이폰 느낌) */
-    padding: 12px 20px;
+    padding: 6px 10px;
     border-radius: 50px;
     
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
