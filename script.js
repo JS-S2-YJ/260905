@@ -253,15 +253,13 @@ const App = (() => {
 
                 if (isMusicPlaying) {
                     player.pauseVideo();
-                    icon.innerText = "🔇"; text.innerText = "BGM 켜기";
+                    icon.innerText = "🔇"; text.innerText = "신랑 입장곡 미리듣기";
                     btn.classList.remove('playing');
-                    btn.style.background = "rgba(255, 255, 255, 0.9)";
                     isMusicPlaying = false;
                 } else {
                     player.playVideo();
-                    icon.innerText = "🎵"; text.innerText = "BGM 끄기";
+                    icon.innerText = "🎵"; text.innerText = "입장곡 끄기";
                     btn.classList.add('playing');
-                    btn.style.background = "rgba(255, 233, 236, 0.95)";
                     isMusicPlaying = true;
                 }
             });
