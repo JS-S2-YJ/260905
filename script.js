@@ -131,16 +131,13 @@ const App = (() => {
         onSnapshot(q, (snapshot) => {
             if (!listEl) return;
             listEl.innerHTML = "";
-            let idx = 0;
             snapshot.forEach((doc) => {
                 const data = doc.data();
-                const sideClass = idx % 2 === 0 ? 'msg-left' : 'msg-right';
                 const html = `
-                    <div class="msg-row ${sideClass}">
-                        <div class="msg-bubble">${data.message}</div>
+                    <div class="guest-msg-card">
+                        <div class="guest-msg-text">${data.message}</div>
                     </div>`;
                 listEl.insertAdjacentHTML('beforeend', html);
-                idx++;
             });
         });
 
