@@ -111,11 +111,24 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(shootConfetti, 500);
 
     // [수정] 메인 사진 클릭 시 발사 (래퍼 기준)
-    const mainPhotoWrapper = document.querySelector('.main-photo-wrapper');
-    if (mainPhotoWrapper) {
-        mainPhotoWrapper.addEventListener('click', function() {
-            shootConfetti();
-        });
+    // [추가] 방명록 버튼 활성화 애니메이션 로직
+    const guestNameInput = document.getElementById('guest-name');
+    const guestMsgInput = document.getElementById('guest-message');
+    const guestSubmitBtn = document.querySelector('.guestbook-form button');
+
+    function checkGuestbookInput() {
+        if (guestNameInput.value.trim() !== "" && guestMsgInput.value.trim() !== "") {
+            guestSubmitBtn.classList.add('btn-active');
+            guestSubmitBtn.innerText = "비행기 탑승하기 ✈️";
+        } else {
+            guestSubmitBtn.classList.remove('btn-active');
+            guestSubmitBtn.innerText = "등록하기";
+        }
+    }
+
+    if (guestNameInput && guestMsgInput) {
+        guestNameInput.addEventListener('input', checkGuestbookInput);
+        guestMsgInput.addEventListener('input', checkGuestbookInput);
     }
 });
 
@@ -151,6 +164,11 @@ window.writeGuestbook = async function() {
         alert("메시지가 등록되었습니다! 🎉");
         document.getElementById('guest-name').value = ""; // 입력창 비우기
         document.getElementById('guest-message').value = "";
+        
+        // [추가] 버튼 상태 초기화
+        const btn = document.querySelector('.guestbook-form button');
+        btn.classList.remove('btn-active');
+        btn.innerText = "등록하기";
     } catch (e) {
         console.error("Error adding document: ", e);
         alert("등록에 실패했습니다 ㅠㅠ");
