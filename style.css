@@ -396,29 +396,63 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
     100% { transform: scale(1); }
 }
 
-/* 메시지 카드 */
-.msg-card {
-    background-color: #f9f9f9; padding: 15px; border-radius: 10px;
-    margin-bottom: 10px; text-align: left; border: 1px solid #eee;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-.msg-text { 
-    font-size: 1rem; 
-    color: #333; 
-    white-space: pre-wrap; 
-    font-weight: 700; /* [수정] 메시지 볼드체 */
+/* --- 방명록 (메신저 스타일) --- */
+#guestbook-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 420px; /* [수정] 약 5.5개 노출 후 스크롤 */
+    overflow-y: auto;
+    padding: 15px;
+    background-color: #f0f4f7; /* 채팅방 배경색 */
+    border-radius: 15px;
+    overscroll-behavior: contain; /* 스크롤 체이닝 방지 */
 }
 
-/* [추가] 방명록 리스트 스크롤 영역 */
-#guestbook-list {
-    max-height: 400px; /* 카드 4~5개 높이 (카드당 약 80~100px) */
-    overflow-y: auto;  /* 넘치면 스크롤 */
-    overscroll-behavior: contain; /* [추가] 스크롤 체이닝 방지 (끝에 닿아도 부모 스크롤 안 됨) */
-    padding: 5px;      /* 안쪽 여백 */
-    
-    /* 스크롤바 디자인 (크롬/사파리) */
-    scrollbar-width: thin;
-    scrollbar-color: #90caf9 #f0f0f0;
+.msg-row {
+    display: flex;
+    width: 100%;
+}
+
+/* 왼쪽 정렬 (받은 메시지) */
+.msg-left { justify-content: flex-start; }
+.msg-left .msg-bubble {
+    background-color: #ffffff;
+    color: #333;
+    border-radius: 2px 15px 15px 15px;
+}
+
+/* 오른쪽 정렬 (보낸 메시지) */
+.msg-right { justify-content: flex-end; }
+.msg-right .msg-bubble {
+    background-color: #fef01b; /* 카톡 느낌 노란색 */
+    color: #333;
+    border-radius: 15px 2px 15px 15px;
+}
+
+.msg-bubble {
+    max-width: 80%;
+    padding: 10px 15px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    word-break: break-all;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    font-weight: 500; /* 너무 굵지 않게 */
+}
+
+/* 다크모드 메신저 스타일 */
+@media (prefers-color-scheme: dark) {
+    #guestbook-list {
+        background-color: #2c2c2c !important;
+    }
+    .msg-left .msg-bubble {
+        background-color: #404040 !important;
+        color: #e0e0e0 !important;
+    }
+    .msg-right .msg-bubble {
+        background-color: #fbc02d !important; /* 약간 톤다운된 노란색 */
+        color: #000 !important;
+    }
 }
 #guestbook-list::-webkit-scrollbar {
     width: 6px;
