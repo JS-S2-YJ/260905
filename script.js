@@ -129,6 +129,43 @@ document.addEventListener('DOMContentLoaded', function() {
     // 초기 로딩 후 발사
     setTimeout(shootConfetti, 500);
 
+    /* --- [추가] 방명록 플레이스홀더(안내 문구) 랜덤 변경 --- */
+    
+    // 1. 랜덤 문구 목록 (20개)
+    const guestPlaceholders = [
+        // 👋 정중하고 따뜻한 덕담 (어르신/직장동료용)
+        "축하의 말을 남겨주세요 🙏",
+        "두 사람의 앞날을 축복해 주세요 ✨",
+        "따뜻한 축하의 한마디 부탁드려요 :)",
+        "행복하게 잘 살라는 응원 메시지!",
+        "서로 아껴주며 살라는 덕담 한마디 💌",
+        "귀한 발걸음 감사합니다. 축하 글 남겨주세요.",
+        "가장 기억에 남는 축하 메시지를 적어주세요.",
+        "사랑스러운 신랑신부에게 한마디!",
+        "꽃길만 걸으라는 따뜻한 말 한마디 🌸",
+        "오늘의 기쁨을 함께 나누어 주세요.",
+        "짧아도 좋습니다. 마음을 전해주세요 💕",
+
+        // 😄 유쾌하고 센스 있는 멘트 (친구용)
+        "센스 있는 축하 멘트 기대할게요 😉",
+        "꿀 떨어지는 덕담 부탁드립니다 🍯",
+        "결혼 선배님의 피가 되고 살이 되는 조언!",
+        "첫 부부싸움은 칼로 물 베기라고 전해주세요 ⚔️",
+        "검은 머리 파뿌리 될 때까지 행복하라고...",
+        "솔로 탈출 축하 메시지 대환영! 🎉",
+        "밥 맛있게 드시고 축하도 많이 해주세요! 🍚",
+        "신랑신부 미모 칭찬은 언제나 환영입니다!",
+        "사랑의 유효기간은 '평생'이라고 적어주세요 ❤️"
+    ];
+
+    // 2. 입력창(textarea) 가져오기
+    const msgInputArea = document.getElementById('guest-message');
+
+    // 3. 랜덤으로 하나 뽑아서 넣기
+    if (msgInputArea) {
+        const randomPlaceholder = guestPlaceholders[Math.floor(Math.random() * guestPlaceholders.length)];
+        msgInputArea.placeholder = randomPlaceholder;
+    }
 
     const submitPhrases = [
         "전송하기 ✈️",
