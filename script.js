@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 4. 꽃가루 효과 (Confetti)
-    const weddingColors = ['#a5c5cc', '#88b0b8', '#d0e5ea', '#ffffff'];
+    const weddingColors = ['#90caf9', '#64b5f6', '#e3f2fd', '#ffffff'];
 
     function shootConfetti() {
         confetti({
