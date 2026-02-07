@@ -57,13 +57,13 @@ img {
 }
 
 .names h1 { font-size: 1.5rem; margin-bottom: 20px; }
-.amp { color: #a5c5cc; margin: 0 5px; }
+.amp { color: #90caf9; margin: 0 5px; }
 .intro-text { font-size: 0.95rem; color: #555; margin-bottom: 30px; }
 .divider { border: none; border-top: 1px solid #eee; margin: 30px 0; }
 
 /* ▼▼▼ 갤러리 섹션 (새로 추가됨) ▼▼▼ */
 .gallery-section h2 {
-    font-size: 1.2rem; color: #a5c5cc; margin-bottom: 15px; letter-spacing: 1px;
+    font-size: 1.2rem; color: #90caf9; margin-bottom: 15px; letter-spacing: 1px;
 }
 .gallery-container {
     display: flex;
@@ -107,7 +107,7 @@ img {
 .time, .location { font-size: 1rem; color: #666; }
 .d-day-box {
     margin-top: 30px;
-    background-color: #a5c5cc;
+    background-color: #90caf9;
     color: white;
     
     /* ▼ 여기를 수정하세요 (여백을 좀 더 넉넉하게) */
@@ -197,7 +197,7 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
 
 /* --- 방명록 --- */
 .guestbook-section { margin: 40px 0; text-align: center; padding: 0 20px; }
-.guestbook-section h2 { color: #a5c5cc; margin-bottom: 20px; }
+.guestbook-section h2 { color: #90caf9; margin-bottom: 20px; }
 
 .guestbook-form {
     display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px;
@@ -207,7 +207,7 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
     font-family: 'Noto Serif KR', serif;
 }
 .guestbook-form button {
-    padding: 10px; background-color: #a5c5cc; color: white; border: none;
+    padding: 10px; background-color: #90caf9; color: white; border: none;
     border-radius: 5px; cursor: pointer; font-weight: bold;
 }
 
@@ -229,7 +229,7 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
     
     /* 스크롤바 디자인 (크롬/사파리) */
     scrollbar-width: thin;
-    scrollbar-color: #a5c5cc #f0f0f0;
+    scrollbar-color: #90caf9 #f0f0f0;
 }
 #guestbook-list::-webkit-scrollbar {
     width: 6px;
@@ -239,6 +239,6 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
     border-radius: 3px;
 }
 #guestbook-list::-webkit-scrollbar-thumb {
-    background-color: #a5c5cc;
+    background-color: #90caf9;
     border-radius: 3px;
 }
