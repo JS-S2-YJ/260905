@@ -202,7 +202,12 @@ img {
 
 .d-day-box {
     margin: 30px auto;
-    background-color: var(--primary-color);
+    
+    /* [수정] 방명록 버튼과 동일한 그라데이션 기술 적용 */
+    background: linear-gradient(45deg, #90caf9, #64b5f6, #42a5f5, #90caf9);
+    background-size: 300% 300%;
+    animation: gradientFlow 5s ease infinite; /* 크기 변화(Pulse) 없이 흐름 효과만 적용 */
+    
     color: white;
     border-radius: 50px;
     width: 85%; max-width: 350px; min-width: 300px;
@@ -211,8 +216,8 @@ img {
     font-weight: 700;
     box-shadow: 0 4px 15px rgba(144, 202, 249, 0.4);
     
-    /* 성능 최적화 */
-    will-change: contents;
+    /* 성능 최적화: 레이어 분리하여 주변 깜빡임 차단 */
+    will-change: background-position;
     transform: translateZ(0);
 }
 
