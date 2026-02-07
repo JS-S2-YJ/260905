@@ -131,10 +131,18 @@ const App = (() => {
         let isEnd = false;
         const PAGE_SIZE = 10;
 
-        const createMsgHtml = (data) => `
-            <div class="guest-msg-card">
-                <div class="guest-msg-text">${data.message}</div>
-            </div>`;
+        const animalEmojis = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🐥", "🐧", "🐦", "🐣", "🦆", "🦄", "🐴", "🐝"];
+
+        const createMsgHtml = (data) => {
+            const randomEmoji = animalEmojis[Math.floor(Math.random() * animalEmojis.length)];
+            return `
+                <div class="guest-msg-card">
+                    <div class="guest-msg-text">
+                        <span class="msg-emoji">${randomEmoji}</span>
+                        ${data.message}
+                    </div>
+                </div>`;
+        };
 
         const qInitial = query(collection(db, "guestbook"), orderBy("date", "desc"), limit(PAGE_SIZE));
         onSnapshot(qInitial, (snapshot) => {
