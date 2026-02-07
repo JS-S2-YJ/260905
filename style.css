@@ -1,6 +1,19 @@
+@font-face {
+    font-family: 'Maplestory';
+    src: url('fonts/fontttf/Maplestory Light.ttf') format('truetype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Maplestory';
+    src: url('fonts/fontttf/Maplestory Bold.ttf') format('truetype');
+    font-weight: 700;
+}
+
 /* --- [수정] 이미지 저장 방지 (강력한 전역 적용) --- */
 body {
-    font-family: 'Noto Serif KR', serif;
+    font-family: 'Maplestory', 'Noto Serif KR', serif;
+    font-weight: 300;
     background-color: #f9f9f9;
     color: #333;
     line-height: 1.8;
@@ -72,7 +85,7 @@ img {
     color: white;
     padding: 20px;
     text-align: center;
-    font-weight: bold;
+    font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
     border-bottom: 2px dashed white; /* 절취선 느낌 */
@@ -125,8 +138,8 @@ img {
     -webkit-user-select: none;
 }
 
-.names h1 { font-size: 1.5rem; margin-bottom: 20px; }
-.amp { color: #90caf9; margin: 0 5px; }
+.names h1 { font-size: 1.5rem; margin-bottom: 20px; font-weight: 700; }
+.amp { color: #90caf9; margin: 0 5px; font-weight: 700; }
 .intro-text { font-size: 0.95rem; color: #555; margin-bottom: 30px; }
 /* 구분선 = 티켓 절취선 */
 .divider { 
@@ -150,7 +163,7 @@ img {
 
 /* ▼▼▼ 갤러리 섹션 (새로 추가됨) ▼▼▼ */
 .gallery-section h2 {
-    font-size: 1.2rem; color: #90caf9; margin-bottom: 15px; letter-spacing: 1px;
+    font-size: 1.2rem; color: #90caf9; margin-bottom: 15px; letter-spacing: 1px; font-weight: 700;
 }
 .gallery-container {
     display: flex;
@@ -190,7 +203,7 @@ img {
 }
 
 /* 달력 및 기타 */
-.calendar-section h2 { font-size: 1.4rem; margin-bottom: 5px; }
+.calendar-section h2 { font-size: 1.4rem; margin-bottom: 5px; font-weight: 700; }
 .time, .location { font-size: 1rem; color: #666; }
 .d-day-box {
     margin-top: 30px;
@@ -218,7 +231,7 @@ img {
     box-sizing: border-box;
     
     /* 그림자 및 폰트 */
-    font-weight: bold;
+    font-weight: 700;
     box-shadow: 0 4px 15px rgba(144, 202, 249, 0.4); /* 그림자도 살짝 진하게 */
     
     /* 하드웨어 가속 */
