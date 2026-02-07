@@ -4,128 +4,155 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="이재석 ❤️ 신예진 결혼합니다. 2026년 9월 5일">
+    <meta property="og:title" content="이재석 ❤️ 신예진의 청첩장">
+    <meta property="og:description" content="Wedding Airlines에 초대합니다.">
+    <meta property="og:image" content="images/main.jpeg">
+
     <title>저희 결혼합니다</title>
-    <link rel="stylesheet" href="style.css?v=1.41">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css?v=2.0">
+
+    <!-- Third-party Libs -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
+    <!-- Logic (Deferred for performance) -->
+    <script type="module" src="script.js?v=2.0" defer></script>
 </head>
 <body>
 
-    <div class="container">
-        <!-- 티켓 헤더 (Boarding Pass) -->
-        <div class="ticket-header">
+    <main class="container">
+        <!-- Ticket Header (Boarding Pass Theme) -->
+        <header class="ticket-header" role="banner">
             BOARDING PASS
-        </div>
+        </header>
 
         <div class="ticket-body">
-            <header class="main-header">
-                <p class="eng-date">2026. 09. 05. 토요일</p>
-                <div id="music-btn" class="music-fab">
+            <!-- Main Intro Section -->
+            <section class="main-header">
+                <p class="eng-date">2026. 09. 05. SATURDAY</p>
+                
+                <!-- Music Control (Floating) -->
+                <button id="music-btn" class="music-fab" aria-label="배경음악 제어">
                     <span class="icon">🔇</span>
                     <span class="text">BGM 켜기</span>
-                </div>
+                </button>
+
                 <div class="photo-area">
                     <div class="main-photo-wrapper">
                         <img src="images/main.jpeg" alt="메인 웨딩 사진" class="main-photo">
                     </div>
                 </div>
+
                 <div class="names">
                     <h1>이재석 <span class="amp">❤️</span> 신예진</h1>
                 </div>
+
                 <p class="intro-text">
                     새로운 인생을 향한 비행을 시작합니다.<br>
                     저희 두 사람의 설레는 여정에<br>
                     함께해 주시면 더없는 기쁨이겠습니다.<br>
                     <br>
-                    Passanger: Lee Jae-seok & Shin Ye-jin
+                    Passenger: Lee Jae-seok & Shin Ye-jin
                 </p>
-            </header>
+            </section>
 
-        <hr class="divider">
+            <hr class="divider">
 
-        <section class="gallery-section">
-            <h2>Gallery</h2>
-            <div class="gallery-container">
-                <div class="gallery-item-wrapper"><img src="images/photo1.jpeg" alt="웨딩사진1" class="gallery-item"></div>
-                <div class="gallery-item-wrapper"><img src="images/photo2.jpeg" alt="웨딩사진2" class="gallery-item"></div>
-                <div class="gallery-item-wrapper"><img src="images/photo3.jpeg" alt="웨딩사진3" class="gallery-item"></div>
-                <div class="gallery-item-wrapper"><img src="images/photo4.jpeg" alt="웨딩사진4" class="gallery-item"></div>
-            </div>
-            <p class="gallery-hint">옆으로 넘겨보세요</p>
-        </section>
-
-        <hr class="divider">
-
-        <section class="calendar-section">
-            <h2>9월 5일</h2>
-            <p class="time">토요일 오후 12시</p>
-            <p class="location">서울 강서구 베뉴지홀 2층</p>
-            
-            <div class="d-day-box">
-                <span id="d-day-phrase" class="dd-phrase">계산 중...</span>
-                <span id="d-day-time" class="dd-time"></span>
-            </div>
-        </section>
-
-        <hr class="divider">
-
-        <section class="map-section">
-            <h2>오시는 길</h2>
-            
-            <div class="map-container">
-                <div class="map-image-wrapper">
-                    <img src="images/photo5.png" alt="오시는 길 약도" class="map-image">
+            <!-- Gallery Section -->
+            <section class="gallery-section">
+                <h2>Gallery</h2>
+                <div class="gallery-container">
+                    <div class="gallery-item-wrapper"><img src="images/photo1.jpeg" alt="웨딩사진1" class="gallery-item" loading="lazy"></div>
+                    <div class="gallery-item-wrapper"><img src="images/photo2.jpeg" alt="웨딩사진2" class="gallery-item" loading="lazy"></div>
+                    <div class="gallery-item-wrapper"><img src="images/photo3.jpeg" alt="웨딩사진3" class="gallery-item" loading="lazy"></div>
+                    <div class="gallery-item-wrapper"><img src="images/photo4.jpeg" alt="웨딩사진4" class="gallery-item" loading="lazy"></div>
                 </div>
-            </div>
+                <p class="gallery-hint">옆으로 넘겨보세요</p>
+            </section>
 
-            <div class="map-info">
-                <p class="address-title">2층 베뉴지홀</p>
-                <p class="address-text">서울 강서구 수정필요</p>
-                <p class="sub-text">
-                    🚇 발산역 3번 출구 도보 5분<br>
-                    🚗 건물 내 지하 주차장 이용 (2시간 무료)
-                </p>
-            </div>
-            
-            <div class="navi-buttons">
-                <a href="#" class="btn-navi">티맵</a>
-                <a href="#" class="btn-navi">카카오내비</a>
-            </div>
-        </section>
+            <hr class="divider">
 
-        <hr class="divider">
-
-        <section class="guestbook-section">
-            <h2>축하 메시지</h2>
-            
-            <div class="guestbook-form">
-                <textarea id="guest-message" placeholder="축하의 말을 남겨주세요" maxlength="1000"></textarea>
-                <button onclick="writeGuestbook()">등록하기</button>
-            </div>
-
-            <div id="guestbook-list">
+            <!-- Calendar & D-Day Section -->
+            <section class="calendar-section">
+                <h2>9월 5일</h2>
+                <p class="time">토요일 오후 12시</p>
+                <p class="location">서울 강서구 베뉴지홀 2층</p>
+                
+                <div class="d-day-box" role="timer">
+                    <span id="d-day-phrase" class="dd-phrase">계산 중...</span>
+                    <span id="d-day-time" class="dd-time"></span>
                 </div>
-        </section>
+            </section>
 
-        <footer>
-            <p>Wedding Airlines</p>
-            <p class="maker-name">만든이 : 신랑 이재석</p>
-            <div class="video-background">
-    <div class="video-foreground">
-        <div id="player"></div> 
-    </div>
-</div>
-        </footer>
-        </div> <!-- ticket-body 닫기 -->
-    </div> <!-- container 닫기 -->
+            <hr class="divider">
 
-    <div id="image-modal" class="modal">
-        <span class="close-btn">&times;</span>
+            <!-- Map Section -->
+            <section class="map-section">
+                <h2>오시는 길</h2>
+                
+                <div class="map-container">
+                    <div class="map-image-wrapper">
+                        <img src="images/photo5.png" alt="오시는 길 약도" class="map-image" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="map-info">
+                    <p class="address-title" style="font-weight: bold; margin-top: 15px;">2층 베뉴지홀</p>
+                    <p class="address-text">서울 강서구 강서로 388</p>
+                    <p class="sub-text">
+                        🚇 발산역 3번 출구 도보 5분<br>
+                        🚗 건물 내 지하 주차장 이용 (2시간 무료)
+                    </p>
+                </div>
+                
+                <div class="navi-buttons">
+                    <a href="https://tmap.co.kr/" target="_blank" class="btn-navi">티맵</a>
+                    <a href="https://kko.to/placeholder" target="_blank" class="btn-navi">카카오내비</a>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- Guestbook Section -->
+            <section class="guestbook-section">
+                <h2>축하 메시지</h2>
+                
+                <div class="guestbook-form">
+                    <textarea id="guest-message" placeholder="축하의 말을 남겨주세요" maxlength="1000" aria-label="방명록 입력"></textarea>
+                    <button onclick="writeGuestbook()">등록하기</button>
+                </div>
+
+                <div id="guestbook-list">
+                    <!-- Javascript will load messages here -->
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer>
+                <p>Wedding Airlines</p>
+                <p class="maker-name">만든이 : 신랑 이재석</p>
+                
+                <!-- Youtube Background (Hidden Logic) -->
+                <div class="video-background" aria-hidden="true">
+                    <div class="video-foreground">
+                        <div id="player"></div> 
+                    </div>
+                </div>
+            </footer>
+        </div> <!-- ticket-body -->
+    </main> <!-- container -->
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="modal" role="dialog" aria-hidden="true">
+        <span class="close-btn" aria-label="닫기">&times;</span>
         <div class="modal-img-wrapper">
-            <img class="modal-content" id="modal-img">
+            <img class="modal-content" id="modal-img" alt="확대된 이미지">
         </div>
     </div>
 
-    <script type="module" src="script.js?v=1.42"></script>
 </body>
 </html>
