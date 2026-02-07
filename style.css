@@ -269,6 +269,10 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
     background-color: #fcfdfe;
     transition: all 0.3s ease;
 }
+.guestbook-form textarea {
+    resize: none;      /* 드래그 크기 조절 방지 */
+    min-height: 100px; /* 기본 높이 확보 */
+}
 .guestbook-form input:focus, .guestbook-form textarea:focus {
     outline: none;
     border-color: #90caf9;
