@@ -96,3 +96,65 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBV2BF5OORqW42zQAv8BAunXFnHbTD1l8k",
+  authDomain: "wedding-guestbook-c8238.firebaseapp.com",
+  projectId: "wedding-guestbook-c8238",
+  storageBucket: "wedding-guestbook-c8238.firebasestorage.app",
+  messagingSenderId: "216248864330",
+  appId: "1:216248864330:web:339891de4f5a92659860b3"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+// 1. 방명록 쓰기 기능
+window.writeGuestbook = async function() {
+    const name = document.getElementById('guest-name').value;
+    const msg = document.getElementById('guest-message').value;
+
+    if (!name || !msg) {
+        alert("이름과 내용을 모두 입력해주세요!");
+        return;
+    }
+
+    try {
+        await addDoc(collection(db, "guestbook"), {
+            name: name,
+            message: msg,
+            date: new Date().toISOString() // 날짜 저장
+        });
+        alert("메시지가 등록되었습니다! 🎉");
+        document.getElementById('guest-name').value = ""; // 입력창 비우기
+        document.getElementById('guest-message').value = "";
+    } catch (e) {
+        console.error("Error adding document: ", e);
+        alert("등록에 실패했습니다 ㅠㅠ");
+    }
+}
+
+// 2. 방명록 읽기 기능 (실시간)
+const q = query(collection(db, "guestbook"), orderBy("date", "desc"));
+onSnapshot(q, (snapshot) => {
+    const list = document.getElementById('guestbook-list');
+    list.innerHTML = ""; // 기존 목록 초기화
+
+    snapshot.forEach((doc) => {
+        const data = doc.data();
+        const date = new Date(data.date).toLocaleDateString();
+        
+        const html = `
+            <div class="msg-card">
+                <div class="msg-name">${data.name}</div>
+                <div class="msg-text">${data.message}</div>
+                <div class="msg-date">${date}</div>
+            </div>
+        `;
+        list.insertAdjacentHTML('beforeend', html);
+    });
+});
