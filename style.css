@@ -176,7 +176,12 @@ img {
     padding: 12px 30px; 
     min-width: 260px;
     border-radius: 50px;
-    display: inline-block;
+    
+    /* [수정] 완벽한 중앙 정렬을 위한 Flexbox 전환 */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    
     font-weight: bold;
     font-size: 1rem;
     box-shadow: 0 4px 15px rgba(144, 202, 249, 0.3);
