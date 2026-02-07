@@ -136,10 +136,10 @@ const App = (() => {
         const createMsgHtml = (data) => {
             const randomEmoji = animalEmojis[Math.floor(Math.random() * animalEmojis.length)];
             return `
-                <div class="guest-msg-card">
-                    <div class="guest-msg-text">
-                        <span class="msg-emoji">${randomEmoji}</span>
-                        ${data.message}
+                <div class="guest-speech-bubble-wrapper">
+                    <div class="guest-animal-avatar">${randomEmoji}</div>
+                    <div class="guest-speech-bubble">
+                        <div class="guest-msg-text">${data.message}</div>
                     </div>
                 </div>`;
         };
