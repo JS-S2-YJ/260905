@@ -164,8 +164,10 @@ img { -webkit-user-drag: none; display: block; }
 .d-day-box {
     margin: 30px auto;
     
-    /* [수정] 깜빡임 원인 파악을 위해 그라데이션 및 애니메이션 완전 제거 */
-    background-color: var(--primary-color);
+    /* [복구] 그라데이션 및 애니메이션 다시 적용 */
+    background: linear-gradient(45deg, #90caf9, #64b5f6, #42a5f5, #90caf9);
+    background-size: 300% 300%;
+    animation: gradientFlow 5s ease infinite;
     
     color: white; border-radius: 50px;
     width: 85%; max-width: 350px; padding: 20px 40px;
@@ -173,7 +175,7 @@ img { -webkit-user-drag: none; display: block; }
     font-weight: 700; box-shadow: 0 4px 15px rgba(144, 202, 249, 0.4);
     
     /* 성능 최적화 유지 */
-    will-change: transform;
+    will-change: background-position, transform;
     transform: translateZ(0);
 }
 .dd-phrase { font-size: 0.9rem; font-weight: 400; opacity: 0.95; }
