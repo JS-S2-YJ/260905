@@ -126,20 +126,18 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
     cursor: pointer;        /* 클릭 가능 표시 */
 }
 
-/* --- 이미지 저장 방지 (보안) --- */
-img {
-    /* 1. 꾹 눌렀을 때 메뉴(저장/공유) 금지 (iOS 필수) */
-    -webkit-touch-callout: none;
+/* --- [수정] 이미지 저장 완벽 방지 --- */
+.gallery-item, .modal-content, .main-photo {
+    /* 1. iOS(아이폰)에서 꾹 눌렀을 때 메뉴 금지 (중요!) */
+    -webkit-touch-callout: none !important;
     
-    /* 2. 드래그 앤 드롭 금지 */
-    -webkit-user-drag: none;
+    /* 2. 드래그 금지 */
+    -webkit-user-drag: none !important;
     
-    /* 3. 선택(파란색 블록) 금지 */
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    /* 3. 텍스트처럼 선택되는 것 금지 */
+    -webkit-user-select: none !important;
+    user-select: none !important;
     
-    /* 4. 마우스 우클릭 금지 (PC용) */
-    pointer-events: auto; /* 클릭은 돼야 하니까 auto */
+    /* 4. 안드로이드 등 기타 브라우저용 */
+    touch-action: pan-y !important; /* 스크롤만 되고 확대/메뉴 등은 막음 */
 }
