@@ -9,11 +9,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 1. 사용할 멘트 목록
     const wittyPhrases = [
+        // 👋 유쾌 & 위트 (친구용)
         "유부 월드 입장까지",
         "다이어트 마감까지",
-        "떨리는 그날까지",
-        "우리끼리 파티까지",
-        "축의금 수금까지(?)"
+        "자유 이용권 만료까지",
+        "품절남녀 되기까지",
+        "현실 부부 되기까지",
+        
+        // 💕 로맨틱 & 감성 (신랑신부용)
+        "평생 짝꿍 만나기까지",
+        "두 손 꼭 잡기까지",
+        "꽃길 걷기 시작까지",
+        "한 지붕 아래 살기까지",
+        "매일 아침 함께하기까지",
+        "서로의 빛이 되기까지",
+
+        // 🙇‍♂️ 정중 & 기대 (어르신/하객용)
+        "귀한 발걸음 하시기까지",
+        "새로운 출발을 하기까지",
+        "아름다운 약속의 날까지",
+        "가장 행복한 날까지",
+        "반가운 얼굴 뵙기까지",
+        "사랑의 결실을 맺기까지",
+        "따뜻한 격려 받기까지",
+        "맛있는 식사 드시기까지"
     ];
 
     // 2. 현재 보여줄 멘트 (처음엔 랜덤으로 하나 뽑아둠)
@@ -24,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentPhrase = wittyPhrases[Math.floor(Math.random() * wittyPhrases.length)];
         // 멘트가 바뀌었으니 화면도 바로 갱신!
         updateCountdown(); 
-    }, 10000); // 10000ms = 10초
+    }, 5_000); // 10000ms = 10초
 
     // 4. 시계 가는 함수 (1초마다 실행)
     function updateCountdown() {
@@ -110,6 +129,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // 초기 로딩 후 발사
     setTimeout(shootConfetti, 500);
 
+
+    const submitPhrases = [
+        "전송하기 ✈️",
+        "축하해주기 💕",
+        "메시지 슝~ 🚀",
+        "소중한 글 등록 ✨",
+        "신랑신부에게 💌",
+        "덕담 남기기 🍀",
+        "사랑을 담아 전송 ❤️"
+    ];
+
     // [수정] 메인 사진 클릭 시 발사 (래퍼 기준)
     // [추가] 방명록 버튼 활성화 애니메이션 로직
     const guestNameInput = document.getElementById('guest-name');
@@ -117,12 +147,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const guestSubmitBtn = document.querySelector('.guestbook-form button');
 
     function checkGuestbookInput() {
-        if (guestNameInput.value.trim() !== "" && guestMsgInput.value.trim() !== "") {
-            guestSubmitBtn.classList.add('btn-active');
-            guestSubmitBtn.innerText = "전송하기 ✈️";
+        // 둘 다 입력되었는지 확인
+        const isFilled = guestNameInput.value.trim() !== "" && guestMsgInput.value.trim() !== "";
+
+        if (isFilled) {
+            // ★ 중요: 버튼이 '비활성' -> '활성'으로 바뀔 때만 멘트를 변경함
+            // (이 조건이 없으면 글자 칠 때마다 버튼 멘트가 계속 바뀝니다 ㅋㅋ)
+            if (!guestSubmitBtn.classList.contains('btn-active')) {
+                const randomText = submitPhrases[Math.floor(Math.random() * submitPhrases.length)];
+                guestSubmitBtn.innerText = randomText;
+                guestSubmitBtn.classList.add('btn-active');
+            }
         } else {
+            // 입력하다 지워서 다시 빈칸이 되면 원상복구
             guestSubmitBtn.classList.remove('btn-active');
-            guestSubmitBtn.innerText = "등록하기";
+            guestSubmitBtn.innerText = "등록하기"; // 기본 멘트
         }
     }
 
