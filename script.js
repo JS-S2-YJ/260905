@@ -303,17 +303,48 @@ const App = (() => {
             }
         }, 500);
 
-        // D-Day Box Click Confetti
+        // D-Day Box Click & Long-press Confetti
         const dDayBox = document.querySelector('.d-day-box');
         if (dDayBox) {
-            dDayBox.addEventListener('click', () => {
+            let confettiInterval = null;
+
+            const startConfetti = () => {
+                if (confettiInterval) return;
+                // 즉시 한 번 터뜨림
                 if (typeof confetti === 'function') {
                     confetti({
                         particleCount: 100, spread: 70, origin: { y: 0.6 },
                         colors: ['#90caf9', '#ff8a80', '#ffffff', '#f6d365']
                     });
                 }
-            });
+                // 300ms 간격으로 연사
+                confettiInterval = setInterval(() => {
+                    if (typeof confetti === 'function') {
+                        confetti({
+                            particleCount: 80, spread: 80, origin: { y: 0.65 },
+                            colors: ['#90caf9', '#ff8a80', '#ffffff', '#f6d365']
+                        });
+                    }
+                }, 300);
+            };
+
+            const stopConfetti = () => {
+                if (confettiInterval) {
+                    clearInterval(confettiInterval);
+                    confettiInterval = null;
+                }
+            };
+
+            // 마우스 및 터치 이벤트 연결
+            dDayBox.addEventListener('mousedown', startConfetti);
+            dDayBox.addEventListener('touchstart', (e) => {
+                e.preventDefault(); // 모바일 줌/클릭 방해 방지
+                startConfetti();
+            }, { passive: false });
+
+            window.addEventListener('mouseup', stopConfetti);
+            window.addEventListener('touchend', stopConfetti);
+            dDayBox.addEventListener('mouseleave', stopConfetti);
         }
 
         // Main Photo Click Confetti
