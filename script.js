@@ -1,3 +1,6 @@
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
 document.addEventListener('DOMContentLoaded', function() {
     
     // 1. 실시간 D-Day 카운트다운
@@ -93,9 +96,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBV2BF5OORqW42zQAv8BAunXFnHbTD1l8k",
