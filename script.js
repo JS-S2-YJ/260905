@@ -275,3 +275,78 @@ onSnapshot(q, (snapshot) => {
         list.insertAdjacentHTML('beforeend', html);
     });
 });
+
+/* ==========================================================================
+   🎵 유튜브 BGM 플레이어 (Play/Pause 방식)
+   ========================================================================== */
+
+let player;
+let isMusicPlaying = false; // 현재 재생 중인지 체크
+
+// 1. 유튜브 API 스크립트 로드
+const tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+const firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// 2. 플레이어 설정
+window.onYouTubeIframeAPIReady = function() {
+    player = new YT.Player('player', {
+        height: '100%',
+        width: '100%',
+        videoId: 'QM8UMOERycA', // 🔴 영상 ID
+        playerVars: {
+            'autoplay': 0,      // ★ 자동재생 끔 (버튼 눌러야 시작)
+            'controls': 0,      // 컨트롤러 숨김
+            'rel': 0, 
+            'playsinline': 1, 
+            'loop': 1, 
+            'playlist': 'QM8UMOERycA', // 반복 필수
+            'mute': 0           // ★ 소리 켠 상태로 대기 (클릭으로 시작하니까 가능!)
+        },
+        events: {
+            'onReady': onPlayerReady
+        }
+    });
+};
+
+function onPlayerReady(event) {
+    // 준비돼도 바로 재생 안 함 (대기)
+    console.log("영상 준비 완료 (대기 중)");
+}
+
+// 3. 버튼 클릭 이벤트
+document.addEventListener('DOMContentLoaded', function() {
+    const musicBtn = document.getElementById('music-btn');
+    
+    if (musicBtn) {
+        musicBtn.addEventListener('click', function() {
+            if (!player || typeof player.playVideo !== 'function') return;
+
+            const btnIcon = musicBtn.querySelector('.icon');
+            const btnText = musicBtn.querySelector('.text');
+
+            if (isMusicPlaying) {
+                // [재생 중 -> 멈춤 (Pause)]
+                player.pauseVideo(); // ★ 영상 멈춤
+                
+                btnIcon.innerText = "🔇";
+                btnText.innerText = "BGM 켜기";
+                musicBtn.classList.remove('playing');
+                musicBtn.style.background = "rgba(255, 255, 255, 0.9)";
+                
+                isMusicPlaying = false;
+            } else {
+                // [멈춤 -> 재생 (Play)]
+                player.playVideo(); // ★ 영상 시작 (소리도 같이 나옴)
+                
+                btnIcon.innerText = "🎵";
+                btnText.innerText = "BGM 끄기";
+                musicBtn.classList.add('playing');
+                musicBtn.style.background = "rgba(255, 233, 236, 0.95)";
+                
+                isMusicPlaying = true;
+            }
+        });
+    }
+});
