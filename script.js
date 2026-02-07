@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
 // --- [1] D-Day 카운트다운 (멘트는 10초마다 변경) ---
     const dDayElement = document.getElementById('d-day-count');
-    const weddingDate = new Date('2026-09-05T13:00:00'); // 예식일
+    const weddingDate = new Date('2026-02-08T12:00:00+09:00'); // 예식일
 
     // 1. 사용할 멘트 목록
     const wittyPhrases = [
@@ -62,10 +62,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
         
         const formatTime = (time) => String(time).padStart(2, '0');
-        
+
         // 여기서 'currentPhrase' 변수를 갖다 씁니다 (10초 동안은 똑같은 멘트 유지됨)
-        dDayElement.innerText = 
-            `${currentPhrase} ${days}일 ${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
+        // ▼ [수정] innerText -> innerHTML로 바꾸고 <br> 추가!
+        // ▼ [수정] 각각 <span> 태그로 감싸서 클래스 이름을 붙여줌!
+        dDayElement.innerHTML = `
+            <span class="dd-phrase">${currentPhrase}</span>
+            <span class="dd-time">D-${days}일 ${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}</span>
+        `;
     }
 
     // 5. 시계 타이머 시작
