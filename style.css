@@ -24,11 +24,6 @@ body {
 img {
     -webkit-user-drag: none !important;
 }
-
-/* 모달 확대 이미지는 예외 (보여야 하므로) */
-.modal-content {
-    pointer-events: auto !important;
-}
 .container {
     max-width: 480px; margin: 0 auto; background-color: white;
     padding: 40px 20px; box-shadow: 0 0 15px rgba(0,0,0,0.1);
@@ -128,25 +123,38 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
 
 /* --- 이미지 확대 팝업 (모달) --- */
 .modal {
-    display: none; /* 평소에는 숨김 */
-    position: fixed; /* 화면에 고정 */
-    z-index: 9999; /* 제일 위에 띄우기 */
+    display: none;
+    position: fixed;
+    z-index: 9999;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* 배경을 까맣게 (투명도 90%) */
+    background-color: rgba(0, 0, 0, 0.9);
     justify-content: center;
     align-items: center;
 }
 
-/* 확대된 이미지 */
-.modal-content {
+/* 확대 이미지 보호막 */
+.modal-img-wrapper {
     max-width: 90%;
     max-height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
     border-radius: 5px;
     box-shadow: 0 0 20px rgba(255,255,255,0.2);
-    object-fit: contain; /* 비율 유지하며 화면 안에 맞춤 */
+    overflow: hidden;
+}
+
+/* 확대된 이미지 (실제 이미지) */
+.modal-content {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none; /* ⭐️ 핵심: 여기서도 롱클릭 차단 */
+    display: block;
 }
 
 /* X 닫기 버튼 */
@@ -212,3 +220,25 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
 .msg-name { font-weight: bold; font-size: 0.9rem; color: #555; margin-bottom: 5px; }
 .msg-text { font-size: 0.95rem; color: #333; white-space: pre-wrap; }
 .msg-date { font-size: 0.7rem; color: #aaa; text-align: right; margin-top: 5px; }
+
+/* [추가] 방명록 리스트 스크롤 영역 */
+#guestbook-list {
+    max-height: 400px; /* 카드 4~5개 높이 (카드당 약 80~100px) */
+    overflow-y: auto;  /* 넘치면 스크롤 */
+    padding: 5px;      /* 안쪽 여백 */
+    
+    /* 스크롤바 디자인 (크롬/사파리) */
+    scrollbar-width: thin;
+    scrollbar-color: #ccaea5 #f0f0f0;
+}
+#guestbook-list::-webkit-scrollbar {
+    width: 6px;
+}
+#guestbook-list::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 3px;
+}
+#guestbook-list::-webkit-scrollbar-thumb {
+    background-color: #ccaea5;
+    border-radius: 3px;
+}
