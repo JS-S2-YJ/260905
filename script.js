@@ -255,15 +255,18 @@ onSnapshot(q, (snapshot) => {
     const list = document.getElementById('guestbook-list');
     list.innerHTML = ""; // 기존 목록 초기화
 
+    let index = 0;
     snapshot.forEach((doc) => {
         const data = doc.data();
+        const sideClass = index % 2 === 0 ? 'msg-left' : 'msg-right';
         
         const html = `
-            <div class="msg-card">
-                <div class="msg-text" style="font-weight: 700;">${data.message}</div>
+            <div class="msg-row ${sideClass}">
+                <div class="msg-bubble">${data.message}</div>
             </div>
         `;
         list.insertAdjacentHTML('beforeend', html);
+        index++;
     });
 });
 
