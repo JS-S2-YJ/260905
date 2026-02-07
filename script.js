@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
         confetti({
             particleCount: 600,
             spread: 60,
-            origin: { y: 0.6 },
+            origin: { y: 0.8 },
             colors: weddingColors,
             disableForReducedMotion: true
         });
@@ -257,14 +257,10 @@ onSnapshot(q, (snapshot) => {
 
     snapshot.forEach((doc) => {
         const data = doc.data();
-        const date = new Date(data.date).toLocaleDateString();
-        const name = data.name || "익명"; // 이름 없으면 익명 처리
         
         const html = `
             <div class="msg-card">
-                <div class="msg-name">${name}</div>
-                <div class="msg-text">${data.message}</div>
-                <div class="msg-date">${date}</div>
+                <div class="msg-text" style="font-weight: 700;">${data.message}</div>
             </div>
         `;
         list.insertAdjacentHTML('beforeend', html);
