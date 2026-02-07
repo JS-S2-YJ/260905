@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeBtn = document.querySelector('.close-btn');
     
     // 1. 모든 갤러리 이미지에 클릭 이벤트 추가
-    const galleryImages = document.querySelectorAll('.gallery-item');
+    const galleryImages = document.querySelectorAll('.gallery-item, .map-image');
     
     galleryImages.forEach(function(img) {
         img.addEventListener('click', function() {
@@ -73,3 +73,36 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+// ... 기존 D-Day 코드 밑에 추가 ...
+
+    /* --- 🎉 꽃가루 효과 (Confetti) --- */
+    
+    // 1. 꽃가루 설정 (분홍 + 살구 + 흰색 파스텔톤)
+    var weddingColors = ['#ffccd5', '#ffb7b2', '#ffe9ec', '#ffffff'];
+
+    function shootConfetti() {
+        confetti({
+            particleCount: 300,       // 꽃가루 개수 (많을수록 화려함)
+            spread: 120,               // 퍼지는 각도
+            origin: { y: 0.6 },       // 시작 위치 (0.6은 화면 중간보다 살짝 아래)
+            colors: weddingColors,    // 웨딩 컬러 적용
+            disableForReducedMotion: true // 동작 줄이기 설정 켠 사람 배려
+        });
+    }
+
+    // 2. 처음 로딩되면 자동으로 한 번 팡!
+    setTimeout(shootConfetti, 500); // 0.5초 뒤에 발사 (화면 뜨자마자)
+
+    // 3. 메인 사진을 클릭하면 또 발사! (재미 요소)
+    const mainPhoto = document.querySelector('.main-photo');
+    if (mainPhoto) {
+        mainPhoto.addEventListener('click', function() {
+            shootConfetti();
+        });
+        
+        // 클릭 가능하다는 걸 알리기 위해 커서 변경 (PC용)
+        mainPhoto.style.cursor = "pointer"; 
+    }
+   }); 
