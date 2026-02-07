@@ -41,24 +41,21 @@ document.addEventListener('DOMContentLoaded', function() {
         return false;
     }, { passive: false });
 
-    // 선택 차단 (더블클릭 등으로 선택되는 것 방지)
-    document.addEventListener('selectstart', function(event) {
-        // 입력창(input, textarea)이 아니면 선택 금지
-        if (event.target.tagName !== 'INPUT' && event.target.tagName !== 'TEXTAREA') {
-            event.preventDefault();
-        }
-    });
-
     // 3. 이미지 팝업 (모달) 기능
     const modal = document.getElementById('image-modal');
     const modalImg = document.getElementById('modal-img');
     const closeBtn = document.querySelector('.close-btn');
-    const galleryImages = document.querySelectorAll('.gallery-item, .map-image');
     
-    galleryImages.forEach(function(img) {
-        img.addEventListener('click', function() {
-            modal.style.display = 'flex';
-            modalImg.src = this.src;
+    // [수정] 래퍼(Wrapper)에 클릭 이벤트를 걸어야 함 (이미지는 pointer-events: none 이므로)
+    const galleryWrappers = document.querySelectorAll('.gallery-item-wrapper, .map-image-wrapper');
+    
+    galleryWrappers.forEach(function(wrapper) {
+        wrapper.addEventListener('click', function() {
+            const img = this.querySelector('img');
+            if (img) {
+                modal.style.display = 'flex';
+                modalImg.src = img.src;
+            }
         });
     });
 
@@ -88,10 +85,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // 초기 로딩 후 발사
     setTimeout(shootConfetti, 500);
 
-    // 메인 사진 클릭 시 발사
-    const mainPhoto = document.querySelector('.main-photo');
-    if (mainPhoto) {
-        mainPhoto.addEventListener('click', function() {
+    // [수정] 메인 사진 클릭 시 발사 (래퍼 기준)
+    const mainPhotoWrapper = document.querySelector('.main-photo-wrapper');
+    if (mainPhotoWrapper) {
+        mainPhotoWrapper.addEventListener('click', function() {
             shootConfetti();
         });
     }
