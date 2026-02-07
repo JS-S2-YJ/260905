@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, getDocs, startAfter } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
 /**
  * ==============================================================================
@@ -126,20 +126,63 @@ const App = (() => {
             });
         }
 
-        // Real-time List Listener
-        const q = query(collection(db, "guestbook"), orderBy("date", "desc"));
-        onSnapshot(q, (snapshot) => {
+        let lastVisible = null;
+        let isLoading = false;
+        let isEnd = false;
+        const PAGE_SIZE = 10;
+
+        const createMsgHtml = (data) => `
+            <div class="guest-msg-card">
+                <div class="guest-msg-text">${data.message}</div>
+            </div>`;
+
+        const qInitial = query(collection(db, "guestbook"), orderBy("date", "desc"), limit(PAGE_SIZE));
+        onSnapshot(qInitial, (snapshot) => {
             if (!listEl) return;
-            listEl.innerHTML = "";
-            snapshot.forEach((doc) => {
-                const data = doc.data();
-                const html = `
-                    <div class="guest-msg-card">
-                        <div class="guest-msg-text">${data.message}</div>
-                    </div>`;
-                listEl.insertAdjacentHTML('beforeend', html);
-            });
+            
+            const liveDocs = [];
+            snapshot.forEach(doc => liveDocs.push({ id: doc.id, ...doc.data() }));
+            
+            const existingCards = listEl.querySelectorAll('.guest-msg-card');
+            if (existingCards.length <= PAGE_SIZE) {
+                listEl.innerHTML = liveDocs.map(data => createMsgHtml(data)).join('');
+                lastVisible = snapshot.docs[snapshot.docs.length - 1];
+            } else {
+                const moreHtml = Array.from(existingCards).slice(PAGE_SIZE).map(el => el.outerHTML).join('');
+                listEl.innerHTML = liveDocs.map(data => createMsgHtml(data)).join('') + moreHtml;
+            }
+            if (snapshot.docs.length < PAGE_SIZE) isEnd = true;
         });
+
+        const loadMore = async () => {
+            if (isLoading || isEnd || !lastVisible) return;
+            isLoading = true;
+            try {
+                const nextQ = query(collection(db, "guestbook"), orderBy("date", "desc"), startAfter(lastVisible), limit(PAGE_SIZE));
+                const snapshot = await getDocs(nextQ);
+                if (snapshot.empty) {
+                    isEnd = true;
+                    return;
+                }
+                snapshot.forEach((doc) => {
+                    listEl.insertAdjacentHTML('beforeend', createMsgHtml(doc.data()));
+                });
+                lastVisible = snapshot.docs[snapshot.docs.length - 1];
+                if (snapshot.docs.length < PAGE_SIZE) isEnd = true;
+            } catch (e) {
+                console.error("Load more error:", e);
+            } finally {
+                isLoading = false;
+            }
+        };
+
+        if (listEl) {
+            listEl.addEventListener('scroll', () => {
+                if (listEl.scrollTop + listEl.clientHeight >= listEl.scrollHeight - 20) {
+                    loadMore();
+                }
+            });
+        }
 
         // Submit Handler (Exposed globally for HTML onclick)
         window.writeGuestbook = async () => {
