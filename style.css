@@ -238,8 +238,7 @@ img { -webkit-user-drag: none; display: block; }
 
 .guest-speech-bubble::before {
     content: ""; position: absolute; 
-    top: 50%; left: -8px; /* 세로 중앙으로 이동 */
-    transform: translateY(-50%);
+    top: 18px; left: -8px; /* 캐릭터 높이(45px)의 중앙쯤으로 고정 */
     width: 10px; height: 10px; background: white;
     /* 왼쪽 중앙을 가리키는 삼각형 모양 */
     clip-path: polygon(100% 0, 0 50%, 100% 100%);
