@@ -20,10 +20,14 @@ body {
     user-select: text !important;
 }
 
-img, .gallery-item, .modal-content, .main-photo, .map-image {
-    /* 이미지 전용 추가 방어 */
+/* 이미지 기본 설정 */
+img {
     -webkit-user-drag: none !important;
-    pointer-events: auto; /* 클릭은 되어야 함 */
+}
+
+/* 모달 확대 이미지는 예외 (보여야 하므로) */
+.modal-content {
+    pointer-events: auto !important;
 }
 .container {
     max-width: 480px; margin: 0 auto; background-color: white;
@@ -38,7 +42,25 @@ img, .gallery-item, .modal-content, .main-photo, .map-image {
 /* 메인 디자인 */
 .eng-date { font-size: 0.9rem; letter-spacing: 2px; color: #888; margin-bottom: 20px; }
 .photo-area { margin-bottom: 30px; }
-.main-photo { width: 100%; border-radius: 150px 150px 0 0; object-fit: cover; cursor: pointer; }
+
+/* [수정] 메인 사진 래퍼 (이미지 보호용) */
+.main-photo-wrapper {
+    width: 100%;
+    border-radius: 150px 150px 0 0;
+    overflow: hidden; /* 이미지가 튀어나가지 않게 */
+    position: relative; /* 자식 요소 기준점 */
+    cursor: pointer; /* 클릭 가능 표시 */
+    -webkit-tap-highlight-color: transparent;
+}
+.main-photo {
+    width: 100%;
+    height: auto; /* [수정] 높이 자동 조절 */
+    object-fit: cover;
+    display: block;
+    pointer-events: none; /* ⭐️ 핵심: 이미지 자체는 클릭/터치 무시 */
+    -webkit-user-select: none;
+}
+
 .names h1 { font-size: 1.5rem; margin-bottom: 20px; }
 .amp { color: #ccaea5; margin: 0 5px; }
 .intro-text { font-size: 0.95rem; color: #555; margin-bottom: 30px; }
@@ -56,17 +78,30 @@ img, .gallery-item, .modal-content, .main-photo, .map-image {
     -ms-overflow-style: none; scrollbar-width: none; /* 스크롤바 숨김 */
 }
 .gallery-container::-webkit-scrollbar { display: none; }
-.gallery-item {
-    /* ▼ 여기 숫자를 줄였습니다 (크기 조절) */
-    width: 200px;       /* 너비: 화면의 반 정도 */
-    height: 280px;      /* 높이: 적당한 세로 직사각형 */
-    
-    /* 비율 유지 및 디자인 (그대로 두세요) */
-    object-fit: cover;
+
+/* [수정] 갤러리 아이템 래퍼 */
+.gallery-item-wrapper {
+    /* ▼ 크기 및 레이아웃 설정 이동 */
+    width: 200px;
+    height: 280px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     scroll-snap-align: center;
     flex-shrink: 0;
+    
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+.gallery-item {
+    /* 이미지는 꽉 채우기만 함 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none; /* ⭐️ 핵심 */
+    -webkit-user-select: none;
 }
 .gallery-hint {
     font-size: 0.8rem; color: #aaa; margin-top: 5px;
@@ -126,22 +161,28 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
     z-index: 10000;
 }
 
-/* 오시는 길 (약도) 이미지 */
+/* 오시는 길 (약도) 이미지 래퍼 */
+.map-image-wrapper {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 15px;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
 .map-image {
-    /* 1. 크기 및 비율 조절 */
-    width: 100%;            /* 모바일 화면 너비에 맞춤 */
-    max-width: 340px;       /* 📌 핵심! 아무리 넓어도 340px은 넘지 마라 (카드 크기) */
-    height: auto;           /* 📌 핵심! 가로가 줄어들면 세로도 알아서 비율 맞춤 (찌그러짐 방지) */
-    
-    /* 2. 위치 정렬 */
-    display: block;         /* 블록 요소로 변경 */
-    margin: 0 auto;         /* 좌우 여백 자동 -> 가운데 정렬 */
-
-    /* 3. 디자인 */
-    border-radius: 15px;    /* 모서리 둥글게 */
-    border: 1px solid #eee; /* 아주 연한 테두리 (깔끔해 보임) */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* 은은한 그림자 */
-    cursor: pointer;        /* 클릭 가능 표시 */
+    width: 100%;
+    height: auto; /* [수정] 높이 자동 조절 */
+    object-fit: cover;
+    display: block;
+    pointer-events: none; /* ⭐️ 핵심 */
+    -webkit-user-select: none;
 }
 
 /* 중복 규칙 삭제됨 */
