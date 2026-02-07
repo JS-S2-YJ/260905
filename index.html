@@ -33,7 +33,7 @@
         <div class="ticket-body">
             <!-- Main Intro Section -->
             <section class="main-header">
-                <p class="eng-date">2026. 09. 05. SATURDAY</p>
+                <p class="eng-date">2026. 09. 05. 토요일</p>
                 
                 <!-- Music Control (Floating) -->
                 <button id="music-btn" class="music-fab" aria-label="배경음악 제어">
@@ -78,7 +78,7 @@
 
             <!-- Calendar & D-Day Section -->
             <section class="calendar-section">
-                <h2>9월 5일</h2>
+                <h2>2026년 9월 5일</h2>
                 <p class="time">토요일 오후 12시</p>
                 <p class="location">서울 강서구 베뉴지홀 2층</p>
                 
@@ -126,8 +126,14 @@
                     <button onclick="writeGuestbook()">등록하기</button>
                 </div>
 
-                <div id="guestbook-list">
-                    <!-- Javascript will load messages here -->
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <span class="status-dot"></span>
+                        <span class="chat-title">WISHES FOR US</span>
+                    </div>
+                    <div id="guestbook-list">
+                        <!-- Javascript will load messages here -->
+                    </div>
                 </div>
             </section>
 
