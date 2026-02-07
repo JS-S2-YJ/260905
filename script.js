@@ -3,10 +3,30 @@ import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "ht
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 1. 실시간 D-Day 카운트다운
+// --- [1] D-Day 카운트다운 (멘트는 10초마다 변경) ---
     const dDayElement = document.getElementById('d-day-count');
-    const weddingDate = new Date('2026-09-05T12:00:00'); 
+    const weddingDate = new Date('2026-09-05T13:00:00'); // 예식일
 
+    // 1. 사용할 멘트 목록
+    const wittyPhrases = [
+        "유부 월드 입장까지",
+        "다이어트 마감까지",
+        "떨리는 그날까지",
+        "우리끼리 파티까지",
+        "축의금 수금까지(?)"
+    ];
+
+    // 2. 현재 보여줄 멘트 (처음엔 랜덤으로 하나 뽑아둠)
+    let currentPhrase = wittyPhrases[Math.floor(Math.random() * wittyPhrases.length)];
+
+    // 3. 멘트만 바꾸는 타이머 (10초마다 실행)
+    setInterval(() => {
+        currentPhrase = wittyPhrases[Math.floor(Math.random() * wittyPhrases.length)];
+        // 멘트가 바뀌었으니 화면도 바로 갱신!
+        updateCountdown(); 
+    }, 10000); // 10000ms = 10초
+
+    // 4. 시계 가는 함수 (1초마다 실행)
     function updateCountdown() {
         const now = new Date();
         const diff = weddingDate - now;
@@ -21,13 +41,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
+        
         const formatTime = (time) => String(time).padStart(2, '0');
-
+        
+        // 여기서 'currentPhrase' 변수를 갖다 씁니다 (10초 동안은 똑같은 멘트 유지됨)
         dDayElement.innerText = 
-            `결혼식까지 ${days}일 ${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)} 남음`;
+            `${currentPhrase} ${days}일 ${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
     }
 
+    // 5. 시계 타이머 시작
     const timerInterval = setInterval(updateCountdown, 1000);
     updateCountdown();
 
