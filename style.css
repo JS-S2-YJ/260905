@@ -447,11 +447,11 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
     
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 5px;
     
     background: rgba(255, 255, 255, 0.9); /* 반투명 흰색 */
     backdrop-filter: blur(5px); /* 배경 흐리게 (아이폰 느낌) */
-    padding: 6px 10px;
+    padding: 4px 8px;
     border-radius: 50px;
     
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
@@ -463,9 +463,9 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
     animation: floatBtn 3s ease-in-out infinite;
 }
 
-.music-fab .icon { font-size: 1.2rem; }
+.music-fab .icon { font-size: 1rem; }
 .music-fab .text { 
-    font-size: 0.9rem; 
+    font-size: 0.75rem; 
     font-weight: 700; 
     color: #555; 
     letter-spacing: -0.5px;
@@ -475,7 +475,7 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
 .music-fab.playing {
     background: rgba(255, 233, 236, 0.95); /* 연한 핑크색 */
     border-color: #ffb7c5;
-    padding-right: 25px; /* 공간 살짝 더 확보 */
+    padding-right: 15px; /* 공간 살짝 더 확보 */
 }
 .music-fab.playing .text { color: #d65a73; }
 
