@@ -77,6 +77,21 @@
             </div>
         </section>
 
+        <hr class="divider">
+
+        <section class="guestbook-section">
+            <h2>축하 메시지</h2>
+            
+            <div class="guestbook-form">
+                <input type="text" id="guest-name" placeholder="이름" maxlength="10">
+                <textarea id="guest-message" placeholder="축하의 말을 남겨주세요" maxlength="100"></textarea>
+                <button onclick="writeGuestbook()">등록하기</button>
+            </div>
+
+            <div id="guestbook-list">
+                </div>
+        </section>
+
         <footer>
             <p>마음을 담아 초대합니다.</p>
         </footer>
@@ -87,6 +102,6 @@
         <img class="modal-content" id="modal-img">
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
