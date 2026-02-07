@@ -297,11 +297,26 @@ const App = (() => {
         setTimeout(() => {
             if (typeof confetti === 'function') {
                 confetti({
-                    particleCount: 600, spread: 60, origin: { y: 0.8 },
+                    particleCount: 150, spread: 60, origin: { y: 0.8 },
                     colors: CONFIG.colors, disableForReducedMotion: true
                 });
             }
         }, 500);
+
+        // D-Day Box Click Confetti
+        const dDayBox = document.querySelector('.d-day-box');
+        if (dDayBox) {
+            dDayBox.addEventListener('click', () => {
+                if (typeof confetti === 'function') {
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 },
+                        colors: ['#90caf9', '#ff8a80', '#ffffff', '#f6d365']
+                    });
+                }
+            });
+        }
     };
 
     // --- Init Sequence ---
