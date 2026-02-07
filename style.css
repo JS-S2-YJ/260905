@@ -58,7 +58,17 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-img { -webkit-user-drag: none; display: block; }
+img { 
+    -webkit-user-drag: none; display: block; 
+    -webkit-touch-callout: none; /* 모바일 롱클릭 방지 */
+    user-select: none; -webkit-user-select: none;
+}
+
+.gallery-item-wrapper, .map-image-wrapper {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
 
 /* --- [5] 레이아웃 (Container) --- */
 .container {

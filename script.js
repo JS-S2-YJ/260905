@@ -269,8 +269,19 @@ const App = (() => {
     // --- 5. UI Effects (Modal, Protection, Confetti) ---
     const initUI = () => {
         // Image Protection
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('dragstart', e => e.preventDefault());
+        document.addEventListener('contextmenu', e => {
+            if (e.target.tagName === 'IMG') e.preventDefault();
+        });
+        document.addEventListener('dragstart', e => {
+            if (e.target.tagName === 'IMG') e.preventDefault();
+        });
+
+        // 추가적인 롱터치 방어 (일부 모바일 대응)
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('touchstart', (e) => {
+                if (e.touches.length > 1) e.preventDefault(); // 다중 터치 방지
+            }, { passive: true });
+        });
 
         // Modal
         const modal = document.getElementById('image-modal');
