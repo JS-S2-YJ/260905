@@ -177,8 +177,10 @@ img {
     min-width: 260px;
     border-radius: 50px;
     
-    /* [수정] 완벽한 중앙 정렬을 위한 Flexbox 전환 */
-    display: inline-flex;
+    /* [수정] 완벽한 중앙 정렬을 위한 Flex + Margin Auto */
+    display: flex;
+    margin: 30px auto; /* 좌우 마진 자동으로 중앙 정렬 */
+    width: fit-content; /* 내용물에 딱 맞게 */
     justify-content: center;
     align-items: center;
     
