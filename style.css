@@ -232,14 +232,17 @@ img { -webkit-user-drag: none; display: block; }
 
 .guest-speech-bubble {
     position: relative; background: white; padding: 12px 16px;
-    border-radius: 18px; border-top-left-radius: 2px;
+    border-radius: 18px; /* 모든 모서리를 둥글게 */
     box-shadow: 0 2px 8px rgba(0,0,0,0.03); max-width: 80%;
 }
 
 .guest-speech-bubble::before {
-    content: ""; position: absolute; top: 0; left: -8px;
+    content: ""; position: absolute; 
+    top: 50%; left: -8px; /* 세로 중앙으로 이동 */
+    transform: translateY(-50%);
     width: 10px; height: 10px; background: white;
-    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    /* 왼쪽 중앙을 가리키는 삼각형 모양 */
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
 }
 
 .guest-msg-text {
