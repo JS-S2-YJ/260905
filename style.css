@@ -174,8 +174,8 @@ img { -webkit-user-drag: none; display: block; }
     background: linear-gradient(to bottom, #a2d5ff 0%, #90caf9 50%, #82bcff 100%);
     
     color: white; border-radius: 50px;
-    width: 90%; max-width: 380px; padding: 18px 25px;
-    display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 10px;
+    width: 88%; max-width: 360px; padding: 20px 30px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
     font-weight: 700; 
     
     /* 입체감을 위한 다중 그림자 및 하이라이트 */
@@ -197,8 +197,11 @@ img { -webkit-user-drag: none; display: block; }
         0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-.dd-phrase { font-size: 0.95rem; font-weight: 500; opacity: 0.95; }
-.dd-time { font-size: 1.25rem; font-weight: 800; line-height: 1; letter-spacing: -0.5px; }
+.dd-phrase { font-size: 0.92rem; font-weight: 500; opacity: 0.95; margin-bottom: 2px; }
+.dd-time { 
+    font-size: 1.4rem; font-weight: 800; line-height: 1; 
+    letter-spacing: -0.5px; white-space: nowrap; /* 시간은 절대 줄바꿈 금지 */
+}
 
 /* 고급스러운 광택(Shine) 효과 */
 .d-day-box::after {
