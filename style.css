@@ -181,6 +181,8 @@ img {
     display: flex;
     margin: 30px auto; /* 좌우 마진 자동으로 중앙 정렬 */
     width: fit-content; /* 내용물에 딱 맞게 */
+    max-width: 100%; /* [추가] 부모 너비 넘지 않게 */
+    box-sizing: border-box; /* [추가] 패딩 포함해서 너비 계산 */
     justify-content: center;
     align-items: center;
     
