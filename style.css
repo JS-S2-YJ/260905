@@ -125,3 +125,21 @@ footer { margin-top: 50px; font-size: 0.8rem; color: #aaa; padding-bottom: 20px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* 은은한 그림자 */
     cursor: pointer;        /* 클릭 가능 표시 */
 }
+
+/* --- 이미지 저장 방지 (보안) --- */
+img {
+    /* 1. 꾹 눌렀을 때 메뉴(저장/공유) 금지 (iOS 필수) */
+    -webkit-touch-callout: none;
+    
+    /* 2. 드래그 앤 드롭 금지 */
+    -webkit-user-drag: none;
+    
+    /* 3. 선택(파란색 블록) 금지 */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    /* 4. 마우스 우클릭 금지 (PC용) */
+    pointer-events: auto; /* 클릭은 돼야 하니까 auto */
+}
