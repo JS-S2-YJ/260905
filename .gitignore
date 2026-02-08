@@ -2,3 +2,17 @@
 ww-commit/
 ww-commit.skill
 .gemini/
+
+# MCP Configuration & Secrets
+
+.env
+
+mcp-config.json
+
+mcp-servers.json
+
+settings.json
+
+.gemini/settings.json
+
+
