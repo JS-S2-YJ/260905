@@ -300,30 +300,47 @@ img {
     letter-spacing: 1px; text-transform: uppercase;
 }
 
-/* 방명록 리스트 (동물 말풍선 스타일) */
+/* 방명록 리스트 (동물 말풍선 스타일) - 내부 스크롤 제거 */
 #guestbook-list {
     display: flex; flex-direction: column; gap: 15px;
-    max-height: 450px; overflow-y: auto; padding: 20px 15px;
+    padding: 20px 15px;
     background-color: #f1f7fd;
-    
-    /* 스크롤 체이닝 방지 강화 */
-    overscroll-behavior-y: contain;
-    -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
-    
-    /* 스크롤바 커스텀 (있다는 걸 알려주기 위함) */
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-color) transparent;
+    /* 내부 스크롤 제거 */
+    overflow: visible;
+    max-height: none;
 }
 
-#guestbook-list::-webkit-scrollbar {
-    width: 4px;
+/* 더보기 버튼 스타일 */
+.load-more-container {
+    padding: 15px;
+    background-color: #f1f7fd;
+    display: flex;
+    justify-content: center;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
-#guestbook-list::-webkit-scrollbar-thumb {
+
+#load-more-btn {
+    padding: 10px 25px;
+    background-color: white;
+    color: var(--primary-color);
+    border: 1.5px solid var(--primary-color);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 5px rgba(144, 202, 249, 0.2);
+}
+
+#load-more-btn:active {
     background-color: var(--primary-color);
-    border-radius: 10px;
+    color: white;
+    transform: scale(0.95);
 }
-#guestbook-list::-webkit-scrollbar-track {
-    background: transparent;
+
+#load-more-btn.hidden {
+    display: none;
 }
 
 .guest-speech-bubble-wrapper {
