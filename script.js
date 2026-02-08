@@ -228,6 +228,49 @@ const App = (() => {
                 alert("등록 실패 ㅠㅠ");
             }
         };
+
+        // Account Copy Function
+        window.copyAccount = (accountNumber) => {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(accountNumber).then(() => {
+                    alert("계좌번호가 복사되었습니다. 🎉");
+                }).catch(err => {
+                    console.error("Copy failed:", err);
+                    // Fallback
+                    const textArea = document.createElement("textarea");
+                    textArea.value = accountNumber;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(textArea);
+                    alert("계좌번호가 복사되었습니다. 🎉");
+                });
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = accountNumber;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textArea);
+                alert("계좌번호가 복사되었습니다. 🎉");
+            }
+        };
+
+        // Accordion Toggle Function
+        window.toggleAccordion = (header) => {
+            const item = header.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            // Close all other accordion items
+            document.querySelectorAll('.accordion-item').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Toggle current item
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        };
     };
 
     // --- 4. YouTube Music Player ---

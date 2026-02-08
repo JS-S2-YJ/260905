@@ -15,12 +15,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=2.037">
+    <link rel="stylesheet" href="style.css?v=2.044">
 
     <!-- Third-party Libs -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
     <!-- Logic (Deferred for performance) -->
-    <script type="module" src="script.js?v=2.037" defer></script>
+    <script type="module" src="script.js?v=2.044" defer></script>
 </head>
 <body>
 
@@ -62,16 +62,55 @@
 
             <hr class="divider">
 
-            <!-- Gallery Section -->
-            <section class="gallery-section">
-                <h2>Gallery</h2>
-                <div class="gallery-container">
-                    <div class="gallery-item-wrapper"><img src="images/photo1.jpeg" alt="웨딩사진1" class="gallery-item" loading="lazy"></div>
-                    <div class="gallery-item-wrapper"><img src="images/photo2.jpeg" alt="웨딩사진2" class="gallery-item" loading="lazy"></div>
-                    <div class="gallery-item-wrapper"><img src="images/photo3.jpeg" alt="웨딩사진3" class="gallery-item" loading="lazy"></div>
-                    <div class="gallery-item-wrapper"><img src="images/photo4.jpeg" alt="웨딩사진4" class="gallery-item" loading="lazy"></div>
+            <!-- Contact Section (New) -->
+            <section class="contact-section">
+                <div class="contact-box">
+                    <div class="contact-group">
+                        <p class="group-title">신랑측</p>
+                        <div class="contact-row">
+                            <span class="relation">신랑</span> <span class="name">이재석</span>
+                            <div class="contact-btns">
+                                <a href="tel:010-0000-0000" class="btn-circle">📞</a>
+                                <a href="sms:010-0000-0000" class="btn-circle">✉️</a>
+                            </div>
+                        </div>
+                        <div class="contact-row">
+                            <span class="relation">부</span> <span class="name">이00</span>
+                            <div class="contact-btns">
+                                <a href="tel:010-0000-0000" class="btn-circle">📞</a>
+                            </div>
+                        </div>
+                        <div class="contact-row">
+                            <span class="relation">모</span> <span class="name">김00</span>
+                            <div class="contact-btns">
+                                <a href="tel:010-0000-0000" class="btn-circle">📞</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vertical-divider"></div>
+                    <div class="contact-group">
+                        <p class="group-title">신부측</p>
+                        <div class="contact-row">
+                            <span class="relation">신부</span> <span class="name">신예진</span>
+                            <div class="contact-btns">
+                                <a href="tel:010-0000-0000" class="btn-circle">📞</a>
+                                <a href="sms:010-0000-0000" class="btn-circle">✉️</a>
+                            </div>
+                        </div>
+                        <div class="contact-row">
+                            <span class="relation">부</span> <span class="name">신00</span>
+                            <div class="contact-btns">
+                                <a href="tel:010-0000-0000" class="btn-circle">📞</a>
+                            </div>
+                        </div>
+                        <div class="contact-row">
+                            <span class="relation">모</span> <span class="name">박00</span>
+                            <div class="contact-btns">
+                                <a href="tel:010-0000-0000" class="btn-circle">📞</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p class="gallery-hint">옆으로 넘겨보세요</p>
             </section>
 
             <hr class="divider">
@@ -90,6 +129,20 @@
 
             <hr class="divider">
 
+            <!-- Gallery Section -->
+            <section class="gallery-section">
+                <h2>Gallery</h2>
+                <div class="gallery-container">
+                    <div class="gallery-item-wrapper"><img src="images/photo1.jpeg" alt="웨딩사진1" class="gallery-item" loading="lazy"></div>
+                    <div class="gallery-item-wrapper"><img src="images/photo2.jpeg" alt="웨딩사진2" class="gallery-item" loading="lazy"></div>
+                    <div class="gallery-item-wrapper"><img src="images/photo3.jpeg" alt="웨딩사진3" class="gallery-item" loading="lazy"></div>
+                    <div class="gallery-item-wrapper"><img src="images/photo4.jpeg" alt="웨딩사진4" class="gallery-item" loading="lazy"></div>
+                </div>
+                <p class="gallery-hint">옆으로 넘겨보세요</p>
+            </section>
+
+            <hr class="divider">
+
             <!-- Map Section -->
             <section class="map-section">
                 <h2>오시는 길</h2>
@@ -101,18 +154,77 @@
                 </div>
 
                 <div class="map-info">
-                    <p class="address-title" style="font-weight: bold; margin-top: 15px;">2층 베뉴지홀</p>
-                    <p class="address-text">서울 강서구 강서로 388</p>
+                    <p class="address-title" style="font-weight: bold; margin-top: 15px;">베뉴지웨딩 2층 베뉴지홀</p>
+                    <p class="address-text">서울 강서구 강서로 388 (등촌동 678-14)</p>
                     <p class="sub-text">
-                        🚇 발산역 3번 출구 도보 5분<br>
-                        🚗 건물 내 지하 주차장 이용 (2시간 무료)
+                        <br>
+                        <strong>🚇 지하철 이용 시</strong><br>
+                        5호선 발산역 3번 출구에서 도보 2분 (약 150m)<br>
+                        9호선 양천향교역 6번 출구에서 도보 7분 (약 450m)<br>
+                        <br>
+                        <strong>🚗 자가용 이용 시</strong><br>
+                        건물 내 지하 및 지상 주차장 이용 (약 1,200대 가능)<br>
+                        축하객 주차 2시간 무료 (무료 주차권 지참)<br>
+                        <br>
+                        <strong>🚌 버스 이용 시</strong><br>
+                        발산역(중) 또는 발산역 3번출구 정류장 하차
                     </p>
                 </div>
                 
                 <div class="navi-buttons">
-                    <a href="https://tmap.co.kr/" target="_blank" class="btn-navi">티맵</a>
-                    <a href="https://kko.to/placeholder" target="_blank" class="btn-navi">카카오내비</a>
+                    <a href="https://tmap.co.kr/tmap2/mobile/route.jsp?appKey=AIzaSyBV2BF5OORqW42zQAv8BAunXFnHbTD1l8k&name=베뉴지웨딩&lon=126.8392&lat=37.5587" target="_blank" class="btn-navi">
+                        <img src="images/map1.svg" alt="" class="navi-icon">티맵
+                    </a>
+                    <a href="https://map.kakao.com/link/to/베뉴지웨딩,37.5587,126.8392" target="_blank" class="btn-navi">
+                        <img src="https://map.kakao.com/favicon.ico" alt="" class="navi-icon">카카오맵
+                    </a>
+                    <a href="https://naver.me/x5GojlWc" target="_blank" class="btn-navi">
+                        <img src="images/map3.webp" alt="" class="navi-icon">네이버 지도
+                    </a>
                 </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- Account Section -->
+            <section class="account-section">
+                <h2>마음 전하실 곳</h2>
+                <div class="account-accordion">
+                    <!-- 신랑측 -->
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>신랑측 계좌번호</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="account-row">
+                                <div class="account-info">
+                                    <span class="person-name">신랑 이재석</span>
+                                    <span class="bank-info">신한은행 | 110-394-051244</span>
+                                </div>
+                                <button class="copy-btn-mini" onclick="copyAccount('110-394-051244')">복사</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 신부측 (예시 데이터) -->
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>신부측 계좌번호</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="account-row">
+                                <div class="account-info">
+                                    <span class="person-name">신부 신예진</span>
+                                    <span class="bank-info">우리은행 | 1002-000-000000</span>
+                                </div>
+                                <button class="copy-btn-mini" onclick="copyAccount('1002-000-000000')">복사</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="account-desc">축하의 마음을 담아 보내주시는 따뜻한 정성에<br>깊은 감사를 드립니다.</p>
             </section>
 
             <hr class="divider">
