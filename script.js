@@ -68,10 +68,17 @@ const App = (() => {
         const updateView = () => {
             const now = new Date();
             const diff = CONFIG.weddingDate - now;
+            const fmt = (n) => String(n).padStart(2, '0');
 
             if (diff <= 0) {
-                if (phraseEl) phraseEl.innerText = "❤️ 저희 결혼했습니다 ❤️";
-                if (timeEl) timeEl.innerText = "";
+                const absDiff = Math.abs(diff);
+                const passedDays = Math.floor(absDiff / (1000 * 60 * 60 * 24));
+                const passedHours = Math.floor((absDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const passedMinutes = Math.floor((absDiff % (1000 * 60 * 60)) / (1000 * 60));
+                const passedSeconds = Math.floor((absDiff % (1000 * 60)) / 1000);
+
+                if (phraseEl) phraseEl.innerHTML = "❤️ 저희 결혼했습니다 ❤️<br>행복하게 잘 살겠습니다";
+                if (timeEl) timeEl.textContent = `함께한 지 +${passedDays}일 ${fmt(passedHours)}:${fmt(passedMinutes)}:${fmt(passedSeconds)}`;
                 return;
             }
 
@@ -80,7 +87,6 @@ const App = (() => {
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
-            const fmt = (n) => String(n).padStart(2, '0');
             const dayText = days === 0 ? "D-DAY" : `D-${days}일`;
 
             if (phraseEl) phraseEl.textContent = currentPhrase;
@@ -269,49 +275,6 @@ const App = (() => {
             // Toggle current item
             if (!isActive) {
                 item.classList.add('active');
-            }
-        };
-
-        // Share Functions
-        window.addToCalendar = () => {
-            const title = "이재석 ❤️ 신예진 결혼식";
-            const location = "더 베뉴지 서울 2층 베뉴지홀";
-            const details = "Wedding Airlines | 저희의 시작을 함께해 주세요.";
-            const startDate = "20260905T120000";
-            const endDate = "20260905T140000";
-            
-            const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
-            window.open(googleCalendarUrl, '_blank');
-        };
-
-        window.copyLink = () => {
-            const url = window.location.href;
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(url).then(() => {
-                    alert("청첩장 링크가 복사되었습니다. 🎉");
-                });
-            } else {
-                const textArea = document.createElement("textarea");
-                textArea.value = url;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand("copy");
-                document.body.removeChild(textArea);
-                alert("청첩장 링크가 복사되었습니다. 🎉");
-            }
-        };
-
-        window.shareKakao = () => {
-            // Web Share API fallback for mobile
-            if (navigator.share) {
-                navigator.share({
-                    title: '이재석 ❤️ 신예진의 청첩장',
-                    text: 'Wedding Airlines | 더 베뉴지 서울 2층 베뉴지홀',
-                    url: window.location.href
-                }).catch(console.error);
-            } else {
-                alert("카카오톡 공유를 위해 링크 복사 기능을 이용해 주세요! 🔗");
-                window.copyLink();
             }
         };
     };

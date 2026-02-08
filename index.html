@@ -15,12 +15,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=2.063">
+    <link rel="stylesheet" href="style.css?v=2.081">
 
     <!-- Third-party Libs -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
     <!-- Logic (Deferred for performance) -->
-    <script type="module" src="script.js?v=2.063" defer></script>
+    <script type="module" src="script.js?v=2.081" defer></script>
 </head>
 <body>
 
@@ -31,6 +31,33 @@
         </header>
 
         <div class="ticket-body">
+            <!-- Flight Info Bar (Boarding Detail) -->
+            <div class="flight-info-bar">
+                <div class="route-info">
+                    <span class="city">JS</span>
+                    <span class="plane">✈️</span>
+                    <span class="city">YJ</span>
+                </div>
+                <div class="detail-grid">
+                    <div class="info-item">
+                        <span class="label">FLIGHT</span>
+                        <span class="val">WED0905</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">GATE</span>
+                        <span class="val">09</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">SEAT</span>
+                        <span class="val">05A</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">BOARDING</span>
+                        <span class="val">12:00</span>
+                    </div>
+                </div>
+            </div>
+
             <!-- Main Intro Section -->
             <section class="main-header">
                 <p class="eng-date">2026. 09. 05. 토요일</p>
@@ -259,14 +286,11 @@
                 </div>
             </section>
 
-            <!-- Share & Calendar Section -->
-            <section class="share-section">
-                <div class="share-minimal">
-                    <button class="btn-minimal" onclick="addToCalendar()">📅 일정 등록</button>
-                    <span class="bar">|</span>
-                    <button class="btn-minimal" onclick="copyLink()">🔗 링크 복사</button>
-                    <span class="bar">|</span>
-                    <button class="btn-minimal" onclick="shareKakao()">💬 카톡 공유</button>
+            <!-- Barcode Section -->
+            <section class="barcode-area">
+                <div class="barcode-wrapper">
+                    <div class="barcode"></div>
+                    <p class="barcode-num">WED-260905-JSYJ</p>
                 </div>
             </section>
 
