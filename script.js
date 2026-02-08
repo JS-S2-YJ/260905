@@ -130,6 +130,7 @@ const App = (() => {
         let isLoading = false;
         let isEnd = false;
         const PAGE_SIZE = 10;
+        const loadMoreBtn = document.getElementById('load-more-btn');
 
         const animalEmojis = ["🐶", "🐱", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐥", "🐧", "🐦", "🐣", "🦄", "🐬", "🦢", "🦋", "✨"];
 
@@ -149,34 +150,44 @@ const App = (() => {
             if (!listEl) return;
             
             const liveDocs = [];
-            snapshot.forEach(doc => liveDocs.push({ id: doc.id, ...doc.data() }));
+            snapshot.forEach(doc => liveDocs.push(doc.data()));
             
-            const existingCards = listEl.querySelectorAll('.guest-msg-card');
-            if (existingCards.length <= PAGE_SIZE) {
+            const currentItemsCount = listEl.querySelectorAll('.guest-speech-bubble-wrapper').length;
+            if (currentItemsCount <= PAGE_SIZE) {
                 listEl.innerHTML = liveDocs.map(data => createMsgHtml(data)).join('');
                 lastVisible = snapshot.docs[snapshot.docs.length - 1];
-            } else {
-                const moreHtml = Array.from(existingCards).slice(PAGE_SIZE).map(el => el.outerHTML).join('');
-                listEl.innerHTML = liveDocs.map(data => createMsgHtml(data)).join('') + moreHtml;
             }
-            if (snapshot.docs.length < PAGE_SIZE) isEnd = true;
+            
+            if (snapshot.docs.length < PAGE_SIZE) {
+                isEnd = true;
+                if (loadMoreBtn) loadMoreBtn.classList.add('hidden');
+            } else if (!isEnd) {
+                if (loadMoreBtn) loadMoreBtn.classList.remove('hidden');
+            }
         });
 
         const loadMore = async () => {
             if (isLoading || isEnd || !lastVisible) return;
             isLoading = true;
+            if (loadMoreBtn) loadMoreBtn.innerText = "불러오는 중...";
             try {
                 const nextQ = query(collection(db, "guestbook"), orderBy("date", "desc"), startAfter(lastVisible), limit(PAGE_SIZE));
                 const snapshot = await getDocs(nextQ);
                 if (snapshot.empty) {
                     isEnd = true;
+                    if (loadMoreBtn) loadMoreBtn.classList.add('hidden');
                     return;
                 }
                 snapshot.forEach((doc) => {
                     listEl.insertAdjacentHTML('beforeend', createMsgHtml(doc.data()));
                 });
                 lastVisible = snapshot.docs[snapshot.docs.length - 1];
-                if (snapshot.docs.length < PAGE_SIZE) isEnd = true;
+                if (snapshot.docs.length < PAGE_SIZE) {
+                    isEnd = true;
+                    if (loadMoreBtn) loadMoreBtn.classList.add('hidden');
+                } else {
+                    if (loadMoreBtn) loadMoreBtn.innerText = "축하 메시지 더보기 ▾";
+                }
             } catch (e) {
                 console.error("Load more error:", e);
             } finally {
@@ -184,12 +195,8 @@ const App = (() => {
             }
         };
 
-        if (listEl) {
-            listEl.addEventListener('scroll', () => {
-                if (listEl.scrollTop + listEl.clientHeight >= listEl.scrollHeight - 20) {
-                    loadMore();
-                }
-            });
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', loadMore);
         }
 
         // Submit Handler (Exposed globally for HTML onclick)
