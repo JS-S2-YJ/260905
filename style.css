@@ -303,9 +303,27 @@ img {
 /* 방명록 리스트 (동물 말풍선 스타일) */
 #guestbook-list {
     display: flex; flex-direction: column; gap: 15px;
-    max-height: 400px; overflow-y: auto; padding: 20px 15px;
-    background-color: #f1f7fd; /* 더 맑은 연하늘색 */
-    overscroll-behavior: contain;
+    max-height: 450px; overflow-y: auto; padding: 20px 15px;
+    background-color: #f1f7fd;
+    
+    /* 스크롤 체이닝 방지 강화 */
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
+    
+    /* 스크롤바 커스텀 (있다는 걸 알려주기 위함) */
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) transparent;
+}
+
+#guestbook-list::-webkit-scrollbar {
+    width: 4px;
+}
+#guestbook-list::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+}
+#guestbook-list::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .guest-speech-bubble-wrapper {
