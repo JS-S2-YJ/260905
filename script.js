@@ -332,7 +332,7 @@ const App = (() => {
                     });
                 }
 
-                // 300ms 후부터 연사 시작 (그 사이에 이동이 없어야 함)
+                // 150ms 간격으로 더 빠르게 연사
                 confettiInterval = setInterval(() => {
                     if (!isMoving && typeof confetti === 'function') {
                         confetti({
@@ -340,7 +340,7 @@ const App = (() => {
                             colors: ['#90caf9', '#ff8a80', '#ffffff', '#f6d365']
                         });
                     }
-                }, 300);
+                }, 150);
             };
 
             const stopConfetti = () => {
