@@ -159,32 +159,34 @@ img {
 /* --- [7-2] 섹션: 연락처 (Contact) --- */
 .contact-section { padding: 0 10px; }
 .contact-box {
-    display: flex; justify-content: space-around; align-items: flex-start;
-    background: white; padding: 20px 10px; border-radius: 15px;
+    display: flex; justify-content: center; align-items: flex-start;
+    background: white; padding: 20px 5px; border-radius: 15px;
     border: 1px solid var(--border-color);
     box-shadow: 0 4px 15px var(--shadow-color);
 }
-.contact-group { flex: 1; padding: 0 5px; }
+.contact-group { flex: 1; min-width: 0; padding: 0 5px; } /* min-width: 0 for flex shrinking */
 .group-title { 
     font-size: 0.85rem; font-weight: 800; color: var(--primary-color); 
     margin-bottom: 15px; letter-spacing: 1px;
 }
 .contact-row {
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    margin-bottom: 12px; font-size: 0.9rem;
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+    margin-bottom: 12px; font-size: 0.85rem;
+    white-space: nowrap; /* Prevent name breaking */
 }
-.contact-row .relation { color: var(--text-light); font-size: 0.75rem; min-width: 25px; }
-.contact-row .name { font-weight: 700; color: var(--text-color); min-width: 45px; text-align: left; }
-.contact-btns { display: flex; gap: 5px; }
+.contact-row .relation { color: var(--text-light); font-size: 0.7rem; min-width: 20px; text-align: right; }
+.contact-row .name { font-weight: 700; color: var(--text-color); min-width: 40px; text-align: left; }
+.contact-btns { display: flex; gap: 4px; }
 .btn-circle {
-    width: 28px; height: 28px; border-radius: 50%;
+    width: 26px; height: 26px; border-radius: 50%;
     background-color: #f0f7ff; color: var(--primary-color);
     display: flex; align-items: center; justify-content: center;
-    text-decoration: none; font-size: 0.8rem;
+    text-decoration: none; font-size: 0.75rem;
     border: 1px solid #e3f2fd; transition: all 0.2s;
+    flex-shrink: 0; /* Don't squash the buttons */
 }
 .btn-circle:active { background-color: var(--primary-color); color: white; transform: scale(0.9); }
-.vertical-divider { width: 1px; height: 120px; background-color: #eef5fb; margin-top: 30px; }
+.vertical-divider { width: 1px; height: 100px; background-color: #eef5fb; margin: 30px 2px 0; flex-shrink: 0; }
 
 /* --- [8] 컴포넌트: 구분선 (Divider) --- */
 .divider { border: none; border-top: 2px dashed #ddd; margin: 40px 10px; position: relative; }
@@ -283,17 +285,18 @@ img {
 .sub-text strong { color: var(--primary-color); }
 
 .navi-buttons {
-    display: flex; justify-content: center; gap: 8px; margin-top: 20px; padding: 0 10px;
+    display: flex; justify-content: center; gap: 6px; margin-top: 20px; padding: 0 5px;
+    flex-wrap: wrap; /* Allow wrapping on very narrow screens */
 }
 .btn-navi {
-    flex: 1; max-width: 110px; padding: 10px 0; text-decoration: none;
-    font-size: 0.8rem; font-weight: 700; border-radius: 8px;
+    flex: 1; min-width: 95px; max-width: 120px; padding: 10px 4px; text-decoration: none;
+    font-size: 0.75rem; font-weight: 700; border-radius: 8px;
     background-color: white; border: 1px solid var(--border-color);
     color: var(--text-color); transition: all 0.2s;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    display: flex; align-items: center; justify-content: center; gap: 6px;
+    display: flex; align-items: center; justify-content: center; gap: 4px;
 }
-.navi-icon { width: 16px; height: 16px; border-radius: 3px; }
+.navi-icon { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
 .btn-navi:active { background-color: #f8fbff; transform: translateY(1px); }
 
 /* --- [11-2] 섹션: 축의금 (Account) --- */
@@ -468,6 +471,23 @@ img {
     font-weight: 500; word-break: break-all; white-space: pre-wrap;
     text-align: left;
 }
+
+/* --- [12-2] 섹션: 공유 및 일정 (Share) --- */
+.share-section { padding: 30px 20px 10px; background-color: var(--bg-color); }
+.share-minimal {
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 400px; margin: 0 auto;
+    font-size: 0.8rem; color: #ddd;
+}
+.btn-minimal {
+    background: none; border: none; padding: 10px 5px;
+    font-family: var(--font-main); font-size: 0.82rem; font-weight: 500;
+    color: #888; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; gap: 4px;
+    filter: grayscale(100%); opacity: 0.8;
+}
+.btn-minimal:active { color: var(--primary-color); opacity: 1; filter: grayscale(0%); }
+.share-minimal .bar { color: #eee; font-size: 0.7rem; font-weight: 300; }
 
 /* --- [13] 푸터 & 기타 --- */
 footer { margin-top: 50px; font-size: 0.8rem; color: var(--text-light); padding-bottom: 20px; }
