@@ -156,6 +156,36 @@ img {
 .names .amp { color: var(--accent-color); margin: 0 5px; font-weight: 700; }
 .intro-text { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 30px; }
 
+/* --- [7-2] 섹션: 연락처 (Contact) --- */
+.contact-section { padding: 0 10px; }
+.contact-box {
+    display: flex; justify-content: space-around; align-items: flex-start;
+    background: white; padding: 20px 10px; border-radius: 15px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+.contact-group { flex: 1; padding: 0 5px; }
+.group-title { 
+    font-size: 0.85rem; font-weight: 800; color: var(--primary-color); 
+    margin-bottom: 15px; letter-spacing: 1px;
+}
+.contact-row {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin-bottom: 12px; font-size: 0.9rem;
+}
+.contact-row .relation { color: var(--text-light); font-size: 0.75rem; min-width: 25px; }
+.contact-row .name { font-weight: 700; color: var(--text-color); min-width: 45px; text-align: left; }
+.contact-btns { display: flex; gap: 5px; }
+.btn-circle {
+    width: 28px; height: 28px; border-radius: 50%;
+    background-color: #f0f7ff; color: var(--primary-color);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 0.8rem;
+    border: 1px solid #e3f2fd; transition: all 0.2s;
+}
+.btn-circle:active { background-color: var(--primary-color); color: white; transform: scale(0.9); }
+.vertical-divider { width: 1px; height: 120px; background-color: #eef5fb; margin-top: 30px; }
+
 /* --- [8] 컴포넌트: 구분선 (Divider) --- */
 .divider { border: none; border-top: 2px dashed #ddd; margin: 40px 10px; position: relative; }
 .divider::before, .divider::after {
@@ -246,8 +276,69 @@ img {
     border-radius: 15px; border: 1px solid #eee; overflow: hidden;
 }
 .map-image { width: 100%; height: auto; }
-.map-info { padding: 15px 0; }
-.address-text { user-select: text !important; -webkit-user-select: text !important; }
+.map-info { padding: 15px 20px; text-align: left; max-width: 400px; margin: 0 auto; }
+.address-title { color: var(--text-color); font-size: 1.1rem; }
+.address-text { font-size: 0.9rem; color: var(--text-muted); user-select: text !important; -webkit-user-select: text !important; }
+.sub-text { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+.sub-text strong { color: var(--primary-color); }
+
+.navi-buttons {
+    display: flex; justify-content: center; gap: 8px; margin-top: 20px; padding: 0 10px;
+}
+.btn-navi {
+    flex: 1; max-width: 110px; padding: 10px 0; text-decoration: none;
+    font-size: 0.8rem; font-weight: 700; border-radius: 8px;
+    background-color: white; border: 1px solid var(--border-color);
+    color: var(--text-color); transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.navi-icon { width: 16px; height: 16px; border-radius: 3px; }
+.btn-navi:active { background-color: #f8fbff; transform: translateY(1px); }
+
+/* --- [11-2] 섹션: 축의금 (Account) --- */
+.account-section h2 { font-size: 1.2rem; color: var(--primary-color); margin-bottom: 20px; font-weight: 700; }
+.account-accordion {
+    width: 92%; max-width: 400px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 10px;
+}
+.accordion-item {
+    background: white; border-radius: 12px; overflow: hidden;
+    border: 1px solid #e3effa;
+    box-shadow: 0 4px 6px rgba(144, 202, 249, 0.1);
+}
+.accordion-header {
+    width: 100%; padding: 15px 20px; background: white; border: none;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-main); font-weight: 700; color: var(--text-color);
+    cursor: pointer; transition: background 0.2s;
+}
+.accordion-header:active { background-color: #f8fbff; }
+.accordion-header .arrow { font-size: 0.7rem; color: var(--primary-color); transition: transform 0.3s; }
+.accordion-item.active .arrow { transform: rotate(180deg); }
+
+.accordion-content {
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
+    background-color: #fcfdfe;
+}
+.accordion-item.active .accordion-content { max-height: 200px; border-top: 1px solid #f0f7ff; }
+
+.account-row {
+    padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
+}
+.account-info { text-align: left; }
+.person-name { display: block; font-size: 0.9rem; font-weight: 700; color: var(--text-color); margin-bottom: 2px; }
+.bank-info { font-size: 0.8rem; color: var(--text-muted); }
+
+.copy-btn-mini {
+    padding: 5px 12px; font-size: 0.75rem; font-weight: 700;
+    background: #f0f7ff; color: var(--primary-color);
+    border: 1px solid var(--primary-color); border-radius: 4px;
+    cursor: pointer; transition: all 0.2s;
+}
+.copy-btn-mini:active { background: var(--primary-color); color: white; }
+
+.account-desc { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; margin-top: 20px; }
 
 /* --- [12] 섹션: 방명록 (Guestbook) --- */
 .guestbook-section h2 { color: var(--primary-color); margin-bottom: 20px; }
