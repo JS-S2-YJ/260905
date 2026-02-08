@@ -14,8 +14,27 @@ ww-commit/
 Thumbs.db
 
 # Secrets & Configs
+
 .env
+
 mcp-config.json
+
 mcp-servers.json
+
 settings.json
+
 .gemini/settings.json
+
+
+
+# Media & Audio
+
+*.mp3
+
+*.wav
+
+*.m4a
+
+*.ogg
+
+*.aac
