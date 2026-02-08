@@ -1,18 +1,21 @@
-# Gemini CLI Skills
-ww-commit/
-ww-commit.skill
+# Gemini CLI
 .gemini/
+*.skill
+ww-commit/
 
-# MCP Configuration & Secrets
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
 
+# OS files
+.DS_Store
+Thumbs.db
+
+# Secrets & Configs
 .env
-
 mcp-config.json
-
 mcp-servers.json
-
 settings.json
-
 .gemini/settings.json
-
-
