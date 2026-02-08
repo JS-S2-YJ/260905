@@ -314,25 +314,29 @@ const App = (() => {
             }
         }, 500);
 
-        // D-Day Box Click & Long-press Confetti
+        // D-Day Box Click & Long-press Confetti (Scroll-safe)
         const dDayBox = document.querySelector('.d-day-box');
         if (dDayBox) {
             let confettiInterval = null;
+            let isMoving = false;
 
-            const startConfetti = () => {
+            const startConfetti = (e) => {
+                isMoving = false; // 이동 상태 초기화
                 if (confettiInterval) return;
-                // 즉시 한 번 터뜨림
+
+                // 즉시 한 번 터뜨림 (스크롤 시작일 수도 있으므로 일단 한 번만)
                 if (typeof confetti === 'function') {
                     confetti({
-                        particleCount: 100, spread: 70, origin: { y: 0.6 },
+                        particleCount: 80, spread: 70, origin: { y: 0.6 },
                         colors: ['#90caf9', '#ff8a80', '#ffffff', '#f6d365']
                     });
                 }
-                // 300ms 간격으로 연사
+
+                // 300ms 후부터 연사 시작 (그 사이에 이동이 없어야 함)
                 confettiInterval = setInterval(() => {
-                    if (typeof confetti === 'function') {
+                    if (!isMoving && typeof confetti === 'function') {
                         confetti({
-                            particleCount: 80, spread: 80, origin: { y: 0.65 },
+                            particleCount: 60, spread: 80, origin: { y: 0.65 },
                             colors: ['#90caf9', '#ff8a80', '#ffffff', '#f6d365']
                         });
                     }
@@ -346,16 +350,21 @@ const App = (() => {
                 }
             };
 
-            // 마우스 및 터치 이벤트 연결
-            dDayBox.addEventListener('mousedown', startConfetti);
-            dDayBox.addEventListener('touchstart', (e) => {
-                e.preventDefault(); // 모바일 줌/클릭 방해 방지
-                startConfetti();
-            }, { passive: false });
+            const handleMove = () => {
+                isMoving = true; // 움직임 발생 시 연사 중단
+                stopConfetti();
+            };
 
+            // 마우스 이벤트
+            dDayBox.addEventListener('mousedown', startConfetti);
             window.addEventListener('mouseup', stopConfetti);
-            window.addEventListener('touchend', stopConfetti);
             dDayBox.addEventListener('mouseleave', stopConfetti);
+
+            // 터치 이벤트 (스크롤 친화적)
+            dDayBox.addEventListener('touchstart', startConfetti, { passive: true });
+            dDayBox.addEventListener('touchmove', handleMove, { passive: true });
+            window.addEventListener('touchend', stopConfetti);
+            window.addEventListener('touchcancel', stopConfetti);
         }
 
         // Main Photo Click Confetti
