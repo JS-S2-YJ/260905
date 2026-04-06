@@ -1,3 +1,9 @@
+# Claude Code
+.claude/
+
+# Serena MCP
+.serena/
+
 # Gemini CLI
 .gemini/
 *.skill

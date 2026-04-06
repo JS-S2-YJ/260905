@@ -384,6 +384,16 @@ img {
     100% { transform: scale(1); }
 }
 
+/* 쿨다운 버튼 상태 */
+.guestbook-form button:disabled,
+.btn-cooldown {
+    background-color: #ccc !important;
+    animation: none !important;
+    transform: none !important;
+    cursor: not-allowed;
+    color: #888;
+}
+
 /* 방명록 컨테이너 및 헤더 */
 .chat-container {
     border-radius: 15px; overflow: hidden;
@@ -405,10 +415,29 @@ img {
     flex-shrink: 0;
 }
 @keyframes blink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.9); } }
-.chat-title { 
+.chat-title {
     font-size: 0.85rem; font-weight: 800; color: #a6937c; /* 브라운 톤 타이틀 */
     letter-spacing: 1px; text-transform: uppercase;
 }
+/* 관리자 토글 버튼 (거의 안 보이게) */
+.admin-toggle-btn {
+    margin-left: auto; background: none; border: none;
+    font-size: 0.75rem; cursor: pointer;
+    opacity: 0; padding: 4px; transition: opacity 0.2s;
+    line-height: 1;
+}
+.admin-toggle-btn:active { opacity: 1; }
+.admin-mode .admin-toggle-btn { opacity: 0.8; }
+
+/* 삭제 버튼 (관리자 모드에서만 표시) */
+.admin-delete-btn {
+    display: none; margin-top: 6px;
+    padding: 3px 10px; font-size: 0.7rem;
+    background-color: #ff6b6b; color: white;
+    border: none; border-radius: 12px; cursor: pointer;
+}
+.admin-delete-btn:active { background-color: #e05555; }
+.admin-mode .admin-delete-btn { display: inline-block; }
 
 /* 방명록 리스트 (동물 말풍선 스타일) - 내부 스크롤 제거 */
 #guestbook-list {

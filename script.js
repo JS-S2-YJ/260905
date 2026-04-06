@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, getDocs, startAfter } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, getDocs, startAfter, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
 /**
  * ==============================================================================
@@ -9,7 +9,7 @@ import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, ge
  */
 
 const CONFIG = {
-    weddingDate: new Date('2026-02-08T15:30:00+09:00'), // 테스트용 오늘 날짜
+    weddingDate: new Date('2026-09-05T12:00:00+09:00'),
     firebase: {
         apiKey: "AIzaSyBV2BF5OORqW42zQAv8BAunXFnHbTD1l8k",
         authDomain: "wedding-guestbook-c8238.firebaseapp.com",
@@ -138,6 +138,21 @@ const App = (() => {
         const PAGE_SIZE = 5;
         const loadMoreBtn = document.getElementById('load-more-btn');
 
+        // 쿨다운 (도배 방지)
+        const COOLDOWN_SECONDS = 30;
+        const COOLDOWN_KEY = 'guestbook_cooldown_until';
+
+        // 관리자 모드
+        const ADMIN_PW_HASH = 'c9aae1ce021698a4ea4c1c5243c2a6dd80d090395086c545244121753b89291d'; // SHA-256 해시
+        const ADMIN_KEY = 'guestbook_admin';
+        let isAdmin = localStorage.getItem(ADMIN_KEY) === 'true';
+        if (isAdmin) document.body.classList.add('admin-mode');
+
+        const hashPassword = async (pw) => {
+            const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pw));
+            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+        };
+
         const animalEmojis = [
             "🐶", "🐱", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🐔", "🐧", "🐦", "🐤", "🐣", "🦆", 
             "🦉", "🦇", "🐺", "🐗", "🐴", "🦄", "🐝", "🦋", "🐌", "🐞", "🐜", "🦗", "🐢", "🐍", "🦎", "🦖", "🦕", "🐙", "🦑", "🦐", 
@@ -147,27 +162,99 @@ const App = (() => {
             "🍀", "🎍", "🎋", "🍃", "🍂", "🍁", "🍄", "🐚", "⭐", "🌟", "✨"
         ];
 
-        const createMsgHtml = (data) => {
+        const escapeHtml = (str) => str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+        const createMsgHtml = (data, docId) => {
             const randomEmoji = animalEmojis[Math.floor(Math.random() * animalEmojis.length)];
             return `
-                <div class="guest-speech-bubble-wrapper">
+                <div class="guest-speech-bubble-wrapper" data-doc-id="${docId || ''}">
                     <div class="guest-animal-avatar">${randomEmoji}</div>
                     <div class="guest-speech-bubble">
-                        <div class="guest-msg-text">${data.message}</div>
+                        <div class="guest-msg-text">${escapeHtml(data.message)}</div>
+                        <button class="admin-delete-btn" onclick="deleteMessage('${docId}')">삭제</button>
                     </div>
                 </div>`;
+        };
+
+        // 쿨다운 타이머
+        const runCooldownTimer = () => {
+            const until = parseInt(localStorage.getItem(COOLDOWN_KEY) || '0');
+            const remaining = Math.ceil((until - Date.now()) / 1000);
+            if (remaining <= 0) {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('btn-cooldown');
+                    submitBtn.innerText = "등록하기";
+                }
+                return;
+            }
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.classList.add('btn-cooldown');
+                submitBtn.classList.remove('btn-active');
+                submitBtn.innerText = `${remaining}초 후 등록 가능`;
+            }
+            setTimeout(runCooldownTimer, 1000);
+        };
+
+        const startCooldown = () => {
+            localStorage.setItem(COOLDOWN_KEY, Date.now() + COOLDOWN_SECONDS * 1000);
+            runCooldownTimer();
+        };
+
+        // 페이지 로드 시 쿨다운 복원
+        if (parseInt(localStorage.getItem(COOLDOWN_KEY) || '0') > Date.now()) {
+            runCooldownTimer();
+        }
+
+        // 관리자 토글
+        window.toggleAdmin = async () => {
+            if (isAdmin) {
+                isAdmin = false;
+                localStorage.removeItem(ADMIN_KEY);
+                document.body.classList.remove('admin-mode');
+                location.reload();
+                return;
+            }
+            const pw = prompt("관리자 비밀번호를 입력하세요");
+            if (pw === null) return;
+            const hash = await hashPassword(pw);
+            if (hash === ADMIN_PW_HASH) {
+                isAdmin = true;
+                localStorage.setItem(ADMIN_KEY, 'true');
+                document.body.classList.add('admin-mode');
+                location.reload();
+            } else {
+                alert("비밀번호가 틀렸습니다");
+            }
+        };
+
+        // 메시지 삭제 (soft delete)
+        window.deleteMessage = async (docId) => {
+            if (!isAdmin || !docId) return;
+            if (!confirm("이 메시지를 숨기겠습니까?")) return;
+            try {
+                await updateDoc(doc(db, "guestbook", docId), { hidden: true });
+                const el = document.querySelector(`[data-doc-id="${docId}"]`);
+                if (el) el.remove();
+            } catch (e) {
+                console.error("Delete error:", e);
+                alert("삭제 실패. Firestore 규칙을 확인해주세요.");
+            }
         };
 
         const qInitial = query(collection(db, "guestbook"), orderBy("date", "desc"), limit(PAGE_SIZE));
         onSnapshot(qInitial, (snapshot) => {
             if (!listEl) return;
-            
+
             const liveDocs = [];
-            snapshot.forEach(doc => liveDocs.push(doc.data()));
-            
+            snapshot.forEach(docSnap => {
+                if (!docSnap.data().hidden) liveDocs.push({ data: docSnap.data(), id: docSnap.id });
+            });
+
             const currentItemsCount = listEl.querySelectorAll('.guest-speech-bubble-wrapper').length;
             if (currentItemsCount <= PAGE_SIZE) {
-                listEl.innerHTML = liveDocs.map(data => createMsgHtml(data)).join('');
+                listEl.innerHTML = liveDocs.map(({ data, id }) => createMsgHtml(data, id)).join('');
                 lastVisible = snapshot.docs[snapshot.docs.length - 1];
             }
             
@@ -191,8 +278,10 @@ const App = (() => {
                     if (loadMoreBtn) loadMoreBtn.classList.add('hidden');
                     return;
                 }
-                snapshot.forEach((doc) => {
-                    listEl.insertAdjacentHTML('beforeend', createMsgHtml(doc.data()));
+                snapshot.forEach((docSnap) => {
+                    if (!docSnap.data().hidden) {
+                        listEl.insertAdjacentHTML('beforeend', createMsgHtml(docSnap.data(), docSnap.id));
+                    }
                 });
                 lastVisible = snapshot.docs[snapshot.docs.length - 1];
                 if (snapshot.docs.length < PAGE_SIZE) {
@@ -215,6 +304,8 @@ const App = (() => {
         // Submit Handler (Exposed globally for HTML onclick)
         window.writeGuestbook = async () => {
             if (!inputEl) return;
+            const cooldownUntil = parseInt(localStorage.getItem(COOLDOWN_KEY) || '0');
+            if (cooldownUntil > Date.now()) return;
             const msg = inputEl.value;
             if (!msg) {
                 alert("내용을 입력해주세요!");
@@ -228,7 +319,7 @@ const App = (() => {
                 inputEl.value = "";
                 submitBtn.classList.remove('btn-active');
                 submitBtn.innerText = "등록하기";
-                // alert("메시지가 등록되었습니다! 🎉"); // Optional: Too many alerts can be annoying
+                startCooldown();
             } catch (e) {
                 console.error("Write error:", e);
                 alert("등록 실패 ㅠㅠ");
@@ -459,3 +550,11 @@ const App = (() => {
 
 // Start App when DOM is ready
 document.addEventListener('DOMContentLoaded', App.init);
+
+// --- Zoom Blur Protection ---
+if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', () => {
+        const scale = window.visualViewport.scale;
+        document.body.style.filter = scale > 1.05 ? `blur(${(scale - 1) * 8}px)` : '';
+    });
+}
