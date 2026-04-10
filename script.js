@@ -19,7 +19,7 @@ const CONFIG = {
         appId: "1:216248864330:web:339891de4f5a92659860b3"
     },
     youtube: {
-        videoId: 'QM8UMOERycA'
+        videoId: 'iQop_qs4xV4'
     },
     colors: ['#90caf9', '#64b5f6', '#e3f2fd', '#ffffff'] // Confetti colors
 };
@@ -68,17 +68,10 @@ const App = (() => {
         const updateView = () => {
             const now = new Date();
             const diff = CONFIG.weddingDate - now;
-            const fmt = (n) => String(n).padStart(2, '0');
 
             if (diff <= 0) {
-                const absDiff = Math.abs(diff);
-                const passedDays = Math.floor(absDiff / (1000 * 60 * 60 * 24));
-                const passedHours = Math.floor((absDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const passedMinutes = Math.floor((absDiff % (1000 * 60 * 60)) / (1000 * 60));
-                const passedSeconds = Math.floor((absDiff % (1000 * 60)) / 1000);
-
-                if (phraseEl) phraseEl.innerHTML = "❤️ 저희 결혼했습니다 ❤️<br>행복하게 잘 살겠습니다";
-                if (timeEl) timeEl.textContent = `함께한 지 +${passedDays}일 ${fmt(passedHours)}:${fmt(passedMinutes)}:${fmt(passedSeconds)}`;
+                if (phraseEl) phraseEl.innerText = "❤️ 저희 결혼했습니다 ❤️";
+                if (timeEl) timeEl.innerText = "";
                 return;
             }
 
@@ -87,6 +80,7 @@ const App = (() => {
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
+            const fmt = (n) => String(n).padStart(2, '0');
             const dayText = days === 0 ? "D-DAY" : `D-${days}일`;
 
             if (phraseEl) phraseEl.textContent = currentPhrase;
@@ -368,6 +362,57 @@ const App = (() => {
                 item.classList.add('active');
             }
         };
+
+        // Share Functions
+        window.addToCalendar = () => {
+            const title = "이재석 ❤️ 신예진 결혼식";
+            const location = "더 베뉴지 서울 2층 베뉴지홀";
+            const details = "Wedding Airlines | 저희의 시작을 함께해 주세요.";
+            const startDate = "20260905T120000";
+            const endDate = "20260905T140000";
+            
+            // ICS Content
+            const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Wedding Airlines//KR
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+DTSTART:${startDate}
+DTEND:${endDate}
+SUMMARY:${title}
+DESCRIPTION:${details}
+LOCATION:${location}
+STATUS:CONFIRMED
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR`;
+
+            // Create and trigger download
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'wedding_event.ics';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
+
+        window.copyLink = () => {
+            const url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    alert("청첩장 링크가 복사되었습니다. 🎉");
+                });
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = url;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textArea);
+                alert("청첩장 링크가 복사되었습니다. 🎉");
+            }
+        };
     };
 
     // --- 4. YouTube Music Player ---
@@ -403,16 +448,15 @@ const App = (() => {
                 if (!player || typeof player.playVideo !== 'function') return;
                 
                 const icon = btn.querySelector('.icon');
-                const text = btn.querySelector('.text');
 
                 if (isMusicPlaying) {
                     player.pauseVideo();
-                    icon.innerText = "🎵"; text.innerText = "BGM 켜기";
+                    icon.innerText = "🔇";
                     btn.classList.remove('playing');
                     isMusicPlaying = false;
                 } else {
                     player.playVideo();
-                    icon.innerText = "🔇"; text.innerText = "BGM 끄기";
+                    icon.innerText = "🔊";
                     btn.classList.add('playing');
                     isMusicPlaying = true;
                 }
