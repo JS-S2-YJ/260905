@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Barun+Pen:wght@400;700&family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=2.079">
+    <link rel="stylesheet" href="style.css?v=2.080">
 
     <!-- DevTools Protection -->
     <script>
@@ -36,7 +36,7 @@
     <!-- Third-party Libs -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
     <!-- Logic (Deferred for performance) -->
-    <script type="module" src="script.js?v=2.079" defer></script>
+    <script type="module" src="script.js?v=2.080" defer></script>
 </head>
 <body>
 
@@ -78,56 +78,98 @@
 
             <hr class="divider">
 
-            <!-- Contact Section (New) -->
+            <!-- Contact Section -->
             <section class="contact-section">
                 <h2>축하 연락하기</h2>
-                <div class="contact-box">
-                    <div class="contact-group">
-                        <p class="group-title">신랑측</p>
-                        <div class="contact-row">
-                            <span class="relation">신랑</span> <span class="name">이재석</span>
-                            <div class="contact-btns">
-                                <a href="tel:010-2294-8424" class="btn-circle">📞</a>
-                                <a href="sms:010-2294-8424" class="btn-circle">✉️</a>
-                            </div>
-                        </div>
-                        <div class="contact-row">
-                            <span class="relation">부</span> <span class="name">이철희</span>
-                            <div class="contact-btns">
-                                <a href="tel:010-9367-5091" class="btn-circle">📞</a>
-                                <a href="sms:010-9367-5091" class="btn-circle">✉️</a>
-                            </div>
-                        </div>
-                        <div class="contact-row">
-                            <span class="relation">모</span> <span class="name">신경옥</span>
-                            <div class="contact-btns">
-                                <a href="tel:010-8364-2159" class="btn-circle">📞</a>
-                                <a href="sms:010-8364-2159" class="btn-circle">✉️</a>
+
+                <!-- 이름 소개 + 아코디언 통합 -->
+                <div class="contact-intro">
+                    <div class="contact-intro-group">
+                        <p class="contact-parents">이철희 · 신경옥 의 아들</p>
+                        <p class="contact-main-name"><span class="contact-role">신랑</span> 이재석</p>
+                        <div class="contact-accordion-inline">
+                            <div class="accordion-item">
+                                <button class="accordion-header" onclick="toggleAccordion(this)">
+                                    <span>신랑측 축하 연락하기</span>
+                                    <span class="arrow">▼</span>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="contact-card">
+                                        <div class="contact-card-info">
+                                            <span class="contact-card-role">신랑</span>
+                                            <span class="contact-card-name">이재석</span>
+                                        </div>
+                                        <div class="contact-btns">
+                                            <a href="tel:010-2294-8424" class="btn-circle">전화하기</a>
+                                            <a href="sms:010-2294-8424" class="btn-circle">문자 보내기</a>
+                                        </div>
+                                    </div>
+                                    <div class="contact-card">
+                                        <div class="contact-card-info">
+                                            <span class="contact-card-role">신랑 아버지</span>
+                                            <span class="contact-card-name">이철희</span>
+                                        </div>
+                                        <div class="contact-btns">
+                                            <a href="tel:010-9367-5091" class="btn-circle">전화하기</a>
+                                            <a href="sms:010-9367-5091" class="btn-circle">문자 보내기</a>
+                                        </div>
+                                    </div>
+                                    <div class="contact-card">
+                                        <div class="contact-card-info">
+                                            <span class="contact-card-role">신랑 어머니</span>
+                                            <span class="contact-card-name">신경옥</span>
+                                        </div>
+                                        <div class="contact-btns">
+                                            <a href="tel:010-8364-2159" class="btn-circle">전화하기</a>
+                                            <a href="sms:010-8364-2159" class="btn-circle">문자 보내기</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="vertical-divider"></div>
-                    <div class="contact-group">
-                        <p class="group-title">신부측</p>
-                        <div class="contact-row">
-                            <span class="relation">신부</span> <span class="name">신예진</span>
-                            <div class="contact-btns">
-                                <a href="tel:010-4757-2973" class="btn-circle">📞</a>
-                                <a href="sms:010-4757-2973" class="btn-circle">✉️</a>
-                            </div>
-                        </div>
-                        <div class="contact-row">
-                            <span class="relation">부</span> <span class="name">신형순</span>
-                            <div class="contact-btns">
-                                <a href="tel:010-0000-0000" class="btn-circle">📞</a>
-                                <a href="sms:010-0000-0000" class="btn-circle">✉️</a>
-                            </div>
-                        </div>
-                        <div class="contact-row">
-                            <span class="relation">모</span> <span class="name">최영화</span>
-                            <div class="contact-btns">
-                                <a href="tel:010-0000-0000" class="btn-circle">📞</a>
-                                <a href="sms:010-0000-0000" class="btn-circle">✉️</a>
+                    <hr class="contact-intro-divider">
+                    <div class="contact-intro-group">
+                        <p class="contact-parents">신형순 · 최영화 의 딸</p>
+                        <p class="contact-main-name"><span class="contact-role">신부</span> 신예진</p>
+                        <div class="contact-accordion-inline">
+                            <div class="accordion-item">
+                                <button class="accordion-header" onclick="toggleAccordion(this)">
+                                    <span>신부측 축하 연락하기</span>
+                                    <span class="arrow">▼</span>
+                                </button>
+                                <div class="accordion-content">
+                                    <div class="contact-card">
+                                        <div class="contact-card-info">
+                                            <span class="contact-card-role">신부</span>
+                                            <span class="contact-card-name">신예진</span>
+                                        </div>
+                                        <div class="contact-btns">
+                                            <a href="tel:010-4757-2973" class="btn-circle">전화하기</a>
+                                            <a href="sms:010-4757-2973" class="btn-circle">문자 보내기</a>
+                                        </div>
+                                    </div>
+                                    <div class="contact-card">
+                                        <div class="contact-card-info">
+                                            <span class="contact-card-role">신부 아버지</span>
+                                            <span class="contact-card-name">신형순</span>
+                                        </div>
+                                        <div class="contact-btns">
+                                            <a href="tel:010-0000-0000" class="btn-circle">전화하기</a>
+                                            <a href="sms:010-0000-0000" class="btn-circle">문자 보내기</a>
+                                        </div>
+                                    </div>
+                                    <div class="contact-card">
+                                        <div class="contact-card-info">
+                                            <span class="contact-card-role">신부 어머니</span>
+                                            <span class="contact-card-name">최영화</span>
+                                        </div>
+                                        <div class="contact-btns">
+                                            <a href="tel:010-0000-0000" class="btn-circle">전화하기</a>
+                                            <a href="sms:010-0000-0000" class="btn-circle">문자 보내기</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

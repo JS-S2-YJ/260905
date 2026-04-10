@@ -113,36 +113,58 @@ img {
 
 /* --- [7-2] 섹션: 연락처 (Contact) --- */
 .contact-section { padding: 0 10px; }
-.contact-section h2 { font-size: 1.2rem; font-weight: 700; color: var(--primary-color); margin-bottom: 15px; }
-.contact-box {
-    display: flex; justify-content: center; align-items: flex-start;
-    background: rgba(255,255,255,0.55); padding: 28px 10px; border-radius: 4px;
-    border: 1px solid var(--border-color);
+.contact-section h2 { font-size: 1.2rem; font-weight: 700; color: var(--primary-color); margin-bottom: 20px; }
+
+/* 이름 소개 블록 */
+.contact-intro {
+    background-color: var(--bg-secondary); border-radius: 4px;
+    padding: 28px 20px; margin-bottom: 16px;
+    text-align: center;
 }
-.contact-group { flex: 1; min-width: 0; padding: 0 12px; } /* min-width: 0 for flex shrinking */
-.group-title {
-    font-size: 0.85rem; font-weight: 700; color: var(--text-muted);
-    margin-bottom: 18px; letter-spacing: 1px;
+.contact-intro-group { padding: 4px 0; }
+.contact-parents {
+    font-size: 1.05rem; color: var(--text-muted); letter-spacing: 2px;
+    margin-bottom: 10px; font-family: var(--font-main);
 }
-.contact-row {
-    display: flex; align-items: center; justify-content: center; gap: 6px;
-    margin-bottom: 18px; font-size: 0.95rem;
-    font-family: var(--font-hand);
-    white-space: nowrap; /* Prevent name breaking */
+.contact-main-name {
+    font-size: 1.15rem; color: var(--text-color);
+    font-family: var(--font-main); font-weight: 400; letter-spacing: 2px;
 }
-.contact-row .relation { color: var(--text-light); font-size: 0.8rem; min-width: 20px; text-align: right; }
-.contact-row .name { font-weight: 700; color: var(--text-color); min-width: 40px; text-align: left; }
+.contact-role { color: var(--text-light); font-size: 0.9rem; margin-right: 4px; }
+.contact-intro-divider {
+    border: none; border-top: 1px solid var(--border-color);
+    margin: 20px 0;
+}
+
+/* 아코디언 연락 (인트로 내부) */
+.contact-accordion-inline {
+    margin-top: 16px;
+}
+.contact-card {
+    padding: 12px 18px; border-bottom: 1px solid #f0f0f0;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.contact-card:last-child { border-bottom: none; }
+.contact-card-info { display: flex; align-items: center; gap: 8px; }
+.contact-card-role { font-size: 0.78rem; color: var(--text-muted); min-width: 52px; }
+.contact-card-name { font-size: 0.95rem; font-weight: 700; color: var(--text-color); }
+
 .contact-btns { display: flex; gap: 6px; }
 .btn-circle {
-    width: 30px; height: 30px; border-radius: 3px;
-    background: transparent; color: var(--text-muted);
+    height: 28px; padding: 0 10px; border-radius: 3px;
     display: flex; align-items: center; justify-content: center;
-    text-decoration: none; font-size: 0.8rem;
-    border: 1px solid var(--border-color); transition: all 0.2s;
-    flex-shrink: 0; /* Don't squash the buttons */
+    text-decoration: none; font-size: 0.75rem;
+    transition: all 0.2s; flex-shrink: 0; white-space: nowrap;
 }
-.btn-circle:active { background-color: var(--border-color); transform: scale(0.9); }
-.vertical-divider { width: 1px; background-color: var(--border-color); margin: 40px 4px 0; flex-shrink: 0; align-self: stretch; }
+.btn-circle[href^="tel"] {
+    background-color: var(--primary-color); color: #fff;
+    border: 1px solid var(--primary-color);
+}
+.btn-circle[href^="sms"] {
+    background-color: var(--accent-color); color: #fff;
+    border: 1px solid var(--accent-color);
+}
+.btn-circle:active { opacity: 0.75; transform: scale(0.93); }
 
 /* --- [8] 컴포넌트: 구분선 (Divider) --- */
 .divider { border: none; border-top: 2px dashed #ddd; margin: 40px 10px; position: relative; }
