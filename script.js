@@ -479,6 +479,10 @@ const App = (() => {
             updateModalIndicators();
         }
 
+        const viewportMeta = document.querySelector('meta[name="viewport"]');
+        const viewportNoZoom = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+        const viewportZoom = 'width=device-width, initial-scale=1.0';
+
         function openModal(src, index, isGallery) {
             modal.style.display = 'flex';
             modal.setAttribute('aria-hidden', 'false');
@@ -493,15 +497,21 @@ const App = (() => {
             if (modalContent) modalContent.classList.toggle('no-blur', !isGallery);
             document.body.style.overflow = 'hidden';
 
+            // 약도 모달일 때 핀치줌 허용
+            if (!isGallery && viewportMeta) viewportMeta.setAttribute('content', viewportZoom);
+
             // 뒤로가기 제어: 히스토리 추가
             history.pushState({ modal: 'open' }, '');
         }
 
         function closeModal() {
+            // 약도 모달이었으면 핀치줌 다시 잠금
+            if (!isGalleryModal && viewportMeta) viewportMeta.setAttribute('content', viewportNoZoom);
+
             modal.style.display = 'none';
             modal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
-            
+
             // 뒤로가기 제어: 히스토리 상태가 있다면 되돌리기
             if (history.state && history.state.modal === 'open') {
                 history.back();
@@ -511,6 +521,8 @@ const App = (() => {
         // 브라우저 뒤로가기 이벤트 감지
         window.addEventListener('popstate', (event) => {
             if (modal.style.display === 'flex') {
+                // 약도 모달이었으면 핀치줌 다시 잠금
+                if (!isGalleryModal && viewportMeta) viewportMeta.setAttribute('content', viewportNoZoom);
                 modal.style.display = 'none';
                 modal.setAttribute('aria-hidden', 'true');
                 document.body.style.overflow = '';
