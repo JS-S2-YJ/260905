@@ -237,6 +237,38 @@ img {
     display: flex; justify-content: center; gap: 8px; margin-top: 20px; padding: 0 5px;
     flex-wrap: wrap; /* Allow wrapping on very narrow screens */
 }
+
+/* --- 약도 다운로드 버튼 --- */
+.map-download-wrapper {
+    margin-top: 20px;
+    text-align: center;
+}
+.btn-download {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 20px; /* 기존 12px 32px에서 축소 */
+    background-color: transparent;
+    color: var(--primary-dark);
+    border: 1px solid var(--primary-color);
+    border-radius: 2px; /* 곡률 최소화 (도화지/티켓 느낌) */
+    font-size: 0.8rem; /* 기존 0.85rem에서 축소 */
+    font-family: var(--font-main);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+}
+.btn-download:active {
+    background-color: rgba(135, 168, 120, 0.1); /* 미세한 그린 톤 배경 */
+    transform: translateY(1px);
+}
+.btn-download svg {
+    color: var(--primary-color);
+    stroke-width: 1.5;
+}
+
 .btn-navi {
     flex: 1; min-width: 105px; max-width: 140px; padding: 13px 6px; text-decoration: none;
     font-size: 0.9rem; font-weight: 700; border-radius: 8px;
