@@ -146,7 +146,7 @@ img {
 }
 .contact-card:last-child { border-bottom: none; }
 .contact-card-info { display: flex; align-items: center; gap: 8px; }
-.contact-card-role { font-size: 0.78rem; color: var(--text-muted); min-width: 52px; }
+.contact-card-role { font-size: 0.78rem; color: var(--text-muted); width: 80px; flex-shrink: 0; white-space: nowrap; }
 .contact-card-name { font-size: 0.95rem; font-weight: 700; color: var(--text-color); }
 
 .contact-btns { display: flex; gap: 6px; }
