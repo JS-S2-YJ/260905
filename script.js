@@ -76,12 +76,12 @@ const App = (() => {
                     const celebrationInterval = setInterval(() => {
                         if (typeof confetti === 'function') {
                             confetti({
-                                particleCount: 100, spread: 80, origin: { y: 0.6 },
-                                colors: CONFIG.colors,
+                                particleCount: 60, spread: 80, origin: { y: 0.65 },
+                                colors: ['#90caf9', '#ff8a80', '#ffffff', '#f6d365'],
                                 disableForReducedMotion: true
                             });
                         }
-                    }, 200);
+                    }, 150);
                     setTimeout(() => clearInterval(celebrationInterval), 10000);
                 }
                 return;
