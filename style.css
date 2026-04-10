@@ -66,8 +66,8 @@ img {
 
 /* --- [5] 레이아웃 (Container) --- */
 .container {
-    max-width: 480px; 
-    margin: 0 auto; 
+    max-width: 480px;
+    margin: 40px auto 0;
     background-color: var(--bg-color);
     /* 제공된 아이보리 도화지 이미지로 배경 적용 */
     background-image: url('images/bg_img_ivory.jpg');
@@ -84,53 +84,11 @@ img {
 }
 
 /* --- [6] 컴포넌트: 티켓 헤더 --- */
-.ticket-header {
-    background: linear-gradient(to bottom, #9dbe8e 0%, #87a878 50%, #6f9260 100%);
-    color: white;
-    padding: 22px 20px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
 
-    /* 3D 입체감 및 구분선 */
-    border-bottom: 2px dashed rgba(255, 255, 255, 0.6);
-    border-top: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 10px rgba(135, 168, 120, 0.3);
-    
-    position: relative;
-    overflow: hidden; /* Shine 효과용 */
-}
-
-/* 티켓 헤더 광택 효과 */
-.ticket-header::before {
-    content: "";
-    position: absolute;
-    top: -50%; left: -100%;
-    width: 50%; height: 200%;
-    background: linear-gradient(
-        to right, 
-        rgba(255,255,255,0) 0%, 
-        rgba(255,255,255,0.4) 50%, 
-        rgba(255,255,255,0) 100%
-    );
-    transform: rotate(30deg);
-    animation: shine 5s infinite; /* D-Day와 엇갈리게 5초로 설정 */
-}
-
-.ticket-header::after {
-    content: '2026 · 09 · 05';
-    display: block;
-    font-size: 0.8rem;
-    opacity: 0.7;
-    margin-top: 5px;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    letter-spacing: 2px;
-}
-
-.ticket-body { padding: 40px 20px; }
+.ticket-body { padding: 0 0 40px; }
 
 /* 섹션: 메인 (Intro) --- */
-.main-header { position: relative; }
+.main-header { position: relative; padding: 30px 20px 0; }
 .eng-date {
     font-family: var(--font-main);
     font-weight: bold;
@@ -139,16 +97,12 @@ img {
     margin-bottom: 15px;
     letter-spacing: 1px;
 }
-.photo-area { margin-bottom: 30px; }
 .main-photo-wrapper {
     width: 100%;
-    border-radius: 10px; 
     overflow: hidden;
     position: relative;
-    border: 5px solid white;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
-.main-photo { width: 100%; height: auto; object-fit: cover; pointer-events: none; }
+.main-photo { width: 100%; height: auto; object-fit: cover; display: block; pointer-events: none; }
 .names h1 { font-size: 1.8rem; margin-bottom: 20px; font-weight: 700; color: var(--text-color); }
 .names .amp { color: #c0af9e; margin: 0 5px; font-weight: 700; }
 .intro-text { 
