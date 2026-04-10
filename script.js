@@ -18,9 +18,6 @@ const CONFIG = {
         messagingSenderId: "216248864330",
         appId: "1:216248864330:web:339891de4f5a92659860b3"
     },
-    youtube: {
-        videoId: 'iQop_qs4xV4'
-    },
     colors: ['#90caf9', '#64b5f6', '#e3f2fd', '#ffffff'] // Confetti colors
 };
 
@@ -30,8 +27,6 @@ const CONFIG = {
 
 const App = (() => {
     let db; // Firestore instance
-    let player; // Youtube Player instance
-    let isMusicPlaying = false;
 
     // --- 1. Firebase Initialization ---
     const initFirebase = () => {
@@ -415,56 +410,7 @@ END:VCALENDAR`;
         };
     };
 
-    // --- 4. YouTube Music Player ---
-    const initMusic = () => {
-        // Load API
-        if (!window.YT) {
-            const tag = document.createElement('script');
-            tag.src = "https://www.youtube.com/iframe_api";
-            const firstScript = document.getElementsByTagName('script')[0];
-            firstScript.parentNode.insertBefore(tag, firstScript);
-        }
-
-        // Define callback globally
-        window.onYouTubeIframeAPIReady = () => {
-            player = new YT.Player('player', {
-                height: '100%', width: '100%',
-                videoId: CONFIG.youtube.videoId,
-                playerVars: {
-                    'autoplay': 0, 'controls': 0, 'rel': 0, 
-                    'playsinline': 1, 'loop': 1, 
-                    'playlist': CONFIG.youtube.videoId, 'mute': 0
-                },
-                events: {
-                    'onReady': () => { /* Ready */ }
-                }
-            });
-        };
-
-        // Button Controller
-        const btn = document.getElementById('music-btn');
-        if (btn) {
-            btn.addEventListener('click', () => {
-                if (!player || typeof player.playVideo !== 'function') return;
-                
-                const icon = btn.querySelector('.icon');
-
-                if (isMusicPlaying) {
-                    player.pauseVideo();
-                    icon.innerText = "🔇";
-                    btn.classList.remove('playing');
-                    isMusicPlaying = false;
-                } else {
-                    player.playVideo();
-                    icon.innerText = "🔊";
-                    btn.classList.add('playing');
-                    isMusicPlaying = true;
-                }
-            });
-        }
-    };
-
-    // --- 5. UI Effects (Modal, Protection, Confetti) ---
+    // --- 4. UI Effects (Modal, Protection, Confetti) ---
     const initUI = () => {
         // Image Protection
         document.addEventListener('contextmenu', e => {
@@ -584,7 +530,6 @@ END:VCALENDAR`;
     const init = () => {
         initFirebase();
         initDday();
-        initMusic();
         initGuestbook();
         initUI();
     };
