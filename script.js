@@ -557,6 +557,26 @@ END:VCALENDAR`;
 // Start App when DOM is ready
 document.addEventListener('DOMContentLoaded', App.init);
 
+// --- Font Size Control ---
+const FONT_SIZES = [14, 15, 16, 17, 18]; // 1~5단계 (px)
+const FONT_SIZE_KEY = 'wedding_font_size';
+let currentFontLevel = parseInt(localStorage.getItem(FONT_SIZE_KEY) || '4');
+
+const applyFontSize = (level) => {
+    currentFontLevel = level;
+    document.documentElement.style.fontSize = FONT_SIZES[level - 1] + 'px';
+    const label = document.getElementById('font-size-label');
+    if (label) label.textContent = level + '/5';
+    localStorage.setItem(FONT_SIZE_KEY, String(level));
+};
+
+window.cycleFontSize = () => {
+    applyFontSize(currentFontLevel >= 5 ? 1 : currentFontLevel + 1);
+};
+
+// 페이지 로드 시 저장된 크기 적용
+applyFontSize(currentFontLevel);
+
 // --- Zoom Blur Protection ---
 const blurTargetSelectors = ['.main-photo', '.gallery-item', '.modal-content'];
 
