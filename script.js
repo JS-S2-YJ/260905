@@ -9,7 +9,7 @@ import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, ge
  */
 
 const CONFIG = {
-    weddingDate: new Date(Date.now() + 60000),
+    weddingDate: new Date('2026-09-05T12:00:00+09:00'),
     firebase: {
         apiKey: "AIzaSyBV2BF5OORqW42zQAv8BAunXFnHbTD1l8k",
         authDomain: "wedding-guestbook-c8238.firebaseapp.com",
@@ -52,27 +52,23 @@ const App = (() => {
         
         const phraseEl = document.getElementById('d-day-phrase');
         const timeEl = document.getElementById('d-day-time');
-
-        // 이미 날짜가 지났다면 이스터에그 발동 안 함 (실시간으로 본 사람만)
+        
+        let hasCelebrated = false;
+        // 이미 날짜가 지났다면 축하 효과는 생략
         if (CONFIG.weddingDate - new Date() <= 0) {
             hasCelebrated = true;
         }
-        
-        let currentPhrase = phrases[Math.floor(Math.random() * phrases.length)];
 
-        // 10초마다 멘트 변경
-        setInterval(() => {
-            currentPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-            updateView();
-        }, 10000);
+        let currentPhrase = phrases[Math.floor(Math.random() * phrases.length)];
 
         const updateView = () => {
             const now = new Date();
             const diff = CONFIG.weddingDate - now;
 
             if (diff <= 0) {
+                const elapsedDays = Math.floor(Math.abs(diff) / (1000 * 60 * 60 * 24)) + 1;
                 if (phraseEl) phraseEl.innerText = "❤️ 저희 결혼했습니다 ❤️";
-                if (timeEl) timeEl.innerText = "";
+                if (timeEl) timeEl.innerText = `결혼한 지 ${elapsedDays}일째`;
 
                 // 실시간으로 0이 되는 걸 본 사람에게만 축하 콘페티 연사 (10초)
                 if (!hasCelebrated) {
@@ -86,7 +82,6 @@ const App = (() => {
                             });
                         }
                     }, 200);
-                    // 10초 후 중단
                     setTimeout(() => clearInterval(celebrationInterval), 10000);
                 }
                 return;
@@ -103,6 +98,12 @@ const App = (() => {
             if (phraseEl) phraseEl.textContent = currentPhrase;
             if (timeEl) timeEl.textContent = `${dayText} ${fmt(hours)}:${fmt(minutes)}:${fmt(seconds)}`;
         };
+
+        // 10초마다 멘트 변경
+        setInterval(() => {
+            currentPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+            updateView();
+        }, 10000);
 
         setInterval(updateView, 1000);
         updateView();
