@@ -534,32 +534,6 @@ footer { margin-top: 50px; font-size: 0.8rem; color: var(--text-light); padding-
 @keyframes rainbowMove { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
 @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-.video-background { position: relative; width: 100%; overflow: hidden; background: #000; }
-.video-foreground { position: relative; padding-bottom: 56.25%; height: 0; }
-.video-foreground iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
-
-/* 뮤직 스위치 (상단 우측) */
-.music-switch {
-    position: absolute; top: 20px; right: 20px; z-index: 100;
-    background: none; border: none; cursor: pointer;
-    width: 40px; height: 40px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.3s;
-    background-color: rgba(255, 255, 255, 0.5);
-    border: 1px solid var(--border-color);
-}
-.music-switch .icon { font-size: 1.2rem; opacity: 0.7; }
-.music-switch.playing { background-color: #fdfaf3; box-shadow: 0 2px 8px var(--shadow-color); }
-.music-switch.playing .icon { opacity: 1; animation: music-pulse 2s infinite; }
-
-@keyframes music-pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-.music-switch:active { transform: scale(0.9); }
-
 /* 모달 */
 .modal {
     display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%;
