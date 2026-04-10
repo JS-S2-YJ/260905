@@ -558,9 +558,19 @@ END:VCALENDAR`;
 document.addEventListener('DOMContentLoaded', App.init);
 
 // --- Zoom Blur Protection ---
+const blurTargetSelectors = ['.main-photo', '.gallery-item', '.modal-content'];
+
+function applyZoomBlur(scale) {
+    const blurValue = scale > 1.05 ? `blur(${(scale - 1) * 8}px)` : '';
+    blurTargetSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => {
+            el.style.filter = blurValue;
+        });
+    });
+}
+
 if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', () => {
-        const scale = window.visualViewport.scale;
-        document.body.style.filter = scale > 1.05 ? `blur(${(scale - 1) * 8}px)` : '';
+        applyZoomBlur(window.visualViewport.scale);
     });
 }
