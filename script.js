@@ -475,14 +475,8 @@ const App = (() => {
             if (index < 0) index = galleryImages.length - 1;
             if (index >= galleryImages.length) index = 0;
             currentModalIndex = index;
-            modalImg.style.opacity = '0';
-            const onFadeOut = () => {
-                modalImg.removeEventListener('transitionend', onFadeOut);
-                modalImg.src = galleryImages[currentModalIndex].src;
-                modalImg.style.opacity = '1';
-                updateModalIndicators();
-            };
-            modalImg.addEventListener('transitionend', onFadeOut);
+            modalImg.src = galleryImages[currentModalIndex].src;
+            updateModalIndicators();
         }
 
         function openModal(src, index, isGallery) {
