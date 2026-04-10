@@ -676,6 +676,13 @@ const App = (() => {
 // Start App when DOM is ready
 document.addEventListener('DOMContentLoaded', App.init);
 
+// 다른 앱 복귀 시 confetti 캔버스 잔상(흰 화면) 방지
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden && typeof confetti === 'function') {
+        confetti.reset();
+    }
+});
+
 // --- Font Size Control ---
 const FONT_SIZES = [14, 15, 16, 17, 18]; // 1~5단계 (px)
 const FONT_SIZE_KEY = 'wedding_font_size';
