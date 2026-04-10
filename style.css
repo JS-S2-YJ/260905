@@ -67,7 +67,7 @@ img {
 /* --- [5] 레이아웃 (Container) --- */
 .container {
     max-width: 480px;
-    margin: 40px auto 0;
+    margin: 40px auto;
     background-color: var(--bg-color);
     /* 제공된 아이보리 도화지 이미지로 배경 적용 */
     background-image: url('images/bg_img_ivory.jpg');
@@ -85,10 +85,10 @@ img {
 
 /* --- [6] 컴포넌트: 티켓 헤더 --- */
 
-.ticket-body { padding: 0 0 40px; }
+.ticket-body { padding: 0; }
 
 /* 섹션: 메인 (Intro) --- */
-.main-header { position: relative; padding: 30px 20px 0; }
+.main-header { position: relative; padding: 30px 20px; }
 .eng-date {
     font-family: var(--font-main);
     font-weight: bold;
@@ -496,7 +496,7 @@ img {
 }
 
 /* --- [12-2] 섹션: 공유 및 일정 (Share) --- */
-.share-section { padding: 30px 15px 20px; background-color: var(--bg-color); text-align: center; }
+.share-section { padding: 30px 15px 30px; background-color: var(--bg-color); text-align: center; }
 .share-minimal {
     display: flex; justify-content: center; align-items: center;
 }
@@ -523,7 +523,7 @@ img {
 }
 
 /* --- [13] 푸터 & 기타 --- */
-footer { margin-top: 50px; font-size: 0.8rem; color: var(--text-light); padding-bottom: 20px; }
+footer { margin-top: 0; font-size: 0.8rem; color: var(--text-light); padding: 45px 0 0; }
 .maker-name {
     font-weight: 900; background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000);
     background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text;
