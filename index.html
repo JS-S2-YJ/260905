@@ -17,6 +17,22 @@
     <!-- Styles -->
     <link rel="stylesheet" href="style.css?v=2.078">
 
+    <!-- DevTools Protection -->
+    <script>
+        (function() {
+            // 우클릭 차단
+            document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+
+            // 키보드 단축키 차단 (F12, Ctrl+Shift+I/J/U, Cmd+Option+I/J)
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F12') { e.preventDefault(); return; }
+                if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'i')) { e.preventDefault(); return; }
+                if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'J' || e.key === 'j')) { e.preventDefault(); return; }
+                if ((e.ctrlKey || e.metaKey) && (e.key === 'U' || e.key === 'u')) { e.preventDefault(); return; }
+            });
+        })();
+    </script>
+
     <!-- Third-party Libs -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
     <!-- Logic (Deferred for performance) -->
