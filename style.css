@@ -144,18 +144,20 @@ img {
 .contact-card {
     padding: 12px 18px; border-bottom: 1px solid #f0f0f0;
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    flex-wrap: wrap; /* 좁은 화면에서 줄바꿈 허용 */
 }
 .contact-card:last-child { border-bottom: none; }
-.contact-card-info { display: flex; align-items: center; gap: 8px; }
-.contact-card-role { font-size: 0.78rem; color: var(--text-muted); width: 80px; flex-shrink: 0; white-space: nowrap; }
-.contact-card-name { font-size: 0.95rem; font-weight: 700; color: var(--text-color); }
+.contact-card-info { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 120px; }
+.contact-card-role { font-size: 0.78rem; color: var(--text-muted); width: 75px; flex-shrink: 0; white-space: nowrap; }
+.contact-card-name { font-size: 0.95rem; font-weight: 700; color: var(--text-color); white-space: nowrap; }
 
-.contact-btns { display: flex; gap: 6px; }
+.contact-btns { display: flex; gap: 4px; flex: 1; }
 .btn-circle {
-    height: 28px; padding: 0 10px; border-radius: 3px;
+    flex: 1; /* 버튼이 남은 공간을 반반씩 채우도록 설정 */
+    height: 32px; padding: 0 4px; border-radius: 4px;
     display: flex; align-items: center; justify-content: center;
-    text-decoration: none; font-size: 0.75rem;
-    transition: all 0.2s; flex-shrink: 0; white-space: nowrap;
+    text-decoration: none; font-size: 0.72rem;
+    transition: all 0.2s; white-space: nowrap;
 }
 .btn-circle[href^="tel"] {
     background-color: var(--primary-color); color: #fff;
