@@ -105,7 +105,7 @@ const App = (() => {
         if (inputEl) inputEl.placeholder = placeholders[Math.floor(Math.random() * placeholders.length)];
 
         // Button Animation Logic
-        const submitPhrases = ["전송하기 ✈️", "축하해주기 💕", "메시지 슝~ 🚀", "소중한 글 등록 ✨", "신랑신부에게 💌", "덕담 남기기 🍀", "사랑을 담아 전송 ❤️"];
+        const submitPhrases = ["전송하기 💌", "축하해주기 💕", "메시지 슝~ 🚀", "소중한 글 등록 ✨", "신랑신부에게 💌", "덕담 남기기 🍀", "사랑을 담아 전송 ❤️"];
         
         if (inputEl && submitBtn) {
             inputEl.addEventListener('input', () => {
