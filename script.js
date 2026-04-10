@@ -315,25 +315,42 @@ const App = (() => {
             }
         };
 
+        // Toast Function
+        const showToast = (msg) => {
+            let toast = document.getElementById('copy-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'copy-toast';
+                toast.className = 'toast';
+                toast.innerHTML = '<span class="toast-icon">✅</span><span>' + msg + '</span>';
+                document.body.appendChild(toast);
+            }
+            toast.querySelector('span:last-child').textContent = msg;
+            toast.classList.add('show');
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(() => toast.classList.remove('show'), 2000);
+        };
+
         // Account Copy Function
         window.copyAccount = (accountNumber) => {
+            const cleaned = accountNumber.replace(/-/g, '');
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(accountNumber).then(() => {
-                    alert("계좌번호가 복사되었습니다. 🎉");
+                navigator.clipboard.writeText(cleaned).then(() => {
+                    showToast("계좌번호가 복사되었습니다.");
                 }).catch(err => {
                     console.error("Copy failed:", err);
                     // Fallback
                     const textArea = document.createElement("textarea");
-                    textArea.value = accountNumber;
+                    textArea.value = cleaned;
                     document.body.appendChild(textArea);
                     textArea.select();
                     document.execCommand("copy");
                     document.body.removeChild(textArea);
-                    alert("계좌번호가 복사되었습니다. 🎉");
+                    showToast("계좌번호가 복사되었습니다.");
                 });
             } else {
                 const textArea = document.createElement("textarea");
-                textArea.value = accountNumber;
+                textArea.value = cleaned;
                 document.body.appendChild(textArea);
                 textArea.select();
                 document.execCommand("copy");
