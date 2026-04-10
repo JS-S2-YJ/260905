@@ -492,13 +492,30 @@ const App = (() => {
             const modalContent = modal.querySelector('.modal-content');
             if (modalContent) modalContent.classList.toggle('no-blur', !isGallery);
             document.body.style.overflow = 'hidden';
+
+            // 뒤로가기 제어: 히스토리 추가
+            history.pushState({ modal: 'open' }, '');
         }
 
         function closeModal() {
             modal.style.display = 'none';
             modal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
+            
+            // 뒤로가기 제어: 히스토리 상태가 있다면 되돌리기
+            if (history.state && history.state.modal === 'open') {
+                history.back();
+            }
         }
+
+        // 브라우저 뒤로가기 이벤트 감지
+        window.addEventListener('popstate', (event) => {
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+        });
 
         // 갤러리 클릭
         document.querySelectorAll('.gallery-item-wrapper').forEach((wrapper, i) => {

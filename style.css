@@ -548,7 +548,7 @@ img {
 }
 
 /* --- [13] 푸터 & 기타 --- */
-footer { margin-top: 0; font-size: 0.8rem; color: var(--text-light); padding: 45px 0 0; }
+footer { margin-top: 0; font-size: 0.45rem; color: var(--text-light); padding: 45px 0 0; }
 .maker-name {
     font-weight: 900; background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000);
     background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text;
