@@ -253,8 +253,8 @@ img {
 }
 .accordion-item {
     background: white; border-radius: 12px; overflow: hidden;
-    border: 1px solid #e3effa;
-    box-shadow: 0 4px 6px rgba(135, 168, 120, 0.1);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 6px var(--shadow-color);
 }
 .accordion-header {
     width: 100%; padding: 14px 18px; background: white; border: none;
@@ -268,9 +268,9 @@ img {
 
 .accordion-content {
     max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
-    background-color: #f7faf6;
+    background-color: var(--bg-secondary);
 }
-.accordion-item.active .accordion-content { max-height: 600px; border-top: 1px solid #e4ede1; }
+.accordion-item.active .accordion-content { max-height: 600px; border-top: 1px solid var(--border-color); }
 
 .account-row {
     padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; gap: 10px;
@@ -282,12 +282,12 @@ img {
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; 
 }
 
-.account-card { padding: 12px 15px; border-bottom: 1px solid #f0f0f0; }
+.account-card { padding: 12px 15px; border-bottom: 1px solid var(--border-color); }
 .account-card:last-child { border-bottom: none; }
 .account-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .person-role { font-size: 0.95rem; color: var(--text-muted); }
 .person-name { font-size: 1rem; font-weight: 700; color: var(--text-color); }
-.account-card-body { display: flex; justify-content: space-between; align-items: center; background: #f5f7fb; border-radius: 8px; padding: 10px 12px; }
+.account-card-body { display: flex; justify-content: space-between; align-items: center; background: #eee9e0; border-radius: 8px; padding: 10px 12px; }
 .account-details { display: flex; flex-direction: column; gap: 3px; }
 .bank-name { font-size: 0.75rem; color: var(--text-muted); text-align: left; }
 .account-number { font-size: 0.85rem; color: var(--text-color); font-weight: 500; }
