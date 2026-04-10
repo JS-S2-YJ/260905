@@ -422,22 +422,114 @@ const App = (() => {
         const modal = document.getElementById('image-modal');
         const modalImg = document.getElementById('modal-img');
         const closeBtn = document.querySelector('.close-btn');
-        const wrappers = document.querySelectorAll('.gallery-item-wrapper, .map-image-wrapper');
+        const modalPrev = document.getElementById('modal-prev');
+        const modalNext = document.getElementById('modal-next');
+        const modalDotsEl = document.getElementById('modal-dots');
+        const modalCounterText = document.getElementById('modal-counter-text');
+        const modalFooter = document.getElementById('modal-footer');
 
-        wrappers.forEach(wrapper => {
+        // 갤러리 이미지만 네비게이션 대상
+        const galleryImages = Array.from(document.querySelectorAll('.gallery-item-wrapper img'));
+        let currentModalIndex = 0;
+        let isGalleryModal = false;
+
+        // 닷 생성
+        galleryImages.forEach((_, i) => {
+            const dot = document.createElement('span');
+            dot.className = 'modal-dot';
+            dot.addEventListener('click', (e) => { e.stopPropagation(); goToImage(i); });
+            modalDotsEl.appendChild(dot);
+        });
+
+        function updateModalIndicators() {
+            modalDotsEl.querySelectorAll('.modal-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentModalIndex);
+            });
+            modalCounterText.textContent = `${currentModalIndex + 1} / ${galleryImages.length}`;
+        }
+
+        function goToImage(index) {
+            if (index < 0) index = galleryImages.length - 1;
+            if (index >= galleryImages.length) index = 0;
+            currentModalIndex = index;
+            modalImg.style.opacity = '0';
+            setTimeout(() => {
+                modalImg.src = galleryImages[currentModalIndex].src;
+                modalImg.style.opacity = '1';
+                updateModalIndicators();
+            }, 160);
+        }
+
+        function openModal(src, index, isGallery) {
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+            modalImg.src = src;
+            modalImg.style.opacity = '1';
+            isGalleryModal = isGallery;
+            currentModalIndex = index;
+            if (modalFooter) modalFooter.style.display = isGallery ? 'flex' : 'none';
+            if (isGallery) updateModalIndicators();
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        // 갤러리 클릭
+        document.querySelectorAll('.gallery-item-wrapper').forEach((wrapper, i) => {
             wrapper.addEventListener('click', function() {
                 const img = this.querySelector('img');
-                if (img && modal) {
-                    modal.style.display = 'flex';
-                    modalImg.src = img.src;
-                }
+                if (img) openModal(img.src, i, true);
             });
         });
 
-        if (closeBtn) closeBtn.addEventListener('click', () => modal.style.display = 'none');
-        if (modal) modal.addEventListener('click', (e) => {
-            if (e.target === modal) modal.style.display = 'none';
+        // 지도 이미지 클릭 (네비게이션 없음)
+        document.querySelectorAll('.map-image-wrapper').forEach(wrapper => {
+            wrapper.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                if (img) openModal(img.src, 0, false);
+            });
         });
+
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (modal) modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        if (modalPrev) modalPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            goToImage(currentModalIndex - 1);
+        });
+        if (modalNext) modalNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            goToImage(currentModalIndex + 1);
+        });
+
+        // 키보드 네비게이션
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === 'none') return;
+            if (e.key === 'ArrowLeft' && isGalleryModal) goToImage(currentModalIndex - 1);
+            if (e.key === 'ArrowRight' && isGalleryModal) goToImage(currentModalIndex + 1);
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // 터치 스와이프
+        let swipeTouchStartX = 0;
+        let swipeTouchStartY = 0;
+        modal.addEventListener('touchstart', (e) => {
+            swipeTouchStartX = e.touches[0].clientX;
+            swipeTouchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        modal.addEventListener('touchend', (e) => {
+            if (!isGalleryModal) return;
+            const dx = e.changedTouches[0].clientX - swipeTouchStartX;
+            const dy = e.changedTouches[0].clientY - swipeTouchStartY;
+            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+                if (dx < 0) goToImage(currentModalIndex + 1);
+                else goToImage(currentModalIndex - 1);
+            }
+        }, { passive: true });
 
         // Confetti
         setTimeout(() => {
