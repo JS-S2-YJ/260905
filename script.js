@@ -74,8 +74,8 @@ const App = (() => {
                 if (!hasCelebrated) {
                     hasCelebrated = true;
                     const celebrationInterval = setInterval(() => {
-                        if (typeof confetti === 'function') {
-                            confetti({
+                        if (fireConfetti) {
+                            fireConfetti({
                                 particleCount: 60, spread: 80, origin: { y: 0.65 },
                                 colors: ['#90caf9', '#ff8a80', '#ffffff', '#f6d365'],
                                 disableForReducedMotion: true
@@ -586,8 +586,8 @@ const App = (() => {
 
         // Confetti
         setTimeout(() => {
-            if (typeof confetti === 'function') {
-                confetti({
+            if (fireConfetti) {
+                fireConfetti({
                     particleCount: 600, spread: 60, origin: { y: 0.8 },
                     colors: CONFIG.colors, disableForReducedMotion: true
                 });
@@ -600,13 +600,13 @@ const App = (() => {
             let confettiInterval = null;
             let isMoving = false;
 
-            const startConfetti = (e) => {
+            const startConfetti = () => {
                 isMoving = false; // 이동 상태 초기화
                 if (confettiInterval) return;
 
                 // 즉시 한 번 터뜨림 (스크롤 시작일 수도 있으므로 일단 한 번만)
-                if (typeof confetti === 'function') {
-                    confetti({
+                if (fireConfetti) {
+                    fireConfetti({
                         particleCount: 80, spread: 70, origin: { y: 0.6 },
                         colors: ['#90caf9', '#ff8a80', '#ffffff', '#f6d365']
                     });
@@ -614,8 +614,8 @@ const App = (() => {
 
                 // 150ms 간격으로 더 빠르게 연사
                 confettiInterval = setInterval(() => {
-                    if (!isMoving && typeof confetti === 'function') {
-                        confetti({
+                    if (!isMoving && fireConfetti) {
+                        fireConfetti({
                             particleCount: 60, spread: 80, origin: { y: 0.65 },
                             colors: ['#90caf9', '#ff8a80', '#ffffff', '#f6d365']
                         });
@@ -652,8 +652,8 @@ const App = (() => {
         if (mainPhoto) {
             mainPhoto.style.cursor = 'pointer'; // 클릭 가능 표시
             mainPhoto.addEventListener('click', () => {
-                if (typeof confetti === 'function') {
-                    confetti({
+                if (fireConfetti) {
+                    fireConfetti({
                         particleCount: 150, spread: 80, origin: { y: 0.7 },
                         colors: CONFIG.colors
                     });
@@ -673,13 +673,24 @@ const App = (() => {
     return { init };
 })();
 
-// Start App when DOM is ready
-document.addEventListener('DOMContentLoaded', App.init);
+// 전용 confetti 캔버스 인스턴스
+// useWorker:false → OffscreenCanvas 미사용, 모바일 백그라운드 복귀 시 흰 화면 방지
+// 캔버스 미리 생성 → 첫 호출 시 생성/표시 타이밍 플래시 없음
+let fireConfetti;
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof confetti === 'function') {
+        const confettiCanvas = document.createElement('canvas');
+        confettiCanvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999999;background:transparent;';
+        document.body.appendChild(confettiCanvas);
+        fireConfetti = confetti.create(confettiCanvas, { resize: true, useWorker: false });
+    }
+    App.init();
+});
 
-// 다른 앱 복귀 시 confetti 캔버스 잔상(흰 화면) 방지
+// 다른 앱 복귀 시 confetti 파티클 초기화 (캔버스는 유지)
 document.addEventListener('visibilitychange', () => {
-    if (document.hidden && typeof confetti === 'function') {
-        confetti.reset();
+    if (document.hidden && fireConfetti) {
+        fireConfetti.reset();
     }
 });
 
