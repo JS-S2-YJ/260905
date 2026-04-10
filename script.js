@@ -376,44 +376,18 @@ const App = (() => {
         };
 
         // Share Functions
-        window.addToCalendar = () => {
-            const title = "이재석 ❤️ 신예진 결혼식";
-            const location = "더 베뉴지 서울 2층 베뉴지홀";
-            const details = "Wedding Airlines | 저희의 시작을 함께해 주세요.";
-            const startDate = "20260905T120000";
-            const endDate = "20260905T140000";
-            
-            // ICS Content
-            const icsContent = `BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//Wedding Airlines//KR
-CALSCALE:GREGORIAN
-BEGIN:VEVENT
-DTSTART:${startDate}
-DTEND:${endDate}
-SUMMARY:${title}
-DESCRIPTION:${details}
-LOCATION:${location}
-STATUS:CONFIRMED
-SEQUENCE:0
-END:VEVENT
-END:VCALENDAR`;
-
-            // Create and trigger download
-            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-            const link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.download = 'wedding_event.ics';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        };
-
         window.copyLink = () => {
             const url = window.location.href;
+            const onSuccess = () => showToast("청첩장 주소가 복사되었습니다.");
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(url).then(() => {
-                    alert("청첩장 링크가 복사되었습니다. 🎉");
+                navigator.clipboard.writeText(url).then(onSuccess).catch(() => {
+                    const textArea = document.createElement("textarea");
+                    textArea.value = url;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(textArea);
+                    onSuccess();
                 });
             } else {
                 const textArea = document.createElement("textarea");
@@ -422,7 +396,7 @@ END:VCALENDAR`;
                 textArea.select();
                 document.execCommand("copy");
                 document.body.removeChild(textArea);
-                alert("청첩장 링크가 복사되었습니다. 🎉");
+                onSuccess();
             }
         };
     };
