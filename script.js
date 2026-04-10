@@ -471,6 +471,9 @@ const App = (() => {
             currentModalIndex = index;
             if (modalFooter) modalFooter.style.display = isGallery ? 'flex' : 'none';
             if (isGallery) updateModalIndicators();
+            // 지도 모달일 때는 블러 보호 제외
+            const modalContent = modal.querySelector('.modal-content');
+            if (modalContent) modalContent.classList.toggle('no-blur', !isGallery);
             document.body.style.overflow = 'hidden';
         }
 
@@ -654,6 +657,7 @@ function applyZoomBlur(scale) {
     const blurValue = scale > 1.05 ? `blur(${(scale - 1) * 8}px)` : '';
     blurTargetSelectors.forEach(selector => {
         document.querySelectorAll(selector).forEach(el => {
+            if (el.classList.contains('no-blur')) return;
             el.style.filter = blurValue;
         });
     });

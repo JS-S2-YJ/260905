@@ -198,7 +198,7 @@ img {
 /* --- [11] 섹션: 지도 (Map) --- */
 .map-image-wrapper {
     width: 100%; max-width: 420px; margin: 0 auto;
-    border-radius: 15px; border: 1px solid #eee; overflow: hidden;
+    border-radius: 4px; border: 1px solid var(--border-color); overflow: hidden;
 }
 .map-image { width: 100%; height: auto; }
 .map-info { padding: 15px 20px; text-align: left; max-width: 420px; margin: 0 auto; }
@@ -340,10 +340,9 @@ img {
 
 /* 방명록 컨테이너 및 헤더 */
 .chat-container {
-    border-radius: 15px; overflow: hidden;
+    border-radius: 4px; overflow: hidden;
     border: 1px solid var(--border-color);
     background-color: var(--bg-color);
-    box-shadow: 0 5px 20px var(--shadow-color);
 }
 .chat-header {
     background-color: #fdfaf3; /* 아이보리 헤더 배경 */
@@ -399,27 +398,24 @@ img {
     background-color: #fbf8f2;
     display: flex;
     justify-content: center;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
 }
 
 #load-more-btn {
     padding: 10px 25px;
-    background-color: white;
+    background-color: transparent;
     color: var(--primary-color);
-    border: 1.5px solid var(--primary-color);
-    border-radius: 50px;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
     font-size: 0.85rem;
-    font-weight: 700;
+    font-weight: 400;
+    font-family: var(--font-main);
     cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 2px 5px rgba(135, 168, 120, 0.2);
+    transition: background-color 0.2s, color 0.2s;
 }
 
 #load-more-btn:active {
     background-color: var(--primary-color);
     color: white;
-    transform: scale(0.95);
 }
 
 #load-more-btn.hidden {
@@ -431,18 +427,17 @@ img {
 }
 
 .guest-animal-avatar {
-    font-size: 1.8rem; background: white; width: 45px; height: 45px;
+    font-size: 1.8rem; background: transparent; width: 45px; height: 45px;
     display: flex; align-items: center; justify-content: center;
-    border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-radius: 4px;
     flex-shrink: 0;
 }
 
 .guest-speech-bubble {
     position: relative; background: white; padding: 12px 16px;
-    border-radius: 18px; /* 모든 모서리를 둥글게 */
-    box-shadow: 0 2px 10px rgba(135, 168, 120, 0.2);
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
     max-width: 80%;
-    border: 1px solid #d4e6ce;
 }
 
 .guest-speech-bubble::before {
