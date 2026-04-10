@@ -21,7 +21,7 @@
     --chat-text-right: #333333;
 
     /* 폰트 */
-    --font-main: 'Nanum Myeongjo', 'Maplestory', serif;
+    --font-main: 'Nanum Myeongjo', serif;
     --font-hand: 'Nanum Barun Pen', cursive;
     --font-serif: 'Nanum Myeongjo', serif;
 }
@@ -29,17 +29,6 @@
 /* --- [2] 다크 모드 제거 (Always Light Mode) --- */
 /* 시스템 설정과 상관없이 라이트 모드만 유지합니다. */
 
-/* --- [3] 폰트 정의 --- */
-@font-face {
-    font-family: 'Maplestory';
-    src: url('fonts/fontttf/Maplestory Light.ttf') format('truetype');
-    font-weight: 300;
-}
-@font-face {
-    font-family: 'Maplestory';
-    src: url('fonts/fontttf/Maplestory Bold.ttf') format('truetype');
-    font-weight: 700;
-}
 
 /* --- [4] 기본 스타일 (Reset & Base) --- */
 * { box-sizing: border-box; }
