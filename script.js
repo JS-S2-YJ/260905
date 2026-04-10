@@ -139,7 +139,7 @@ const App = (() => {
         // 관리자 모드
         const ADMIN_PW_HASH = 'c9aae1ce021698a4ea4c1c5243c2a6dd80d090395086c545244121753b89291d'; // SHA-256 해시
         const ADMIN_KEY = 'guestbook_admin';
-        let isAdmin = localStorage.getItem(ADMIN_KEY) === 'true';
+        let isAdmin = sessionStorage.getItem(ADMIN_KEY) === 'true';
         if (isAdmin) document.body.classList.add('admin-mode');
 
         const hashPassword = async (pw) => {
@@ -205,7 +205,7 @@ const App = (() => {
         window.toggleAdmin = async () => {
             if (isAdmin) {
                 isAdmin = false;
-                localStorage.removeItem(ADMIN_KEY);
+                sessionStorage.removeItem(ADMIN_KEY);
                 document.body.classList.remove('admin-mode');
                 location.reload();
                 return;
@@ -215,7 +215,7 @@ const App = (() => {
             const hash = await hashPassword(pw);
             if (hash === ADMIN_PW_HASH) {
                 isAdmin = true;
-                localStorage.setItem(ADMIN_KEY, 'true');
+                sessionStorage.setItem(ADMIN_KEY, 'true');
                 document.body.classList.add('admin-mode');
                 location.reload();
             } else {
