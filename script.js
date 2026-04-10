@@ -9,7 +9,7 @@ import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, ge
  */
 
 const CONFIG = {
-    weddingDate: new Date('2026-09-05T12:00:00+09:00'),
+    weddingDate: new Date(Date.now() + 60000),
     firebase: {
         apiKey: "AIzaSyBV2BF5OORqW42zQAv8BAunXFnHbTD1l8k",
         authDomain: "wedding-guestbook-c8238.firebaseapp.com",
@@ -27,6 +27,7 @@ const CONFIG = {
 
 const App = (() => {
     let db; // Firestore instance
+    let hasCelebrated = false; // 실시간 D-Day 달성 축하 여부 플래그
 
     // --- 1. Firebase Initialization ---
     const initFirebase = () => {
@@ -51,6 +52,11 @@ const App = (() => {
         
         const phraseEl = document.getElementById('d-day-phrase');
         const timeEl = document.getElementById('d-day-time');
+
+        // 이미 날짜가 지났다면 이스터에그 발동 안 함 (실시간으로 본 사람만)
+        if (CONFIG.weddingDate - new Date() <= 0) {
+            hasCelebrated = true;
+        }
         
         let currentPhrase = phrases[Math.floor(Math.random() * phrases.length)];
 
@@ -67,6 +73,22 @@ const App = (() => {
             if (diff <= 0) {
                 if (phraseEl) phraseEl.innerText = "❤️ 저희 결혼했습니다 ❤️";
                 if (timeEl) timeEl.innerText = "";
+
+                // 실시간으로 0이 되는 걸 본 사람에게만 축하 콘페티 연사 (10초)
+                if (!hasCelebrated) {
+                    hasCelebrated = true;
+                    const celebrationInterval = setInterval(() => {
+                        if (typeof confetti === 'function') {
+                            confetti({
+                                particleCount: 100, spread: 80, origin: { y: 0.6 },
+                                colors: CONFIG.colors,
+                                disableForReducedMotion: true
+                            });
+                        }
+                    }, 200);
+                    // 10초 후 중단
+                    setTimeout(() => clearInterval(celebrationInterval), 10000);
+                }
                 return;
             }
 
