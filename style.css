@@ -113,6 +113,7 @@ img {
 
 /* --- [7-2] 섹션: 연락처 (Contact) --- */
 .contact-section { padding: 0 10px; }
+.contact-section h2 { font-size: 1.2rem; font-weight: 700; color: var(--primary-color); margin-bottom: 15px; }
 .contact-box {
     display: flex; justify-content: center; align-items: flex-start;
     background: white; padding: 20px 5px; border-radius: 15px;
@@ -196,6 +197,7 @@ img {
 }
 
 /* --- [11] 섹션: 지도 (Map) --- */
+.map-section h2 { font-size: 1.2rem; font-weight: 700; color: var(--primary-color); margin-bottom: 15px; }
 .map-image-wrapper {
     width: 100%; max-width: 420px; margin: 0 auto;
     border-radius: 4px; border: 1px solid var(--border-color); overflow: hidden;
@@ -305,7 +307,7 @@ img {
 
 /* --- [12] 섹션: 방명록 (Guestbook) --- */
 .guestbook-section { padding: 0 20px 40px; }
-.guestbook-section h2 { color: var(--primary-color); margin-bottom: 20px; }
+.guestbook-section h2 { font-size: 1.2rem; font-weight: 700; color: var(--primary-color); margin-bottom: 20px; }
 .guestbook-form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
 .guestbook-form textarea {
     padding: 12px; border: 1px solid var(--border-color); border-radius: 10px;
