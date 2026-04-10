@@ -67,7 +67,7 @@ img {
 /* --- [5] 레이아웃 (Container) --- */
 .container {
     max-width: 480px;
-    margin: 40px auto;
+    margin: 40px auto 0;
     background-color: var(--bg-color);
     /* 제공된 아이보리 도화지 이미지로 배경 적용 */
     background-image: url('images/bg_img_ivory.jpg');
@@ -498,7 +498,7 @@ img {
 }
 
 /* --- [12-2] 섹션: 공유 및 일정 (Share) --- */
-.share-section { padding: 10px 15px 30px; background-color: var(--bg-color); text-align: center; }
+.share-section { padding: 30px 15px 30px; background-color: var(--bg-color); text-align: center; }
 .share-minimal {
     display: flex; justify-content: center; align-items: center;
 }

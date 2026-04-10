@@ -453,11 +453,13 @@ const App = (() => {
             if (index >= galleryImages.length) index = 0;
             currentModalIndex = index;
             modalImg.style.opacity = '0';
-            setTimeout(() => {
+            const onFadeOut = () => {
+                modalImg.removeEventListener('transitionend', onFadeOut);
                 modalImg.src = galleryImages[currentModalIndex].src;
                 modalImg.style.opacity = '1';
                 updateModalIndicators();
-            }, 160);
+            };
+            modalImg.addEventListener('transitionend', onFadeOut);
         }
 
         function openModal(src, index, isGallery) {
@@ -469,11 +471,13 @@ const App = (() => {
             currentModalIndex = index;
             if (modalFooter) modalFooter.style.display = isGallery ? 'flex' : 'none';
             if (isGallery) updateModalIndicators();
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             modal.style.display = 'none';
             modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
         }
 
         // 갤러리 클릭
