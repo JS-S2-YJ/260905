@@ -130,8 +130,8 @@ img {
 
 /* 섹션: 메인 (Intro) --- */
 .main-header { position: relative; }
-.eng-date { 
-    font-family: 'Courier New', Courier, monospace;
+.eng-date {
+    font-family: var(--font-main);
     font-weight: bold;
     color: var(--primary-color);
     font-size: 1.6rem;
@@ -149,7 +149,7 @@ img {
 }
 .main-photo { width: 100%; height: auto; object-fit: cover; pointer-events: none; }
 .names h1 { font-size: 1.8rem; margin-bottom: 20px; font-weight: 700; color: var(--text-color); }
-.names .amp { color: var(--accent-color); margin: 0 5px; font-weight: 700; }
+.names .amp { color: #c0af9e; margin: 0 5px; font-weight: 700; }
 .intro-text { 
     font-family: var(--font-hand);
     font-size: 1.15rem; color: var(--text-muted); margin-bottom: 30px; 
@@ -213,8 +213,9 @@ img {
 .gallery-hint { font-size: 0.8rem; color: var(--text-light); margin-top: 5px; }
 
 /* --- [10] 섹션: 달력 & D-Day --- */
-.calendar-section h2 { font-size: 1.4rem; margin-bottom: 5px; font-weight: 700; color: var(--text-color); }
-.time, .location { font-size: 1rem; color: var(--text-muted); }
+.calendar-section h2 { font-size: 1.4rem; margin-bottom: 0; font-weight: 700; color: var(--text-color); }
+.time { font-size: 1.4rem; font-weight: 700; color: var(--text-color); margin: 0 0 2px 0; }
+.location { font-size: 1.15rem; color: var(--text-muted); margin-top: 0; }
 .d-day-box {
     margin: 30px auto;
     /* 미세한 곡률이 느껴지는 수직 그라데이션 */
