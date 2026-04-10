@@ -134,8 +134,8 @@ img {
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     color: var(--primary-color);
-    font-size: 1.2rem;
-    margin-bottom: 15px; 
+    font-size: 1.6rem;
+    margin-bottom: 15px;
     letter-spacing: 1px;
 }
 .photo-area { margin-bottom: 30px; }
@@ -574,3 +574,42 @@ footer { margin-top: 50px; font-size: 0.8rem; color: var(--text-light); padding-
 }
 .modal-content { max-width: 90vw; max-height: 80vh; object-fit: contain; }
 .close-btn { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 40px; cursor: pointer; }
+
+/* --- [14] 글자 크기 조절 버튼 --- */
+.font-size-btn {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1.5px solid var(--primary-color);
+    border-radius: 22px;
+    padding: 7px 13px;
+    cursor: pointer;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 12px rgba(144, 202, 249, 0.4);
+    z-index: 1000;
+    transition: transform 0.15s, box-shadow 0.15s;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: auto;
+    font-family: var(--font-main);
+}
+.font-size-btn:active {
+    transform: scale(0.92);
+    box-shadow: 0 1px 6px rgba(144, 202, 249, 0.3);
+}
+.font-size-char {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    line-height: 1;
+}
+.font-size-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    opacity: 0.75;
+    line-height: 1;
+}
