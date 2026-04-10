@@ -12,15 +12,15 @@
     <title>저희 결혼합니다</title>
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Barun+Pen:wght@400;700&family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=2.082">
+    <link rel="stylesheet" href="style.css?v=2.078">
 
     <!-- Third-party Libs -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
     <!-- Logic (Deferred for performance) -->
-    <script type="module" src="script.js?v=2.082" defer></script>
+    <script type="module" src="script.js?v=2.078" defer></script>
 </head>
 <body>
 
@@ -31,42 +31,14 @@
         </header>
 
         <div class="ticket-body">
-            <!-- Flight Info Bar (Boarding Detail) -->
-            <div class="flight-info-bar">
-                <div class="route-info">
-                    <span class="city">JS</span>
-                    <span class="plane">✈️</span>
-                    <span class="city">YJ</span>
-                </div>
-                <div class="detail-grid">
-                    <div class="info-item">
-                        <span class="label">FLIGHT</span>
-                        <span class="val">WED0905</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">GATE</span>
-                        <span class="val">09</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">SEAT</span>
-                        <span class="val">05A</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">BOARDING</span>
-                        <span class="val">12:00</span>
-                    </div>
-                </div>
-            </div>
-
             <!-- Main Intro Section -->
             <section class="main-header">
-                <p class="eng-date">2026. 09. 05. 토요일</p>
-                
-                <!-- Music Control (Floating) -->
-                <button id="music-btn" class="music-fab" aria-label="배경음악 제어">
-                    <span class="icon">🎵</span>
-                    <span class="text">BGM 켜기</span>
+                <!-- Music Control (Top Right) -->
+                <button id="music-btn" class="music-switch" aria-label="배경음악 제어">
+                    <span class="icon">🔊</span>
                 </button>
+
+                <p class="eng-date">2026. 09. 05. 토요일</p>
 
                 <div class="photo-area">
                     <div class="main-photo-wrapper">
@@ -287,11 +259,12 @@
                 </div>
             </section>
 
-            <!-- Barcode Section -->
-            <section class="barcode-area">
-                <div class="barcode-wrapper">
-                    <div class="barcode"></div>
-                    <p class="barcode-num">WED-260905-JSYJ</p>
+            <!-- Share & Calendar Section -->
+            <section class="share-section">
+                <div class="share-minimal">
+                    <button class="btn-minimal" onclick="addToCalendar()">📅 일정 등록</button>
+                    <span class="bar">|</span>
+                    <button class="btn-minimal" onclick="copyLink()">🔗 링크 복사</button>
                 </div>
             </section>
 
