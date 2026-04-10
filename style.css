@@ -68,7 +68,7 @@ img {
 /* --- [5] 레이아웃 (Container) --- */
 .container {
     max-width: 480px;
-    margin: 40px auto 0;
+    margin: 0 auto;
     background-color: var(--bg-color);
     /* 제공된 아이보리 도화지 이미지로 배경 적용 */
     background-image: url('images/bg_img_ivory.jpg');
@@ -77,7 +77,7 @@ img {
     
     min-height: 100vh; 
     text-align: center;
-    border-radius: 20px; 
+    border-radius: 4px; 
     overflow: hidden;
     position: relative;
     border: 1px solid var(--orange-point); /* [수정] 얇고 부드러운 주황색 테두리 */
