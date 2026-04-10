@@ -154,6 +154,7 @@ img {
 .divider::after { right: -30px; }
 
 /* --- [9] 섹션: 갤러리 --- */
+.gallery-section { padding: 0 20px; }
 .gallery-section h2 { font-size: 1.2rem; color: var(--primary-color); margin-bottom: 15px; font-weight: 700; }
 .gallery-container {
     display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
@@ -338,6 +339,7 @@ img {
 .toast-icon { font-size: 1.1rem; }
 
 /* --- [12] 섹션: 방명록 (Guestbook) --- */
+.guestbook-section { padding: 0 20px 40px; }
 .guestbook-section h2 { color: var(--primary-color); margin-bottom: 20px; }
 .guestbook-form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
 .guestbook-form textarea {
@@ -496,7 +498,7 @@ img {
 }
 
 /* --- [12-2] 섹션: 공유 및 일정 (Share) --- */
-.share-section { padding: 30px 15px 30px; background-color: var(--bg-color); text-align: center; }
+.share-section { padding: 10px 15px 30px; background-color: var(--bg-color); text-align: center; }
 .share-minimal {
     display: flex; justify-content: center; align-items: center;
 }
