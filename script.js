@@ -399,6 +399,24 @@ const App = (() => {
         };
 
         // Share Functions
+        if (window.Kakao && !Kakao.isInitialized()) {
+            Kakao.init('fb1460645c1f12b6d4d57e705b5b188c');
+        }
+
+        window.shareKakao = () => {
+            if (!window.Kakao || !Kakao.isInitialized()) {
+                showToast("카카오 공유를 불러오는 중입니다. 잠시 후 다시 시도해주세요.");
+                return;
+            }
+            Kakao.Share.sendCustom({
+                templateId: 131991,
+                templateArgs: {
+                    title: '이재석 ❤️ 신예진의 청첩장',
+                    description: '2026년 9월 5일 오후 12시 더베뉴지서울',
+                },
+            });
+        };
+
         window.copyLink = () => {
             const url = window.location.href;
             const onSuccess = () => showToast("청첩장 주소가 복사되었습니다.");

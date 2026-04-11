@@ -523,7 +523,16 @@ img {
 /* --- [12-2] 섹션: 공유 및 일정 (Share) --- */
 .share-section { padding: 30px 15px 30px; background-color: var(--bg-color); text-align: center; }
 .share-minimal {
-    display: flex; justify-content: center; align-items: center;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px;
+}
+.btn-kakao {
+    background: #FEE500;
+    border-color: #FEE500;
+    color: #3C1E1E;
+}
+.btn-kakao:active {
+    background: #e6cf00;
+    opacity: 0.85;
 }
 .btn-minimal {
     background: transparent;
