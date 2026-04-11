@@ -501,6 +501,11 @@ const App = (() => {
         const viewportNoZoom = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
         const viewportZoom = 'width=device-width, initial-scale=1.0';
 
+        // 스크롤 이벤트 핸들러
+        const preventScroll = (e) => {
+            if (e.cancelable) e.preventDefault();
+        };
+
         function openModal(src, index, isGallery) {
             modal.style.display = 'flex';
             modal.setAttribute('aria-hidden', 'false');
@@ -513,6 +518,9 @@ const App = (() => {
             // 지도 모달일 때는 블러 보호 제외
             const modalContent = modal.querySelector('.modal-content');
             if (modalContent) modalContent.classList.toggle('no-blur', !isGallery);
+            
+            // 모달 활성화 시 배경 스크롤 차단
+            document.body.addEventListener('touchmove', preventScroll, { passive: false });
             document.body.style.overflow = 'hidden';
 
             // 약도 모달일 때 핀치줌 허용
@@ -528,6 +536,9 @@ const App = (() => {
 
             modal.style.display = 'none';
             modal.setAttribute('aria-hidden', 'true');
+            
+            // 모달 닫을 시 스크롤 차단 해제
+            document.body.removeEventListener('touchmove', preventScroll);
             document.body.style.overflow = '';
 
             // 뒤로가기 제어: 히스토리 상태가 있다면 되돌리기
