@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Barun+Pen:wght@400;700&family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=2.091">
+    <link rel="stylesheet" href="style.css?v=2.092">
 
     <!-- DevTools Protection -->
     <script>
@@ -35,8 +35,9 @@
 
     <!-- Third-party Libs -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
     <!-- Logic (Deferred for performance) -->
-    <script type="module" src="script.js?v=2.091" defer></script></head>
+    <script type="module" src="script.js?v=2.092" defer></script></head>
 <body>
 
     <main class="container">
@@ -383,6 +384,10 @@
             <!-- Share & Calendar Section -->
             <section class="share-section">
                 <div class="share-minimal">
+                    <button class="btn-minimal btn-kakao" onclick="shareKakao()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 3C6.48 3 2 6.58 2 11c0 2.77 1.72 5.2 4.33 6.67l-.9 3.32a.5.5 0 0 0 .72.56L10.1 19.1C10.73 19.2 11.36 19.25 12 19.25c5.52 0 10-3.58 10-8.25S17.52 3 12 3z"/></svg>
+                        카카오톡 공유
+                    </button>
                     <button class="btn-minimal" onclick="copyLink()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                         청첩장 주소 복사
