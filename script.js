@@ -607,7 +607,8 @@ const App = (() => {
             if (fireConfetti) {
                 fireConfetti({
                     particleCount: 600, spread: 60, origin: { y: 0.8 },
-                    colors: CONFIG.colors, disableForReducedMotion: true
+                    colors: ['#90caf9', '#ff8a80', '#ffffff', '#f6d365'],
+                    disableForReducedMotion: true
                 });
             }
         }, 500);
@@ -665,18 +666,10 @@ const App = (() => {
             window.addEventListener('touchcancel', stopConfetti);
         }
 
-        // Main Photo Click Confetti
+        // Main Photo
         const mainPhoto = document.querySelector('.main-photo-wrapper');
         if (mainPhoto) {
-            mainPhoto.style.cursor = 'pointer'; // 클릭 가능 표시
-            mainPhoto.addEventListener('click', () => {
-                if (fireConfetti) {
-                    fireConfetti({
-                        particleCount: 150, spread: 80, origin: { y: 0.7 },
-                        colors: CONFIG.colors
-                    });
-                }
-            });
+            mainPhoto.style.cursor = 'default';
         }
     };
 
