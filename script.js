@@ -713,9 +713,9 @@ document.addEventListener('visibilitychange', () => {
 });
 
 // --- Font Size Control ---
-const FONT_SIZES = [14, 15, 16, 17, 18]; // 1~5단계 (px)
+const FONT_SIZES = [13, 14, 15, 16, 18]; // 1~5단계 (px) - 기존 대비 축소
 const FONT_SIZE_KEY = 'wedding_font_size';
-let currentFontLevel = parseInt(localStorage.getItem(FONT_SIZE_KEY) || '4');
+let currentFontLevel = parseInt(localStorage.getItem(FONT_SIZE_KEY) || '1'); // 기본값 1단계로 변경
 
 const applyFontSize = (level) => {
     currentFontLevel = level;
