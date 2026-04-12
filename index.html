@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Barun+Pen:wght@400;700&family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=2.094">
+    <link rel="stylesheet" href="style.css?v=2.095">
 
     <!-- Font Size Pre-apply (FOUC 방지: 렌더링 전에 저장된 폰트 크기 즉시 적용) -->
     <script>
@@ -47,7 +47,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
     <!-- Logic (Deferred for performance) -->
-    <script type="module" src="script.js?v=2.093" defer></script></head>
+    <script type="module" src="script.js?v=2.095" defer></script></head>
 <body>
 
     <main class="container">
@@ -237,28 +237,31 @@
                 <div class="map-info">
                     <p class="address-title" style="font-weight: bold; margin-top: 15px;">더베뉴지서울 2층 베뉴지홀</p>
                     <p class="address-text">서울 강서구 강서로 388 (등촌동 678-14)</p>
-                    <p class="sub-text">
-                        <br>
-                        <strong>🚇 지하철 (Subway)</strong><br>
-                        · <span style="display:inline-block;background:#996CAC;color:#fff;font-size:0.82em;font-weight:700;padding:1px 7px;border-radius:10px;vertical-align:middle;">5호선</span> 발산역 3번 출구 도보 3분 이내<br>
-                        · <span style="display:inline-block;background:#BDB092;color:#fff;font-size:0.82em;font-weight:700;padding:1px 7px;border-radius:10px;vertical-align:middle;">9호선</span> 양천향교역 6번 출구 도보 15분 이내<br>
-                        <br>
-                        <strong>🚗 자가용 (Car)</strong><br>
-                        건물 내 지하 및 지상 주차장 이용 (약 1,200대 가능)<br>
-                        축하객 주차 2시간 무료<br>
-                        *1층, 2층 엘레베이터 옆 사전 정산기로 사전 정산 후 출차해주세요.<br>
-                        (정산 후 20분 이내 출차)<br>
-                        <br>
-                        <strong>🚌 버스 (Bus)</strong><br>
-                        '발산역' 정류장 하차<br>
-                        <span style="font-size: 0.9rem; color: #888; line-height: 1.8; display: block; margin-top: 5px;">
-                            · 지선: 6630, 6632, 6642, 6645, 6648, 6657, 6712<br>
-                            · 간선: 601, 605, 652, 654, 661<br>
-                            · 공항: 6003<br>
-                            · 일반: 60, 60-3, 88, 1002<br>
-                            · 직행: 3000, 8000
-                        </span>
-                    </p>
+                    <div class="map-info-details">
+                        <div class="transport-item">
+                            <strong>🚇 지하철 (Subway)</strong><br>
+                            · <span style="display:inline-block;background:#996CAC;color:#fff;font-size:0.82em;font-weight:700;padding:1px 7px;border-radius:10px;vertical-align:middle;">5호선</span> 발산역 3번 출구 도보 3분 이내<br>
+                            · <span style="display:inline-block;background:#BDB092;color:#fff;font-size:0.82em;font-weight:700;padding:1px 7px;border-radius:10px;vertical-align:middle;">9호선</span> 양천향교역 6번 출구 도보 15분 이내
+                        </div>
+                        <div class="transport-item">
+                            <strong>🚗 자가용 (Car)</strong><br>
+                            건물 내 지하 및 지상 주차장 이용 (약 1,200대 가능)<br>
+                            축하객 주차 2시간 무료<br>
+                            *1층, 2층 엘레베이터 옆 사전 정산기로 사전 정산 후 출차해주세요.<br>
+                            (정산 후 20분 이내 출차)
+                        </div>
+                        <div class="transport-item">
+                            <strong>🚌 버스 (Bus)</strong><br>
+                            '발산역' 정류장 하차<br>
+                            <span style="font-size: 0.9rem; color: #888; line-height: 1.8; display: block; margin-top: 5px;">
+                                · 지선: 6630, 6632, 6642, 6645, 6648, 6657, 6712<br>
+                                · 간선: 601, 605, 652, 654, 661<br>
+                                · 공항: 6003<br>
+                                · 일반: 60, 60-3, 88, 1002<br>
+                                · 직행: 3000, 8000
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="navi-buttons">
