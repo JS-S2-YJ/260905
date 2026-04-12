@@ -682,6 +682,25 @@ const App = (() => {
         if (mainPhoto) {
             mainPhoto.style.cursor = 'default';
         }
+
+        // --- Scroll Reveal (IntersectionObserver) ---
+        const revealTargets = document.querySelectorAll(
+            '.main-header, .calendar-section, .contact-section, ' +
+            '.gallery-section, .map-section, .account-section, ' +
+            '.guestbook-section, .share-section'
+        );
+        revealTargets.forEach(el => el.classList.add('scroll-reveal'));
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    revealObserver.unobserve(entry.target); // 한 번만 실행
+                }
+            });
+        }, { threshold: 0.12 });
+
+        revealTargets.forEach(el => revealObserver.observe(el));
     };
 
     // --- Init Sequence ---
