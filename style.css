@@ -171,6 +171,26 @@ img {
 }
 .btn-circle:active { opacity: 0.75; transform: scale(0.93); }
 
+/* --- [7.5] 스크롤 등장 애니메이션 (Scroll Reveal) --- */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+    will-change: opacity, transform;
+}
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* 모션 감소 설정 시 애니메이션 비활성화 */
+@media (prefers-reduced-motion: reduce) {
+    .scroll-reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
 /* --- [8] 컴포넌트: 구분선 (Divider) --- */
 .divider { border: none; border-top: 2px dashed #ddd; margin: 20px 10px; position: relative; }
 .divider::before, .divider::after {
