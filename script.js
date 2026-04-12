@@ -680,7 +680,15 @@ const App = (() => {
         // Main Photo
         const mainPhoto = document.querySelector('.main-photo-wrapper');
         if (mainPhoto) {
-            mainPhoto.style.cursor = 'default';
+            mainPhoto.style.cursor = 'pointer';
+            mainPhoto.addEventListener('click', () => {
+                if (fireConfetti) {
+                    fireConfetti({
+                        particleCount: 80, spread: 70, origin: { y: 0.6 },
+                        colors: ['#90caf9', '#ff8a80', '#ffffff', '#f6d365']
+                    });
+                }
+            });
         }
 
         // --- Scroll Reveal (IntersectionObserver) ---
