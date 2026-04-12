@@ -599,7 +599,10 @@ footer { margin-top: 0; font-size: 0.45rem; color: var(--text-light); padding: 4
 .modal .modal-img-wrapper {
     cursor: default; flex: 1; display: flex; align-items: center; justify-content: center; width: 100%;
 }
-.modal-content { max-width: 90vw; max-height: 72vh; object-fit: contain; transition: opacity 0.2s ease; }
+.modal-content { 
+    max-width: 90vw; max-height: 72vh; object-fit: contain; transition: opacity 0.2s ease;
+    pointer-events: auto; /* 확대(핀치줌)를 원활하게 하기 위해 포인터 이벤트 허용 */
+}
 .close-btn { position: absolute; top: 16px; right: 20px; color: #fff; font-size: 36px; cursor: pointer; z-index: 10001; line-height: 1; }
 .modal-nav {
     background: rgba(255, 255, 255, 0.15); border: none; color: #fff;
