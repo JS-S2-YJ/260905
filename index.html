@@ -17,6 +17,16 @@
     <!-- Styles -->
     <link rel="stylesheet" href="style.css?v=2.094">
 
+    <!-- Font Size Pre-apply (FOUC 방지: 렌더링 전에 저장된 폰트 크기 즉시 적용) -->
+    <script>
+        (function() {
+            var sizes = [13, 14, 15, 16, 18];
+            var level = parseInt(localStorage.getItem('wedding_font_size') || '1');
+            if (level < 1 || level > 5) level = 1;
+            document.documentElement.style.fontSize = sizes[level - 1] + 'px';
+        })();
+    </script>
+
     <!-- DevTools Protection -->
     <script>
         (function() {
@@ -422,7 +432,7 @@
     <!-- Font Size Button -->
     <button class="font-size-btn" id="font-size-btn" onclick="cycleFontSize()" aria-label="글자 크기 조절">
         <span class="font-size-char">가</span>
-        <span class="font-size-label" id="font-size-label">3/5</span>
+        <span class="font-size-label" id="font-size-label">1/5</span>
     </button>
 
     <!-- Image Modal -->
