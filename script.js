@@ -442,7 +442,39 @@ const App = (() => {
         };
     };
 
-    // --- 4. UI Effects (Modal, Protection, Confetti) ---
+    // --- 4. Gallery Dynamic Loading ---
+    const initGallery = async () => {
+        const container = document.querySelector('.gallery-container');
+        if (!container) return;
+
+        const tryLoad = (src) => new Promise(resolve => {
+            const img = new Image();
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = src;
+        });
+
+        let i = 1;
+        while (true) {
+            const src = `images/photos/gallery${i}.jpeg`;
+            const ok = await tryLoad(src);
+            if (!ok) break;
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'gallery-item-wrapper';
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `웨딩사진${i}`;
+            img.className = 'gallery-item';
+            img.loading = 'lazy';
+            img.draggable = false;
+            wrapper.appendChild(img);
+            container.appendChild(wrapper);
+            i++;
+        }
+    };
+
+    // --- 5. UI Effects (Modal, Protection, Confetti) ---
     const initUI = () => {
         // Image Protection
         document.addEventListener('contextmenu', e => {
@@ -717,10 +749,11 @@ const App = (() => {
     };
 
     // --- Init Sequence ---
-    const init = () => {
+    const init = async () => {
         initFirebase();
         initDday();
         initGuestbook();
+        await initGallery();
         initUI();
     };
 
