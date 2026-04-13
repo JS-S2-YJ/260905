@@ -710,7 +710,7 @@ const App = (() => {
             });
         }, { 
             threshold: 0.25, // 25% 이상 보일 때 시작 (더 늦게 등장)
-            rootMargin: '0px 0px -40px 0px' // 하단에서 40px 더 올라왔을 때 감지
+            rootMargin: '0px 0px -30px 0px' // 하단에서 30px 더 올라왔을 때 감지
         });
 
         revealTargets.forEach(el => revealObserver.observe(el));
