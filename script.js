@@ -535,6 +535,8 @@ const App = (() => {
 
         // 스크롤 이벤트 핸들러
         const preventScroll = (e) => {
+            // 약도 모달(map mode)일 때는 패닝 허용
+            if (!isGalleryModal) return;
             // 핀치 줌(두 손가락 이상)일 때는 막지 않음
             if (e.touches && e.touches.length > 1) return;
             if (e.cancelable) e.preventDefault();
