@@ -569,8 +569,8 @@ footer { margin-top: 0; font-size: 0.45rem; color: var(--text-light); padding: 4
 .modal.map-mode {
     background-color: transparent;
     background-image: url('images/ui/bg_img_ivory.jpg');
-    background-size: 50%;
     background-repeat: repeat;
+    background-size: 100px auto;
 }
 .modal.map-mode .close-btn {
     color: #222;

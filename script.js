@@ -549,7 +549,8 @@ const App = (() => {
             currentModalIndex = index;
             if (modalFooter) modalFooter.style.display = isGallery ? 'flex' : 'none';
             if (isGallery) updateModalIndicators();
-            // 지도 모달일 때는 블러 보호 제외
+            // 지도 모달일 때는 블러 보호 제외, 아이보리 배경 적용
+            modal.classList.toggle('map-mode', !isGallery);
             const modalContent = modal.querySelector('.modal-content');
             if (modalContent) modalContent.classList.toggle('no-blur', !isGallery);
             
