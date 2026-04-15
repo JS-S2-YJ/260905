@@ -104,6 +104,27 @@ img {
     position: relative;
 }
 .main-photo { width: 100%; height: auto; object-fit: cover; display: block; pointer-events: none; }
+.main-photo-ver-btns {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 0 4px;
+}
+.ver-btn {
+    background: rgba(0,0,0,0.35);
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 12px;
+    padding: 4px 10px;
+    font-size: 0.72rem;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+}
+.ver-btn.active {
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    border-color: rgba(255,255,255,0.7);
+}
 .names h1 { font-size: 1.8rem; margin-bottom: 20px; font-weight: 700; color: var(--text-color); }
 .names .amp { color: #c0af9e; margin: 0 5px; font-weight: 700; }
 .intro-text {
