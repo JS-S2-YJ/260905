@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Barun+Pen:wght@400;700&family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=2.104">
+    <link rel="stylesheet" href="style.css?v=2.105">
 
     <!-- Font Size Pre-apply (FOUC 방지: 렌더링 전에 저장된 폰트 크기 즉시 적용) -->
     <script>
@@ -47,18 +47,14 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
     <!-- Logic (Deferred for performance) -->
-    <script type="module" src="script.js?v=2.104" defer></script></head>
+    <script type="module" src="script.js?v=2.105" defer></script></head>
 <body>
 
     <main class="container">
         <div class="ticket-body">
             <!-- 메인 사진 (상단 꽉 차게) -->
             <div class="main-photo-wrapper">
-                <img id="main-photo-img" src="images/photos/main_t1.jpeg" alt="메인 웨딩 사진" class="main-photo" draggable="false">
-            </div>
-            <div class="main-photo-ver-btns">
-                <button id="ver-btn-1" class="ver-btn active" onclick="setMainPhoto(0)">ver1</button>
-                <button id="ver-btn-2" class="ver-btn" onclick="setMainPhoto(1)">ver2</button>
+                <img src="images/photos/main_t1.jpeg" alt="메인 웨딩 사진" class="main-photo" draggable="false">
             </div>
 
             <!-- Main Intro Section -->
