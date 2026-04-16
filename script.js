@@ -822,17 +822,3 @@ if (window.visualViewport) {
         applyZoomBlur(window.visualViewport.scale);
     });
 }
-
-// --- Main Photo Ver Select (임시) ---
-const _mainPhotos = ['images/photos/main_t1.jpeg', 'images/photos/main_t2.jpeg'];
-window.setMainPhoto = function(idx) {
-    const img = document.getElementById('main-photo-img');
-    if (img) img.src = _mainPhotos[idx];
-    document.getElementById('ver-btn-1').classList.toggle('active', idx === 0);
-    document.getElementById('ver-btn-2').classList.toggle('active', idx === 1);
-};
-// 최초 랜덤 선택
-(function() {
-    const randIdx = Math.floor(Math.random() * _mainPhotos.length);
-    document.addEventListener('DOMContentLoaded', function() { setMainPhoto(randIdx); });
-})();
