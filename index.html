@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Barun+Pen:wght@400;700&family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=2.105">
+    <link rel="stylesheet" href="style.css?v=2.106">
 
     <!-- Font Size Pre-apply (FOUC 방지: 렌더링 전에 저장된 폰트 크기 즉시 적용) -->
     <script>
@@ -47,7 +47,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
     <!-- Logic (Deferred for performance) -->
-    <script type="module" src="script.js?v=2.105" defer></script></head>
+    <script type="module" src="script.js?v=2.106" defer></script></head>
 <body>
 
     <main class="container">
@@ -290,7 +290,7 @@
                                         <span class="bank-name">신한은행</span>
                                         <span class="account-number">110-394-051244</span>
                                     </div>
-                                    <button class="copy-btn-mini" onclick="copyAccount('110-394-051244')">복사</button>
+                                    <button class="copy-btn-mini" onclick="copyAccount(this)">복사</button>
                                 </div>
                             </div>
                             <div class="account-card">
@@ -303,7 +303,7 @@
                                         <span class="bank-name">우리은행</span>
                                         <span class="account-number">438-07-006688</span>
                                     </div>
-                                    <button class="copy-btn-mini" onclick="copyAccount('438-07-006688')">복사</button>
+                                    <button class="copy-btn-mini" onclick="copyAccount(this)">복사</button>
                                 </div>
                             </div>
                             <div class="account-card">
@@ -316,13 +316,13 @@
                                         <span class="bank-name">농협은행</span>
                                         <span class="account-number">195-12-064776</span>
                                     </div>
-                                    <button class="copy-btn-mini" onclick="copyAccount('195-12-064776')">복사</button>
+                                    <button class="copy-btn-mini" onclick="copyAccount(this)">복사</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 신부측 (예시 데이터) -->
+                    <!-- 신부측 -->
                     <div class="accordion-item">
                         <button class="accordion-header" onclick="toggleAccordion(this)">
                             <span>신부측 계좌번호</span>
@@ -336,10 +336,10 @@
                                 </div>
                                 <div class="account-card-body">
                                     <div class="account-details">
-                                        <span class="bank-name">은행</span>
-                                        <span class="account-number">계좌번호</span>
+                                        <span class="bank-name">국민은행</span>
+                                        <span class="account-number">656502-01-373515</span>
                                     </div>
-                                    <button class="copy-btn-mini" onclick="copyAccount('')">복사</button>
+                                    <button class="copy-btn-mini" onclick="copyAccount(this)">복사</button>
                                 </div>
                             </div>
                             <div class="account-card">
@@ -349,10 +349,10 @@
                                 </div>
                                 <div class="account-card-body">
                                     <div class="account-details">
-                                        <span class="bank-name">은행</span>
-                                        <span class="account-number">계좌번호</span>
+                                        <span class="bank-name">새마을금고</span>
+                                        <span class="account-number">2339-09-0232860</span>
                                     </div>
-                                    <button class="copy-btn-mini" onclick="copyAccount('')">복사</button>
+                                    <button class="copy-btn-mini" onclick="copyAccount(this)">복사</button>
                                 </div>
                             </div>
                             <div class="account-card">
@@ -362,10 +362,10 @@
                                 </div>
                                 <div class="account-card-body">
                                     <div class="account-details">
-                                        <span class="bank-name">은행</span>
-                                        <span class="account-number">계좌번호</span>
+                                        <span class="bank-name">국민은행</span>
+                                        <span class="account-number">602825-94-100067</span>
                                     </div>
-                                    <button class="copy-btn-mini" onclick="copyAccount('')">복사</button>
+                                    <button class="copy-btn-mini" onclick="copyAccount(this)">복사</button>
                                 </div>
                             </div>
                         </div>

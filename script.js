@@ -355,7 +355,8 @@ const App = (() => {
         };
 
         // Account Copy Function
-        window.copyAccount = (accountNumber) => {
+        window.copyAccount = (btn) => {
+            const accountNumber = btn.closest('.account-card-body').querySelector('.account-number').textContent.trim();
             const cleaned = accountNumber.replace(/-/g, '');
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(cleaned).then(() => {
