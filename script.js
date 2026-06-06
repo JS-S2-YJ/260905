@@ -479,6 +479,29 @@ const App = (() => {
         return srcs;
     };
 
+    // --- 4-1. Gallery View Toggle (스크롤 ⇄ 그리드) ---
+    const initGalleryViewToggle = () => {
+        const container = document.querySelector('.gallery-container');
+        const tabs = document.querySelectorAll('.gallery-view-tab');
+        const hint = document.querySelector('.gallery-hint');
+        if (!container || !tabs.length) return;
+
+        const apply = (view) => {
+            const isGrid = view === 'grid';
+            container.classList.toggle('grid-view', isGrid);
+            if (hint) hint.style.display = isGrid ? 'none' : '';
+            tabs.forEach(t => {
+                const active = t.dataset.view === view;
+                t.classList.toggle('active', active);
+                t.setAttribute('aria-selected', active ? 'true' : 'false');
+            });
+        };
+
+        tabs.forEach(t => {
+            t.addEventListener('click', () => apply(t.dataset.view));
+        });
+    };
+
     const initMainSlider = async (gallerySrcs) => {
         const img = document.querySelector('.main-photo');
         const prevBtn = document.getElementById('main-nav-prev');
@@ -772,7 +795,7 @@ const App = (() => {
         // --- Scroll Reveal (IntersectionObserver) ---
         const revealTargets = document.querySelectorAll(
             '.main-header, .calendar-section, .contact-section, ' +
-            '.gallery-section, .map-section, .account-section, ' +
+            '.gallery-section, .story-section, .map-section, .account-section, ' +
             '.guestbook-section, .share-section'
         );
         revealTargets.forEach(el => el.classList.add('scroll-reveal'));
@@ -798,6 +821,7 @@ const App = (() => {
         initDday();
         initGuestbook();
         const gallerySrcs = await initGallery();
+        initGalleryViewToggle();
         await initMainSlider(gallerySrcs);
         initUI();
     };

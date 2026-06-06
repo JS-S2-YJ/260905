@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Barun+Pen:wght@400;700&family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=2.117">
+    <link rel="stylesheet" href="style.css?v=2.122">
 
     <!-- Font Size Pre-apply (FOUC 방지: 렌더링 전에 저장된 폰트 크기 즉시 적용) -->
     <script>
@@ -47,7 +47,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
     <!-- Logic (Deferred for performance) -->
-    <script type="module" src="script.js?v=2.117" defer></script></head>
+    <script type="module" src="script.js?v=2.122" defer></script></head>
 <body>
 
     <main class="container">
@@ -212,8 +212,108 @@
             <!-- Gallery Section -->
             <section class="gallery-section">
                 <h2>Gallery</h2>
+                <div class="gallery-view-tabs" role="tablist" aria-label="갤러리 보기 방식">
+                    <button type="button" class="gallery-view-tab active" data-view="scroll" role="tab" aria-selected="true">스크롤</button>
+                    <button type="button" class="gallery-view-tab" data-view="grid" role="tab" aria-selected="false">그리드</button>
+                </div>
                 <div class="gallery-container"></div>
                 <p class="gallery-hint">옆으로 넘겨보세요</p>
+            </section>
+
+            <hr class="divider">
+
+            <!-- Our Story Section -->
+            <section class="story-section">
+                <h2>우리의 이야기</h2>
+                <div class="story-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>재석 &amp; 예진의 시간들</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <ol class="story-timeline">
+                                <li class="story-item">
+                                    <div class="story-photo">
+                                        <img src="images/photos/story1.webp" alt="첫 만남" loading="lazy" onerror="this.parentElement.classList.add('empty'); this.remove();">
+                                    </div>
+                                    <div class="story-text">
+                                        <span class="story-date">2022. 11. 18</span>
+                                        <strong class="story-title">첫 만남</strong>
+                                        <p class="story-desc">재석이와 예진이가 처음 만난 날</p>
+                                    </div>
+                                </li>
+                                <li class="story-item">
+                                    <div class="story-photo">
+                                        <img src="images/photos/story2.webp" alt="연애 시작" loading="lazy" onerror="this.parentElement.classList.add('empty'); this.remove();">
+                                    </div>
+                                    <div class="story-text">
+                                        <span class="story-date">2022. 12. 8</span>
+                                        <strong class="story-title">연애 시작</strong>
+                                        <p class="story-desc">우리가 연인이 된 날</p>
+                                    </div>
+                                </li>
+                                <li class="story-item">
+                                    <div class="story-photo">
+                                        <img src="images/photos/story3.webp" alt="1주년" loading="lazy" onerror="this.parentElement.classList.add('empty'); this.remove();">
+                                    </div>
+                                    <div class="story-text">
+                                        <span class="story-date">2023. 12. 8</span>
+                                        <strong class="story-title">1주년</strong>
+                                        <p class="story-desc">함께한 첫 번째 해</p>
+                                    </div>
+                                </li>
+                                <li class="story-item">
+                                    <div class="story-photo">
+                                        <img src="images/photos/story4.webp" alt="2주년" loading="lazy" onerror="this.parentElement.classList.add('empty'); this.remove();">
+                                    </div>
+                                    <div class="story-text">
+                                        <span class="story-date">2024. 12. 8</span>
+                                        <strong class="story-title">2주년</strong>
+                                        <p class="story-desc">함께한 두 번째 해</p>
+                                    </div>
+                                </li>
+                                <li class="story-item">
+                                    <div class="story-photo">
+                                        <img src="images/photos/story5.webp" alt="3주년" loading="lazy" onerror="this.parentElement.classList.add('empty'); this.remove();">
+                                    </div>
+                                    <div class="story-text">
+                                        <span class="story-date">2025. 12. 8</span>
+                                        <strong class="story-title">3주년</strong>
+                                        <p class="story-desc">함께한 세 번째 해</p>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>저희가 평생을 함께한 이유는요</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="reasons-list">
+                                <div class="reason-block">
+                                    <div class="reason-header">
+                                        <span class="reason-from">재석</span>
+                                        <span class="reason-arrow">♡</span>
+                                        <span class="reason-to">예진</span>
+                                    </div>
+                                    <p class="reason-text">(작성 예정)</p>
+                                </div>
+                                <div class="reason-block">
+                                    <div class="reason-header">
+                                        <span class="reason-from">예진</span>
+                                        <span class="reason-arrow">♡</span>
+                                        <span class="reason-to">재석</span>
+                                    </div>
+                                    <p class="reason-text">(작성 예정)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <hr class="divider">
