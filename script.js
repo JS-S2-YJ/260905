@@ -446,7 +446,7 @@ const App = (() => {
     // --- 4. Gallery Dynamic Loading ---
     const initGallery = async () => {
         const container = document.querySelector('.gallery-container');
-        if (!container) return;
+        const srcs = [];
 
         const tryLoad = (src) => new Promise(resolve => {
             const img = new Image();
@@ -457,22 +457,62 @@ const App = (() => {
 
         let i = 1;
         while (true) {
-            const src = `images/photos/gallery${i}.jpeg`;
+            const src = `images/photos/gallery${i}.webp`;
             const ok = await tryLoad(src);
             if (!ok) break;
+            srcs.push(src);
 
-            const wrapper = document.createElement('div');
-            wrapper.className = 'gallery-item-wrapper';
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = `웨딩사진${i}`;
-            img.className = 'gallery-item';
-            img.loading = 'lazy';
-            img.draggable = false;
-            wrapper.appendChild(img);
-            container.appendChild(wrapper);
+            if (container) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'gallery-item-wrapper';
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = `웨딩사진${i}`;
+                img.className = 'gallery-item';
+                img.loading = 'lazy';
+                img.draggable = false;
+                wrapper.appendChild(img);
+                container.appendChild(wrapper);
+            }
             i++;
         }
+        return srcs;
+    };
+
+    const initMainSlider = async (gallerySrcs) => {
+        const img = document.querySelector('.main-photo');
+        const prevBtn = document.getElementById('main-nav-prev');
+        const nextBtn = document.getElementById('main-nav-next');
+        const counter = document.getElementById('main-nav-counter');
+        if (!img || !prevBtn || !nextBtn || !counter) return;
+
+        const tryLoad = (src) => new Promise(resolve => {
+            const probe = new Image();
+            probe.onload = () => resolve(true);
+            probe.onerror = () => resolve(false);
+            probe.src = src;
+        });
+
+        const srcs = [...(gallerySrcs || [])];
+        const mainCandidate = 'images/photos/main_t1.webp';
+        if (await tryLoad(mainCandidate)) srcs.unshift(mainCandidate);
+        if (srcs.length === 0) return;
+
+        let idx = 0;
+        const update = () => {
+            img.src = srcs[idx];
+            counter.textContent = `${idx + 1} / ${srcs.length}`;
+        };
+        update();
+
+        const go = (delta) => {
+            idx = (idx + delta + srcs.length) % srcs.length;
+            update();
+        };
+        const nav = document.querySelector('.main-photo-nav');
+        if (nav) nav.addEventListener('click', (e) => e.stopPropagation());
+        prevBtn.addEventListener('click', () => go(-1));
+        nextBtn.addEventListener('click', () => go(1));
     };
 
     // --- 5. UI Effects (Modal, Protection, Confetti) ---
@@ -757,7 +797,8 @@ const App = (() => {
         initFirebase();
         initDday();
         initGuestbook();
-        await initGallery();
+        const gallerySrcs = await initGallery();
+        await initMainSlider(gallerySrcs);
         initUI();
     };
 

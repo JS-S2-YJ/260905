@@ -104,6 +104,41 @@ img {
     position: relative;
 }
 .main-photo { width: 100%; height: auto; object-fit: cover; display: block; pointer-events: none; }
+.main-photo-nav {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    padding: 4px 6px;
+    font-family: var(--font-base);
+}
+.main-nav-btn {
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main-nav-btn:active { opacity: 0.6; }
+.main-nav-counter {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    min-width: 38px;
+    text-align: center;
+    user-select: none;
+}
 .names h1 { font-size: 1.8rem; margin-bottom: 20px; font-weight: 700; color: var(--text-color); }
 .names .amp { color: #c0af9e; margin: 0 5px; font-weight: 700; }
 .intro-text {
