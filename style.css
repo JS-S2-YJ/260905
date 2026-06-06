@@ -174,7 +174,7 @@ img {
 .contact-role { color: var(--text-light); font-size: 0.9rem; margin-right: 4px; }
 .contact-intro-divider {
     border: none; border-top: 1px solid var(--border-color);
-    margin: 20px 0;
+    width: 25%; margin: 20px auto;
 }
 
 /* 아코디언 연락 (인트로 내부) */
