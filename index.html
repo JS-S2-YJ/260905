@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Barun+Pen:wght@400;700&family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=2.115">
+    <link rel="stylesheet" href="style.css?v=2.117">
 
     <!-- Font Size Pre-apply (FOUC 방지: 렌더링 전에 저장된 폰트 크기 즉시 적용) -->
     <script>
@@ -47,7 +47,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
     <!-- Logic (Deferred for performance) -->
-    <script type="module" src="script.js?v=2.115" defer></script></head>
+    <script type="module" src="script.js?v=2.117" defer></script></head>
 <body>
 
     <main class="container">
@@ -269,6 +269,35 @@
                     <a href="https://naver.me/x5GojlWc" target="_blank" class="btn-navi">
                         <img src="images/map/map3.webp" alt="" class="navi-icon">네이버 지도
                     </a>
+                </div>
+
+                <div class="facility-accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>편의시설 안내</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="facility-list">
+                                <div class="facility-item">
+                                    <strong>🍼 수유실</strong>
+                                    <p>위치 안내 (추후 업데이트)</p>
+                                </div>
+                                <div class="facility-item">
+                                    <strong>🚻 화장실</strong>
+                                    <p>위치 안내 (추후 업데이트)</p>
+                                </div>
+                                <div class="facility-item">
+                                    <strong>🏧 ATM</strong>
+                                    <p>위치 안내 (추후 업데이트)</p>
+                                </div>
+                                <div class="facility-item">
+                                    <strong>🍽️ 식당</strong>
+                                    <p>위치 안내 (추후 업데이트)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 

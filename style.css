@@ -340,6 +340,16 @@ img {
 }
 .accordion-item.active .accordion-content { max-height: 600px; border-top: 1px solid var(--border-color); }
 
+/* --- 편의시설 안내 (Facility Guide) --- */
+.facility-accordion {
+    width: 94%; max-width: 400px; margin: 20px auto 0;
+}
+.facility-list { padding: 14px 18px; text-align: left; }
+.facility-item { padding: 10px 0; border-bottom: 1px solid var(--border-color); }
+.facility-item:last-child { border-bottom: none; }
+.facility-item strong { display: block; font-size: 0.9rem; color: var(--text-color); margin-bottom: 4px; }
+.facility-item p { font-size: 0.85rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+
 .account-row {
     padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; gap: 10px;
 }
