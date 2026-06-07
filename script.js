@@ -807,7 +807,11 @@ let fireConfetti;
 // --- 랜딩 인트로: 손글씨 써지는 효과 ---
 (function runIntro() {
     const overlay = document.getElementById('introOverlay');
-    if (!overlay) return;
+    if (!overlay) {
+        // 인트로가 없으면 바로 안내 말풍선 시도
+        setTimeout(() => window.showFontHint && window.showFontHint(), 800);
+        return;
+    }
     document.body.style.overflow = 'hidden';
     let done = false;
     const finish = () => {
@@ -816,6 +820,8 @@ let fireConfetti;
         overlay.classList.add('hide');
         document.body.style.overflow = '';
         setTimeout(() => overlay.remove(), 650);
+        // 인트로가 걷힌 뒤 안내 말풍선 등장
+        if (window.showFontHint) setTimeout(window.showFontHint, 700);
     };
     // 윤곽선 그리기(~3.4s) + 잉크 채움(~3.8s) + 0.7s 머무름
     const timer = setTimeout(finish, 4500);
@@ -862,6 +868,25 @@ window.cycleFontSize = () => {
 
 // 페이지 로드 시 저장된 크기 적용
 applyFontSize(isLargeFont);
+
+// 첫 진입 시 폰트 버튼 안내 말풍선 (디바이스당 1회)
+const FONT_HINT_KEY = 'wedding_font_hint_seen';
+window.showFontHint = () => {
+    // 이미 봤거나, 이미 크게 보기를 쓰고 있으면(버튼을 찾은 사람) 생략
+    if (localStorage.getItem(FONT_HINT_KEY) || isLargeFont) return;
+    const hint = document.getElementById('font-hint');
+    const btn = document.getElementById('font-size-btn');
+    if (!hint || !btn) return;
+    hint.classList.add('show');
+    const dismiss = () => {
+        hint.classList.remove('show');
+        localStorage.setItem(FONT_HINT_KEY, '1');
+    };
+    const timer = setTimeout(dismiss, 3000);
+    // 버튼이나 말풍선을 누르면 즉시 사라짐
+    btn.addEventListener('click', () => { clearTimeout(timer); dismiss(); }, { once: true });
+    hint.addEventListener('click', () => { clearTimeout(timer); dismiss(); }, { once: true });
+};
 
 // --- Zoom Blur Protection ---
 const blurTargetSelectors = ['.main-photo', '.gallery-item', '.modal-content'];
