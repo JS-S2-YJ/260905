@@ -835,8 +835,8 @@ let fireConfetti;
         document.body.style.overflow = '';
         setTimeout(() => overlay.remove(), 650);
     };
-    // 0.3s 지연 + 2.2s 쓰기 + 0.7s 머무름
-    const timer = setTimeout(finish, 3200);
+    // 윤곽선 그리기(~3.4s) + 잉크 채움(~3.8s) + 0.7s 머무름
+    const timer = setTimeout(finish, 4500);
     overlay.addEventListener('click', () => { clearTimeout(timer); finish(); }, { once: true });
 })();
 
