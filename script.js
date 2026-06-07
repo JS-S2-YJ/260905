@@ -500,6 +500,8 @@ const App = (() => {
         tabs.forEach(t => {
             t.addEventListener('click', () => apply(t.dataset.view));
         });
+
+        apply('grid'); // 기본값: 그리드
     };
 
     const initMainSlider = async (gallerySrcs) => {
@@ -867,8 +869,10 @@ const applyFontSize = (large) => {
     isLargeFont = large;
     document.documentElement.style.fontSize = (large ? FONT_SIZE_LARGE : FONT_SIZE_SMALL) + 'px';
     const btn = document.getElementById('font-size-btn');
-    // 버튼은 "누르면 일어날 동작"을 안내
+    // 버튼은 "누르면 일어날 동작"을 안내 (크면 −, 작으면 +)
     if (btn) btn.setAttribute('aria-label', large ? '글씨 작게 보기' : '글씨 크게 보기');
+    const plus = document.querySelector('.font-size-plus');
+    if (plus) plus.textContent = large ? '−' : '+';
     localStorage.setItem(FONT_SIZE_KEY, large ? 'large' : 'small');
 };
 

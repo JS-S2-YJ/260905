@@ -899,19 +899,15 @@ footer { margin-top: 0; font-size: 0.45rem; color: var(--text-light); padding: 4
     transform: scale(0.92);
     box-shadow: 0 1px 6px rgba(135, 168, 120, 0.3);
 }
-.font-size-char-sm {
-    font-size: 12px;
+.font-size-plus {
+    font-size: 15px;
     font-weight: 700;
     color: var(--primary-dark);
     line-height: 1;
-    opacity: 0.55;
 }
-.font-size-char-lg {
+.font-size-icon {
     font-size: 18px;
-    font-weight: 700;
-    color: var(--primary-dark);
     line-height: 1;
-    margin-left: -2px;
 }
 
 /* --- [16] 달력 UI 스타일 --- */

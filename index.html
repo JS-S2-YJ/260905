@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Barun+Pen:wght@400;700&family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=2.140">
+    <link rel="stylesheet" href="style.css?v=2.145">
 
     <!-- Font Size Pre-apply (FOUC 방지: 렌더링 전에 저장된 폰트 크기 즉시 적용) -->
     <script>
@@ -45,7 +45,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
     <!-- Logic (Deferred for performance) -->
-    <script type="module" src="script.js?v=2.140" defer></script></head>
+    <script type="module" src="script.js?v=2.145" defer></script></head>
 <body>
 
     <!-- 랜딩 인트로: 210 에필로그B, 저희/결혼합니다 한 글자씩 써짐 -->
@@ -227,11 +227,11 @@
             <section class="gallery-section">
                 <h2>Gallery</h2>
                 <div class="gallery-view-tabs" role="tablist" aria-label="갤러리 보기 방식">
-                    <button type="button" class="gallery-view-tab active" data-view="scroll" role="tab" aria-selected="true">스크롤</button>
-                    <button type="button" class="gallery-view-tab" data-view="grid" role="tab" aria-selected="false">그리드</button>
+                    <button type="button" class="gallery-view-tab active" data-view="grid" role="tab" aria-selected="true">그리드</button>
+                    <button type="button" class="gallery-view-tab" data-view="scroll" role="tab" aria-selected="false">스크롤</button>
                 </div>
-                <div class="gallery-container"></div>
-                <p class="gallery-hint">옆으로 넘겨보세요</p>
+                <div class="gallery-container grid-view"></div>
+                <p class="gallery-hint" style="display:none">옆으로 넘겨보세요</p>
             </section>
 
             <hr class="divider">
@@ -572,8 +572,8 @@
 
     <!-- Font Size Button -->
     <button class="font-size-btn" id="font-size-btn" onclick="cycleFontSize()" aria-label="글씨 크게 보기">
-        <span class="font-size-char-sm">가</span>
-        <span class="font-size-char-lg">가</span>
+        <span class="font-size-plus">+</span>
+        <span class="font-size-icon">🔍</span>
     </button>
 
     <!-- Image Modal -->
