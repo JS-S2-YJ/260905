@@ -476,6 +476,23 @@ const App = (() => {
             }
             i++;
         }
+
+        // 메인 사진(main_t1)을 갤러리 마지막에도 추가
+        const mainSrc = 'images/photos/main_t1.webp';
+        srcs.push(mainSrc);
+        if (container) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'gallery-item-wrapper';
+            const img = document.createElement('img');
+            img.src = mainSrc;
+            img.alt = '웨딩사진';
+            img.className = 'gallery-item';
+            img.loading = 'lazy';
+            img.draggable = false;
+            wrapper.appendChild(img);
+            container.appendChild(wrapper);
+        }
+
         return srcs;
     };
 
@@ -502,42 +519,6 @@ const App = (() => {
         });
 
         apply('grid'); // 기본값: 그리드
-    };
-
-    const initMainSlider = async (gallerySrcs) => {
-        const img = document.querySelector('.main-photo');
-        const prevBtn = document.getElementById('main-nav-prev');
-        const nextBtn = document.getElementById('main-nav-next');
-        const counter = document.getElementById('main-nav-counter');
-        if (!img || !prevBtn || !nextBtn || !counter) return;
-
-        const tryLoad = (src) => new Promise(resolve => {
-            const probe = new Image();
-            probe.onload = () => resolve(true);
-            probe.onerror = () => resolve(false);
-            probe.src = src;
-        });
-
-        const srcs = [...(gallerySrcs || [])];
-        const mainCandidate = 'images/photos/main_t1.webp';
-        if (await tryLoad(mainCandidate)) srcs.unshift(mainCandidate);
-        if (srcs.length === 0) return;
-
-        let idx = 0;
-        const update = () => {
-            img.src = srcs[idx];
-            counter.textContent = `${idx + 1} / ${srcs.length}`;
-        };
-        update();
-
-        const go = (delta) => {
-            idx = (idx + delta + srcs.length) % srcs.length;
-            update();
-        };
-        const nav = document.querySelector('.main-photo-nav');
-        if (nav) nav.addEventListener('click', (e) => e.stopPropagation());
-        prevBtn.addEventListener('click', () => go(-1));
-        nextBtn.addEventListener('click', () => go(1));
     };
 
     // --- 5. UI Effects (Modal, Protection, Confetti) ---
@@ -811,9 +792,8 @@ const App = (() => {
         initFirebase();
         initDday();
         initGuestbook();
-        const gallerySrcs = await initGallery();
+        await initGallery();
         initGalleryViewToggle();
-        await initMainSlider(gallerySrcs);
         initUI();
     };
 
