@@ -34,6 +34,67 @@
 /* 시스템 설정과 상관없이 라이트 모드만 유지합니다. */
 
 
+/* --- [3.5] 랜딩 인트로 (손글씨 써지는 효과) --- */
+.intro-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-color);
+    background-image: url('images/ui/bg_img_ivory.jpg');
+    background-repeat: repeat;
+    background-size: 100px auto;
+    transition: opacity 0.6s ease;
+    cursor: pointer;
+}
+.intro-overlay.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+.intro-handwrite {
+    position: relative;
+    display: inline-block;
+    padding: 0 4px;
+}
+.intro-text-hand {
+    display: inline-block;
+    font-family: var(--font-hand);
+    font-weight: 700;
+    font-size: 2.7rem;
+    line-height: 1.2;
+    color: var(--primary-dark);
+    white-space: nowrap;
+    /* 오른쪽을 100% 가렸다가 왼→오로 드러내며 "써지는" 느낌 */
+    clip-path: inset(0 100% 0 -8px);
+    animation: introWrite 2.2s ease-out 0.3s forwards;
+}
+.intro-pen {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary-dark);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    animation: introPen 2.2s ease-out 0.3s forwards;
+}
+@keyframes introWrite {
+    to { clip-path: inset(0 -8px 0 -8px); }
+}
+@keyframes introPen {
+    0%   { left: 0;    opacity: 1; }
+    92%  { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .intro-text-hand { clip-path: none; animation: none; }
+    .intro-pen { display: none; }
+}
+
 /* --- [4] 기본 스타일 (Reset & Base) --- */
 * { box-sizing: border-box; }
 
@@ -847,18 +908,19 @@ footer { margin-top: 0; font-size: 0.45rem; color: var(--text-light); padding: 4
     transform: scale(0.92);
     box-shadow: 0 1px 6px rgba(135, 168, 120, 0.3);
 }
-.font-size-char {
-    font-size: 15px;
+.font-size-char-sm {
+    font-size: 12px;
     font-weight: 700;
     color: var(--primary-dark);
     line-height: 1;
+    opacity: 0.55;
 }
-.font-size-label {
-    font-size: 11px;
+.font-size-char-lg {
+    font-size: 18px;
     font-weight: 700;
     color: var(--primary-dark);
-    opacity: 0.75;
     line-height: 1;
+    margin-left: -2px;
 }
 
 /* --- [16] 달력 UI 스타일 --- */

@@ -714,17 +714,6 @@ const App = (() => {
             }
         }, { passive: true });
 
-        // Confetti
-        setTimeout(() => {
-            if (fireConfetti) {
-                fireConfetti({
-                    particleCount: 600, spread: 60, origin: { y: 0.8 },
-                    colors: ['#90caf9', '#ff8a80', '#ffffff', '#f6d365'],
-                    disableForReducedMotion: true
-                });
-            }
-        }, 500);
-
         // D-Day Box Click & Long-press Confetti (Scroll-safe)
         const dDayBox = document.querySelector('.d-day-box');
         if (dDayBox) {
@@ -833,6 +822,24 @@ const App = (() => {
 // useWorker:false → OffscreenCanvas 미사용, 모바일 백그라운드 복귀 시 흰 화면 방지
 // 캔버스 미리 생성 → 첫 호출 시 생성/표시 타이밍 플래시 없음
 let fireConfetti;
+// --- 랜딩 인트로: 손글씨 써지는 효과 ---
+(function runIntro() {
+    const overlay = document.getElementById('introOverlay');
+    if (!overlay) return;
+    document.body.style.overflow = 'hidden';
+    let done = false;
+    const finish = () => {
+        if (done) return;
+        done = true;
+        overlay.classList.add('hide');
+        document.body.style.overflow = '';
+        setTimeout(() => overlay.remove(), 650);
+    };
+    // 0.3s 지연 + 2.2s 쓰기 + 0.7s 머무름
+    const timer = setTimeout(finish, 3200);
+    overlay.addEventListener('click', () => { clearTimeout(timer); finish(); }, { once: true });
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof confetti === 'function') {
         const confettiCanvas = document.createElement('canvas');
@@ -851,24 +858,26 @@ document.addEventListener('visibilitychange', () => {
 });
 
 // --- Font Size Control ---
-const FONT_SIZES = [13, 14, 15, 16, 18]; // 1~5단계 (px) - 기존 대비 축소
+const FONT_SIZE_SMALL = 14; // 기본 (기존 2단계)
+const FONT_SIZE_LARGE = 18; // 크게 (기존 5단계)
 const FONT_SIZE_KEY = 'wedding_font_size';
-let currentFontLevel = parseInt(localStorage.getItem(FONT_SIZE_KEY) || '1'); // 기본값 1단계로 변경
+let isLargeFont = localStorage.getItem(FONT_SIZE_KEY) === 'large';
 
-const applyFontSize = (level) => {
-    currentFontLevel = level;
-    document.documentElement.style.fontSize = FONT_SIZES[level - 1] + 'px';
-    const label = document.getElementById('font-size-label');
-    if (label) label.textContent = level + '/5';
-    localStorage.setItem(FONT_SIZE_KEY, String(level));
+const applyFontSize = (large) => {
+    isLargeFont = large;
+    document.documentElement.style.fontSize = (large ? FONT_SIZE_LARGE : FONT_SIZE_SMALL) + 'px';
+    const btn = document.getElementById('font-size-btn');
+    // 버튼은 "누르면 일어날 동작"을 안내
+    if (btn) btn.setAttribute('aria-label', large ? '글씨 작게 보기' : '글씨 크게 보기');
+    localStorage.setItem(FONT_SIZE_KEY, large ? 'large' : 'small');
 };
 
 window.cycleFontSize = () => {
-    applyFontSize(currentFontLevel >= 5 ? 1 : currentFontLevel + 1);
+    applyFontSize(!isLargeFont);
 };
 
 // 페이지 로드 시 저장된 크기 적용
-applyFontSize(currentFontLevel);
+applyFontSize(isLargeFont);
 
 // --- Zoom Blur Protection ---
 const blurTargetSelectors = ['.main-photo', '.gallery-item', '.modal-content'];

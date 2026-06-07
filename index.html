@@ -15,15 +15,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Barun+Pen:wght@400;700&family=Noto+Serif+KR:wght@300;500&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="style.css?v=2.122">
+    <link rel="stylesheet" href="style.css?v=2.131">
 
     <!-- Font Size Pre-apply (FOUC 방지: 렌더링 전에 저장된 폰트 크기 즉시 적용) -->
     <script>
         (function() {
-            var sizes = [13, 14, 15, 16, 18];
-            var level = parseInt(localStorage.getItem('wedding_font_size') || '1');
-            if (level < 1 || level > 5) level = 1;
-            document.documentElement.style.fontSize = sizes[level - 1] + 'px';
+            var large = localStorage.getItem('wedding_font_size') === 'large';
+            document.documentElement.style.fontSize = (large ? 18 : 14) + 'px';
         })();
     </script>
 
@@ -47,8 +45,16 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4" crossorigin="anonymous"></script>
     <!-- Logic (Deferred for performance) -->
-    <script type="module" src="script.js?v=2.122" defer></script></head>
+    <script type="module" src="script.js?v=2.131" defer></script></head>
 <body>
+
+    <!-- 랜딩 인트로: 도화지 위에 손글씨로 써지는 효과 -->
+    <div class="intro-overlay" id="introOverlay" aria-hidden="true">
+        <div class="intro-handwrite">
+            <span class="intro-text-hand">우리 결혼합니다!</span>
+            <span class="intro-pen"></span>
+        </div>
+    </div>
 
     <main class="container">
         <div class="ticket-body">
@@ -557,9 +563,9 @@
     </main> <!-- container -->
 
     <!-- Font Size Button -->
-    <button class="font-size-btn" id="font-size-btn" onclick="cycleFontSize()" aria-label="글자 크기 조절">
-        <span class="font-size-char">가</span>
-        <span class="font-size-label" id="font-size-label">1/5</span>
+    <button class="font-size-btn" id="font-size-btn" onclick="cycleFontSize()" aria-label="글씨 크게 보기">
+        <span class="font-size-char-sm">가</span>
+        <span class="font-size-char-lg">가</span>
     </button>
 
     <!-- Image Modal -->
