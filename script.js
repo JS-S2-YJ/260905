@@ -496,31 +496,6 @@ const App = (() => {
         return srcs;
     };
 
-    // --- 4-1. Gallery View Toggle (스크롤 ⇄ 그리드) ---
-    const initGalleryViewToggle = () => {
-        const container = document.querySelector('.gallery-container');
-        const tabs = document.querySelectorAll('.gallery-view-tab');
-        const hint = document.querySelector('.gallery-hint');
-        if (!container || !tabs.length) return;
-
-        const apply = (view) => {
-            const isGrid = view === 'grid';
-            container.classList.toggle('grid-view', isGrid);
-            if (hint) hint.style.display = isGrid ? 'none' : '';
-            tabs.forEach(t => {
-                const active = t.dataset.view === view;
-                t.classList.toggle('active', active);
-                t.setAttribute('aria-selected', active ? 'true' : 'false');
-            });
-        };
-
-        tabs.forEach(t => {
-            t.addEventListener('click', () => apply(t.dataset.view));
-        });
-
-        apply('grid'); // 기본값: 그리드
-    };
-
     // --- 5. UI Effects (Modal, Protection, Confetti) ---
     const initUI = () => {
         // Image Protection
@@ -793,7 +768,6 @@ const App = (() => {
         initDday();
         initGuestbook();
         await initGallery();
-        initGalleryViewToggle();
         initUI();
     };
 
